@@ -14,7 +14,7 @@ function fun_Inicio()
     $("#contenedorMenu ul").remove();
     $.get('menus/' + Vinculo + ".html?tmpId=" + obtenerPrefijo(), function(data) 
     {
-      $("#contenedorMenu").html(data);
+      $("#contenedorMenu").append(data);
       if ($(window).width() < 767)
           {
             $.site.menubar.open();

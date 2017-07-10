@@ -13,7 +13,7 @@ $(document).ready(function() {
     //llenarRestricciones();
     cargarModulo("Inicio.html", "Inicio", function()
       {
-        $("#lblUsuario").text(Usuario.Nombre);
+        $(".lblUsuario").text(Usuario.Nombre);
       });
   }
 
