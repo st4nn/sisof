@@ -26,17 +26,17 @@
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
         </p>
         <div class="row">
-          <div class="col-md-6">
+          <div class="col-lg-6">
               <div class="bg-blue-grey-600" style="padding: 5px;"> 
-                <button class="btn btn-info btn-block white font-size-50 text-left">  
+                <button class="btn btn-info btn-block white font-size-30 text-left btnCargarMenu" data-sitio="Estado">  
                     <i class="icon bg-cyan-700 pull-left fa-line-chart icon-circle" aria-hidden="true" style="position: absolute; bottom:-9px;"></i>
                     <span style="margin-left: 130px;">Estado</span>
                 </button>
               </div>
           </div>
-          <div class="col-sm-6">
+          <div class="col-lg-6">
               <div class="bg-blue-grey-600" style="padding: 5px;"> 
-                <button class="btn btn-info btn-block white font-size-50 text-right">  
+                <button class="btn btn-info btn-block white font-size-30 text-right btnCargarMenu" data-sitio="Estado">  
                     <span style="margin-right: 130px;">SG SST</span>
                     <i class="icon bg-cyan-700 pull-right fa-medkit icon-circle" aria-hidden="true" style="position: absolute; bottom:-9px; right: 30px;"></i>
                 </button>
@@ -45,7 +45,7 @@
         </div>
         <div class="row margin-top-25"> 
           <div class="col-sm-12">
-            <button class="btn btn-warning btn-block font-size-50">
+            <button class="btn btn-warning btn-block font-size-30 btnCargarMenu" data-sitio="Configuracion">
               <i class="icon icon-circle bg-orange-700 fa-cogs"></i>
               Configuración
             </button>
@@ -56,8 +56,10 @@
   </div>
 </div>
 <!-- End Page -->
+<script src="../js/Inicio.js"></script>
 <script type="text/javascript">
 jQuery(document).ready(function()
 {
+  fun_Inicio();
 });
 </script>

@@ -10,7 +10,7 @@ $(document).ready(function() {
     cerrarSesion();
   } else
   {
-    llenarRestricciones();
+    //llenarRestricciones();
     cargarModulo("Inicio.html", "Inicio", function()
       {
         $("#lblUsuario").text(Usuario.Nombre);
@@ -38,7 +38,10 @@ function aplicacion()
        	cargarModulo(vinculo, titulo);
         if ($(window).width() < 767)
           {
-            $("#btnInicio_OcultarMenu").trigger('click');
+            $.site.menubar.hide();
+          } else
+          {
+            $.site.menubar.fold();
           }
       }
     });

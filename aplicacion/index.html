@@ -94,11 +94,6 @@
           <img class="navbar-brand-logo" src="../assets/images/logo.png">
           <span class="navbar-brand-text"> SISOF</span>
         </div>
-        <button type="button" class="navbar-toggle collapsed" data-target="#site-navbar-search"
-        data-toggle="collapse">
-        <span class="sr-only">Toggle Search</span>
-        <i class="icon wb-search" aria-hidden="true"></i>
-        </button>
       </div>
       <div class="navbar-container container-fluid">
         <!-- Navbar Collapse -->
@@ -156,7 +151,9 @@
       <div class="site-menubar-body">
         <div>
           <div id="contenedorMenu">
-            
+            <ul class="site-menu">
+              <li class="site-menu-category"></li>
+            </ul>
           
           </div>
         </div>
@@ -224,7 +221,7 @@
   <script src="../assets/vendor/datatables/datatables.js"></script>  
   <script src="../assets/vendor/datatables/dataTables.buttons.js"></script>  
   <script src="../assets/vendor/datatables/buttons.html5.js"></script>  
-  <script src="../assets/components/jszip.min.js"></script>  
+  <script src="../assets/js/components/jszip.min.js"></script>  
 
   
   
@@ -241,7 +238,7 @@
   <!-- Scripts For Tabs -->
   <script src="../assets/js/components/tabs.js"></script>
   <script src="../assets/vendor/bootstrap-sweetalert/sweet-alert.js"></script>
-  <script src="../assets/js/components/bootbox.js"></script>
+  <script src="../assets/js/components/bootbox.min.js"></script>
   <script src="../assets/js/components/bootstrap-sweetalert.js"></script>
   
   <script src="../assets/js/components/jquery.form.js"></script>
@@ -255,7 +252,6 @@
   $(document).ready(function($)
   {
   Site.run();
-   /*$("body").removeClass('site-menubar-fold');
   //AppCalendar.run();
   });
   </script>
