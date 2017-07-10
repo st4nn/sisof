@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
     <meta name="description" content="bootstrap admin template">
     <meta name="author" content="">
-    <title>Simasus</title>
+    <title>SISOF</title>
     <link rel="apple-touch-icon" href="../assets/images/apple-touch-icon.png">
     <link rel="shortcut icon" href="../assets/images/favicon.ico">
     <!-- Stylesheets -->
@@ -75,7 +75,7 @@
     Breakpoints();
     </script>
   </head>
-  <body class="dashboard">
+  <body class="dashboard site-menubar-fold" data-auto-menubar="false">
     <!--[if lt IE 8]>
     <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
@@ -92,7 +92,7 @@
         </button>
         <div class="navbar-brand navbar-brand-center site-gridmenu-toggle" data-toggle="gridmenu">
           <img class="navbar-brand-logo" src="../assets/images/logo.png">
-          <span class="navbar-brand-text"> Línea D Fuego</span>
+          <span class="navbar-brand-text"> SISOF</span>
         </div>
         <button type="button" class="navbar-toggle collapsed" data-target="#site-navbar-search"
         data-toggle="collapse">
@@ -156,86 +156,13 @@
       <div class="site-menubar-body">
         <div>
           <div id="contenedorMenu">
-            <ul class="site-menu">
-              <li class="site-menu-category"></li>
-              <li id="lnkMenu_Inicio" class="site-menu-item">
-                <a vinculo="Inicio.html" href="javascript:void(0)" class="lnkMenuBar_Item">
-                  <i class="site-menu-icon fa-home" aria-hidden="true"></i>
-                  <span class="site-menu-title">Inicio</span>
-                </a>
-              </li>
-              <li id="lnkMenu_Usuarios" class="site-menu-category">Administración</li>
-                
-              <li  class="site-menu-item">
-                <a vinculo="trajes/crearTraje.html" href="javascript:void(0)" class="lnkMenuBar_Item">
-                  <i class="site-menu-icon fa-user-plus" aria-hidden="true"></i>
-                  <span class="site-menu-title">Crear Traje</span>
-                </a>
-              </li>
-              <li  class="site-menu-item">
-                <a vinculo="trajes/verTrajes.html" href="javascript:void(0)" class="lnkMenuBar_Item">
-                  <i class="site-menu-icon fa-user-plus" aria-hidden="true"></i>
-                  <span class="site-menu-title">Ver Trajes</span>
-                </a>
-              </li>
-              <li class="site-menu-item">
-                <a vinculo="inspecciones/verInspecciones.html" href="javascript:void(0)" class="lnkMenuBar_Item">
-                  <i class="site-menu-icon fa-cogs" aria-hidden="true"></i>
-                  <span class="site-menu-title">Inspecciones</span>
-                </a>
-              </li>
-              <li class="site-menu-item">
-                <a vinculo="servicios/verServicios.html" href="javascript:void(0)" class="lnkMenuBar_Item">
-                  <i class="site-menu-icon fa-cogs" aria-hidden="true"></i>
-                  <span class="site-menu-title">Servicios</span>
-                </a>
-              </li>
-
-            </li>
-            <li id="lnkMenu_Administracion" class="site-menu-category">Menú Usuarios</li>
-              <li class="site-menu-item">
-                <a vinculo="usuarios/usuarios.html" href="javascript:void(0)" class="lnkMenuBar_Item">
-                  <i class="site-menu-icon fa-user-plus" aria-hidden="true"></i>
-                  <span class="site-menu-title">Crear Usuario</span>
-                </a>
-              </li>
-                         <li id="lnkMenu_Perfil" class="site-menu-item">
-                <a vinculo="miPerfil.html" href="javascript:void(0)" class="lnkMenuBar_Item">
-                  <i class="site-menu-icon fa-users" aria-hidden="true"></i>
-                  <span class="site-menu-title">Mi Perfil</span>
-                </a>
-              </li>
-              <li  class="site-menu-item">
-                <a vinculo="trajes.html" href="javascript:void(0)" class="lnkMenuBar_Item">
-                  <i class="site-menu-icon fa-user-plus" aria-hidden="true"></i>
-                  <span class="site-menu-title">Bomberos</span>
-                </a>
-              </li>
-            <li id="lnkMenu_Programa_Madres" class="site-menu-item">
-              <a vinculo="Trajes.html" href="javascript:void(0)" class="lnkMenuBar_Item">
-                <i class="site-menu-icon fa-female" aria-hidden="true"></i>
-                <span class="site-menu-title">Ver Trajes</span>
-              </a>
-            </li>
-            <li id="lnkMenu_inspeccionesUsr" class="site-menu-item">
-              <a vinculo="inspeccionesUsr.html" href="javascript:void(0)" class="lnkMenuBar_Item">
-                <i class="site-menu-icon fa-child" aria-hidden="true"></i>
-                <span class="site-menu-title">Inspecciones</span>
-              </a>
-            </li>
-            <li id="lnkMenu_UsrServicios" class="site-menu-item">
-              <a vinculo="UsrServicios.html" href="javascript:void(0)" class="lnkMenuBar_Item">
-                <i class="site-menu-icon fa-child" aria-hidden="true"></i>
-                <span class="site-menu-title">Servicios</span>
-              </a>
-            </li>
             
-          </ul>
+          
+          </div>
         </div>
       </div>
-    </div>
     <!-- Footer -->
-  </div>
+    </div>
   <!-- Page -->
   <input id="txtCoordenadas_Global" type="hidden">
   <div id="contenedorDeModulos">
@@ -328,6 +255,7 @@
   $(document).ready(function($)
   {
   Site.run();
+   /*$("body").removeClass('site-menubar-fold');
   //AppCalendar.run();
   });
   </script>

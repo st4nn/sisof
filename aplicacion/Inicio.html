@@ -1,17 +1,57 @@
 <!-- Page -->
-<div class="page">
+<div class="page" style="min-height: 90vh;">
   <div class="page-content padding-30 container-fluid">
-    <div class="row col-sm-12">
-      <h1>BIENVENIDO AL PORTAL DE SERVICIO Y MANTENIMIENTO</h1>
-      <p>Gracias por registrarse en el portal. Ahora es el momento de disfrutar de los beneficios de ser cliente y parte del equipo Linea D Fuego.</p>
-      <p>En este portal los clientes tienen acceso a la historia del mantenimiento y servicios de su producto, como tambien acceso a las inspecciones cumplidas, y aquellas por cumplir para garntizar la seguridad de los equipos.</p>
-      <p>Linea D Fuego es la unica empresa en Colombia que ofrece este servicio para los bomberos e incluye beneficios como:
+    <div class="row">
+      <div class="col-sm-6 col-lg-4">
 
-      Inspección y lavado anual los primeros 2 años con concepto técnico emitido
-      Primer cambio de partes por desgaste (cremalleras, velcros y reflectivos), único en el mundo 
-      Arreglos por defecto de fabricación o manufactura durante 2 años
-      Traje temporal durante reparaciones o un traje nuevo en caso de defectos irreparables
-      Diagnóstico y reporte anual del estado y mantenimiento de los trajes de la unidad, que evitará compra innecesaria de uniformes que puedan ser reparados bajo indicaciones de la normatividad.</p>
+        <div class="widget">
+          <div class="widget-header bg-blue-grey-200 padding-30 clearfix">
+            <img class="col-xs-12 margin-bottom-25" height="auto" src="../server/Archivos/InserteLogoAqui_1024.png" alt="">
+              <div class="font-size-20 margin-bottom-15">{Nombre de Empresa}</div>
+              <p class="margin-bottom-5 text-nowrap"><i class="icon wb-map margin-right-10" aria-hidden="true"></i>
+                <span class="text-break">{Ubicación}</span>
+              </p>
+              <p class="margin-bottom-5 text-nowrap"><i class="icon wb-envelope margin-right-10" aria-hidden="true"></i>
+                <span class="text-break">{Responsable}</span>
+              </p>
+          </div>
+          <div class="widget-content">
+          </div>
+        </div>
+        
+      </div>
+      <div class="col-sm-6 col-lg-8">
+        <h1>Bienvenido <span id="lblUsuario"></span></h1>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        </p>
+        <div class="row">
+          <div class="col-md-6">
+              <div class="bg-blue-grey-600" style="padding: 5px;"> 
+                <button class="btn btn-info btn-block white font-size-50 text-left">  
+                    <i class="icon bg-cyan-700 pull-left fa-line-chart icon-circle" aria-hidden="true" style="position: absolute; bottom:-9px;"></i>
+                    <span style="margin-left: 130px;">Estado</span>
+                </button>
+              </div>
+          </div>
+          <div class="col-sm-6">
+              <div class="bg-blue-grey-600" style="padding: 5px;"> 
+                <button class="btn btn-info btn-block white font-size-50 text-right">  
+                    <span style="margin-right: 130px;">SG SST</span>
+                    <i class="icon bg-cyan-700 pull-right fa-medkit icon-circle" aria-hidden="true" style="position: absolute; bottom:-9px; right: 30px;"></i>
+                </button>
+              </div>
+          </div>
+        </div>
+        <div class="row margin-top-25"> 
+          <div class="col-sm-12">
+            <button class="btn btn-warning btn-block font-size-50">
+              <i class="icon icon-circle bg-orange-700 fa-cogs"></i>
+              Configuración
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>

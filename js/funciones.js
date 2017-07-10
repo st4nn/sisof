@@ -11,7 +11,10 @@ $(document).ready(function() {
   } else
   {
     llenarRestricciones();
-    cargarModulo("Inicio.html", "Inicio");
+    cargarModulo("Inicio.html", "Inicio", function()
+      {
+        $("#lblUsuario").text(Usuario.Nombre);
+      });
   }
 
   document.addEventListener("backbutton", function(e)
