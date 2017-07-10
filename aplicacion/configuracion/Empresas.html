@@ -1,72 +1,166 @@
-<style>
-	.buscarGoogle
-	{
-		margin-top: 300px;
-	}
-</style>
 <!-- Page -->
 <div class="page" style="min-height: 90vh;">
 	<div class="page-header">
 		<h3 class="page-title">Empresas</h3>
 	</div>
  	<div class="page-content container-fluid">
-  		<form id="frmReporte_Permisos_Buscar" class="page-search-form buscarGoogle" role="search">
-		    <div class="row">
-			    <div class="col-sm-12">
-			      <div class="input-search">
-			        <i class="input-search-icon wb-search" aria-hidden="true"></i>
-			        <input type="text" class="form-control" id="txtReportes_OT_Buscar" placeholder="Buscar">
-			        <button type="button" class="input-search-close icon wb-close" aria-label="Close"></button>
-			      </div>
+ 		<div id="cntEmpresas_Listado">
+	  		<form id="frmReporte_Permisos_Buscar" class="page-search-form buscarGoogle" role="search">
+	  			<h1 class="text-center buscarGoogle_titulo">Empresas</h1>
+			    <div class="row">
+				    <div class="row col-sm-12 buscarGoogle_col">
+				      <div class="input-search">
+				        <i class="input-search-icon wb-search" aria-hidden="true"></i>
+				        <input type="text" class="form-control" id="txtReportes_OT_Buscar" placeholder="Buscar">
+				        <button type="button" class="input-search-close icon wb-close" aria-label="Close"></button>
+				      </div>
+				    </div>
+				    <div class="row col-sm-12 buscarGoogle_col">
+					    <div class="col-lg-2 hidden-sm buscarGoogle_col_del"></div>
+					    	<button type="submit" class="btn btn-success col-lg-4 col-sm-5  col-xs-12 margin-10"><i class="icon wb-search" aria-hidden="true"></i> Buscar</button>		    
+					    	<button type="button" class="btn btn-warning col-lg-4 col-sm-5  col-xs-12 margin-10" id="btnEmpresas_CrearEmpresa"><i class="icon wb-plus" aria-hidden="true"></i> Crear Empresa</button>
+					    <div class="col-lg-2 col-sm-1 buscarGoogle_col_del"></div>
+				    </div>
 			    </div>
-		    </div>
-		    <div class="row text-aling-center">
-		    	<br>
-			    <div class="col-sm-3">
-			        <button type="submit" class="btn btn-success btn-block"><i class="icon wb-search" aria-hidden="true"></i> Buscar</button>
-			    </div>
-			    <div class="col-sm-3">
-			        <button type="submit" class="btn btn-warning btn-block"><i class="icon wb-plus" aria-hidden="true"></i> Crear Empresa</button>
-			    </div>
-		    </div>
-	  	</form>
+		  	</form>
 
-	    <div id="cntEmpresas_Listado" class="panel panel-primary panel-bordered hide col-md-12">
-	      <div class="panel-heading">
-	        <div class="panel-actions">
-	          <button id="btnEmpresas_Listado_Actualizar" class="btn btn-success btn-floating"><i class="icon wb-refresh"></i></button> 
-	        </div>
-	      </div>
-	      <div class="panel-body">
-	        <div class="table-responsive">
-	          <table id="tblEmpresas_Listado" class="table table-hover table-striped">
-	            <thead>
-	              <tr>
-	              	<th></th>
-	                <th>Consecutivo</th>
-	                <th>Nombre</th>
-	                <th>Nombre del Contacto</th>
-	                <th>Correo del Contacto</th>
-	                <th>Fecha de Creación</th>
-	                <th>Codigo</th>
-	                <th>Nombre</th>
-	                <th>Descripción</th>
-	                <th>Estado</th>
-	                <th>Tareas Cargadas</th>
-	                <th>Tareas Pendientes</th>
-	                <th></th>
-	              </tr>
-	            </thead>
-	            <tbody>
-	            </tbody>
-	          </table>
-	        </div>
-	      </div>
-	    </div>
+		    <div class="panel panel-primary panel-bordered hide col-md-12">
+		      <div class="panel-heading">
+		        <div class="panel-actions">
+		          <button id="btnEmpresas_Listado_Actualizar" class="btn btn-success btn-floating"><i class="icon wb-refresh"></i></button> 
+		        </div>
+		      </div>
+		      <div class="panel-body">
+		        <div class="table-responsive">
+		          <table id="tblEmpresas_Listado" class="table table-hover table-striped">
+		            <thead>
+		              <tr>
+		              	<th></th>
+		                <th>Consecutivo</th>
+		                <th>Nombre</th>
+		                <th>Correo de Contacto</th>
+		                <th>Teléfono de Contacto</th>
+		                <th>Fecha de Creación</th>
+		                <th>Creada por</th>
+		              </tr>
+		            </thead>
+		            <tbody>
+		            </tbody>
+		          </table>
+		        </div>
+		      </div>
+		    </div>
+		</div>
 		
 
-		<div>
-			
+		<div id="cntEmpresas_Creacion" class="hide">
+			<div class="page-header">
+                <h1 class="page-title" id="lblEmpresas_Creacion_Titulo">Page Title</h1>
+                <div class="page-header-actions">
+                  
+                    <div class="">
+                    	<a id="lnkEmpresas_VolverABusqueda" href="#">
+                    		<i class="icon icon-2x fa-arrow-left "></i> 
+                    		<span class="text-middle">Volver a la Búsqueda</span>
+                    	</a>
+                    </div>
+                  
+                </div>
+            </div>
+
+            <div class="col-md-12">
+            	<div class="panel panel-bordered panel-primary col-lg-6">
+            		<div class="panel-heading">
+            			<div class="panel-actions">
+            				<button class="btn btn-success btn-floating btn-danger"><i class="icon wb-refresh"></i></button> 
+				        	<button class="btn btn-success btn-floating btn-danger"><i class="icon wb-trash"></i></button> 
+				        </div>
+            		</div>
+            		<div class="panel-body">
+            			<form action="">
+            				<div class="form-group col-md-12 col-lg-6">
+								<label class="col-lg-12 col-md-4 control-label">Nombre
+									<span class="required">*</span>
+								</label>
+								<div class="col-lg-12 col-md-8">
+									<div class="input-group">
+										<span class="input-group-addon">
+											<i class="icon fa-barcode" aria-hidden="true"></i>
+										</span>
+										<input type="text" class="form-control guardar" id="txtEmpresas_Crear_Nombre" required>
+									</div>
+								</div>
+							</div>
+
+							<div class="form-group col-md-12 col-lg-6">
+								<label class="col-lg-12 col-md-4 control-label">Dirección
+								</label>
+								<div class="col-lg-12 col-md-8">
+									<div class="input-group">
+										<span class="input-group-addon">
+											<i class="icon fa-barcode" aria-hidden="true"></i>
+										</span>
+										<input type="text" class="form-control guardar" id="txtEmpresas_Crear_Direccion">
+									</div>
+								</div>
+							</div>
+
+							
+							<div class="form-group col-sm-6">
+								<label class="col-lg-12 col-md-4 control-label">Correo de Contacto
+									<span class="required">*</span>
+								</label>
+								<div class="col-lg-12 col-md-8">
+									<div class="input-group">
+										<span class="input-group-addon">
+											<i class="icon wb-envelope" aria-hidden="true"></i>
+										</span>
+										<input type="mail" class="form-control guardar" id="txtEmpresas_Crear_Correo" required>
+									</div>
+								</div>
+							</div>
+
+							<div class="form-group col-sm-6">
+								<label class="col-lg-12 col-md-4 control-label">Teléfono de Contacto
+								</label>
+								<div class="col-lg-12 col-md-8">
+									<div class="input-group">
+										<span class="input-group-addon">
+											<i class="icon fa-phone" aria-hidden="true"></i>
+										</span>
+										<input type="number" class="form-control guardar" id="txtEmpresas_Crear_Telefono">
+									</div>
+								</div>
+							</div>
+
+            			</form>
+            		</div>
+            	</div>
+            	<div class="col-lg-6">
+	            	<div class="panel panel-bordered panel-primary">
+	            		<div class="panel-body">
+	            			<div class="input-group input-group-file">
+					          <input type="text" class="form-control inputText" readonly="">
+					          <span class="input-group-btn">
+					            <span class="btn btn-success btn-file">
+					              <i class="icon wb-more-horizontal" aria-hidden="true"></i>
+					              Buscar
+					              <input type="file" name="archivo" class="inputControl" name="">
+					            </span>
+					          </span>
+					        </div>
+					        <div class="col-sm-12">
+					        	<img id="elIMG" src="" alt="">
+					        </div>
+	            		</div>
+	            	</div>
+            	</div>
+            </div>
 		</div>
 	</div>
 </div>
+
+<script src="../js/empresas.js"></script>
+<script>
+	$(".inputText").on("change")
+</script>

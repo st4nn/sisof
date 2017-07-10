@@ -66,10 +66,6 @@ function cargarModulo(vinculo, titulo, callback)
         if ($('#' + nomModulo).length)
         {
           $('#' + nomModulo).show();
-          if (titulo != null)
-          {
-            $('#' + nomModulo).find('.page-header').find(".page-title").text(titulo);
-          }
           callback();
         } else
         {

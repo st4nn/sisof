@@ -27,4 +27,37 @@ function fun_Inicio()
     });
     $("#contenedorMenu ul").remove();
   }
+
+  $(document).delegate('.input-search-close', 'click', function(event) 
+  {
+    var control = $(this).parent('.input-search').find('input[type="text"]');
+    $(control).val('');
+  });
+
+  $(document).delegate('.buscarGoogle', 'submit', function(event) 
+  {
+    event.preventDefault();
+
+    $(this).ajustarFormularioGoogle();
+  });
+
+  $.fn.ajustarFormularioGoogle = function()
+  {
+    $(this).css('margin-top', '0px');
+    $(this).css('width', '100%');
+    $(this).find(".buscarGoogle_titulo").remove();
+
+    var objetos = $(this).find('.buscarGoogle_col');
+    var botones = $(objetos).find("button");
+
+    $(objetos).removeClass('col-sm-12');
+    $(objetos).addClass('col-lg-6');
+
+    $(botones).removeClass('margin-10');
+    $(botones).addClass('margin-horizontal-5');
+
+    $(this).find(".buscarGoogle_col_del").remove();
+
+    $(this).removeClass('buscarGoogle');
+  }
 }
