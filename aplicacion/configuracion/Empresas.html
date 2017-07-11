@@ -55,7 +55,7 @@
 
 		<div id="cntEmpresas_Creacion" class="hide">
 			<div class="page-header">
-                <h1 class="page-title" id="lblEmpresas_Creacion_Titulo">Page Title</h1>
+                <h1 class="page-title" id="lblEmpresas_Creacion_Titulo"></h1>
                 <div class="page-header-actions">
                   
                     <div class="">
@@ -72,12 +72,17 @@
             	<div class="panel panel-bordered panel-primary col-lg-8">
             		<div class="panel-heading">
             			<div class="panel-actions">
-            				<button class="btn btn-success btn-floating btn-danger"><i class="icon wb-refresh"></i></button> 
-				        	<button class="btn btn-success btn-floating btn-danger"><i class="icon wb-trash"></i></button> 
+            				<button id="btnEmpresas_Crear_Limpiar" class="btn btn-success btn-floating btn-danger">
+            					<i class="icon wb-refresh"></i>
+            				</button> 
+				        	
+				        	<button id="btnEmpresas_Crear_Borrar" class="btn btn-success btn-floating btn-danger">
+				        		<i class="icon wb-trash"></i>
+				        	</button> 
 				        </div>
             		</div>
             		<div class="panel-body">
-            			<form action="">
+            			<form id="frmEmpresas_Crear">
             				<div class="form-group col-md-12 col-lg-6">
 								<label class="col-lg-12 col-md-4 control-label">Nombre
 									<span class="required">*</span>
@@ -153,6 +158,3 @@
 </div>
 
 <script src="../js/empresas.js"></script>
-<script>
-	$("#cntEmpresas_Imagen").iniciar_CargadorImagenes({idObj : 'Empresas_Crear'});
-</script>
