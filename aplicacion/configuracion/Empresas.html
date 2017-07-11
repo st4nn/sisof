@@ -69,7 +69,7 @@
             </div>
 
             <div class="col-md-12">
-            	<div class="panel panel-bordered panel-primary col-lg-6">
+            	<div class="panel panel-bordered panel-primary col-lg-8">
             		<div class="panel-heading">
             			<div class="panel-actions">
             				<button class="btn btn-success btn-floating btn-danger"><i class="icon wb-refresh"></i></button> 
@@ -136,22 +136,14 @@
             			</form>
             		</div>
             	</div>
-            	<div class="col-lg-6">
+            	<div class="col-lg-4">
 	            	<div class="panel panel-bordered panel-primary">
 	            		<div class="panel-body">
-	            			<div class="input-group input-group-file">
-					          <input type="text" class="form-control inputText" readonly="">
-					          <span class="input-group-btn">
-					            <span class="btn btn-success btn-file">
-					              <i class="icon wb-more-horizontal" aria-hidden="true"></i>
-					              Buscar
-					              <input type="file" name="archivo" class="inputControl" name="">
-					            </span>
-					          </span>
-					        </div>
-					        <div class="col-sm-12">
-					        	<img id="elIMG" src="" alt="">
-					        </div>
+	            			<div>
+	            				<h4>Logo de la Empresa</h4>
+	            				<div id="cntEmpresas_Imagen"></div>	
+	            			</div>
+	            			
 	            		</div>
 	            	</div>
             	</div>
@@ -162,5 +154,5 @@
 
 <script src="../js/empresas.js"></script>
 <script>
-	$(".inputText").on("change")
+	$("#cntEmpresas_Imagen").iniciar_CargadorImagenes({idObj : 'Empresas_Crear'});
 </script>

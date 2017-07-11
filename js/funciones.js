@@ -473,3 +473,64 @@ function sumarDias(tFecha, tiempo)
     
     return fecha.getFullYear() + "-" + CompletarConCero(fecha.getMonth() + 1, 2) + '-' + fecha.getDate();
 }
+
+$.fn.iniciar_CargadorImagenes = function(vdefault)
+{
+  var parametros = {
+    idObj : obtenerPrefijo(),
+    txtBtn : 'Buscar',
+    callback :  function(){}
+  };
+
+  $.extend(parametros, vdefault);
+
+  var tds = '';
+  tds += '<div class="input-group input-group-file">';
+    tds += '<input id="txt' + parametros.idObj + '_Etiqueta" type="text" class="form-control inputText" readonly="">';
+    tds += '<span class="input-group-btn">';
+      tds += '<span class="btn btn-success btn-file">';
+        tds += '<i class="icon wb-more-horizontal" aria-hidden="true"></i>';
+        tds += parametros.txtBtn;
+        tds += '<input type="file" id="txt' + parametros.idObj + '_Archivo" class="inputControl" name="txt' + parametros.idObj + '_Archivo">';
+      tds += '</span>';
+    tds += '</span>';
+  tds += '</div>';
+  tds += '<div class="col-sm-12">';
+    tds += '<img id="img' + parametros.idObj + '_Preview" class="col-xs-12" height="auto" src="" alt="">';
+  tds += '</div>';
+
+  $(this).append(tds);
+
+  $('#txt' + parametros.idObj + '_Archivo').on("change", function(evento)
+  {
+    $('#img' + parametros.idObj + '_Preview').previewIMG(this, $('#txt' + parametros.idObj + '_Etiqueta'));
+  });
+}
+
+$.fn.previewIMG = function(input, texto)
+{
+  var obj = this;
+    
+  if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+          if (e.target.result.includes('image'))
+          {
+            $(obj).attr('src', e.target.result);  
+            if (texto != undefined)
+            {
+              $(texto).val($(input).val().replace('C:\\fakepath\\', ''))
+            }
+          } else
+          {
+            Mensaje("Error", "El Archivo seleccionado no es una imagen", "danger");
+            $(input).val('');
+            $(texto).val('');
+            $(obj).attr('src', '');  
+          }
+        }
+
+        reader.readAsDataURL(input.files[0]);
+    }
+}
