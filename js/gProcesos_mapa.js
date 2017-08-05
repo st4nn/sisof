@@ -1,14 +1,14 @@
 $(document).ready(function()
 {
-	init();
+	gProcesos_Mapa_IniciarDiagrama();
 });
 
 
-function init() {
+function gProcesos_Mapa_IniciarDiagrama() {
     var $ = go.GraphObject.make;
 
     myDiagram =
-      $(go.Diagram, "myDiagramDiv",
+      $(go.Diagram, "cntGProcesos_Mapa_Diagrama",
         {
           allowDrop: true, // from Palette
           // what to do when a drag-drop occurs in the Diagram's background
@@ -20,6 +20,51 @@ function init() {
           "commandHandler.archetypeGroupData": { isGroup: true, category: "OfNodes" },
           "undoManager.isEnabled": true
         });
+
+    myDiagram.addDiagramListener("Modified", function(e) {
+      var button = document.getElementById("SaveButton");
+      if (button) button.disabled = !myDiagram.isModified;
+      var idx = document.title.indexOf("*");
+      if (myDiagram.isModified) {
+        if (idx < 0) document.title += "*";
+      } else {
+        if (idx >= 0) document.title = document.title.substr(0, idx);
+      }
+    });
+
+    function makePort(name, spot, output, input) {
+      // the port is basically just a small circle that has a white stroke when it is made visible
+      return $(go.Shape, "Circle",
+               {
+                  fill: "transparent",
+                  stroke: null,  // this is changed to "white" in the gProcesos_Mapa_showPorts function
+                  desiredSize: new go.Size(8, 8),
+                  alignment: spot, alignmentFocus: spot,  // align the port on the main Shape
+                  portId: name,  // declare this object to be a "port"
+                  fromSpot: spot, toSpot: spot,  // declare where links may connect at this port
+                  fromLinkable: output, toLinkable: input,  // declare whether the user may draw links to/from here
+                  cursor: "pointer"  // show a different cursor to indicate potential link point
+               });
+    };
+
+     function nodeStyle() {
+      return [
+        // The Node.location comes from the "loc" property of the node data,
+        // converted by the Point.parse static method.
+        // If the Node.location is changed, it updates the "loc" property of the node data,
+        // converting back using the Point.stringify static method.
+        new go.Binding("location", "loc", go.Point.parse).makeTwoWay(go.Point.stringify),
+        {
+          // the Node.location is at the center of each node
+          locationSpot: go.Spot.Center,
+          //isShadowed: true,
+          //shadowColor: "#888",
+          // handle mouse enter/leave events to show/hide the ports
+          mouseEnter: function (e, obj) { gProcesos_Mapa_showPorts(obj.part, true); },
+          mouseLeave: function (e, obj) { gProcesos_Mapa_showPorts(obj.part, false); }
+        }
+      ];
+    };
 
     // There are two templates for Groups, "OfGroups" and "OfNodes".
 
@@ -52,7 +97,7 @@ function init() {
     }
 
     myDiagram.groupTemplateMap.add("OfGroups",
-      $(go.Group, "Auto",
+      $(go.Group, "Auto", nodeStyle(),
         {
           background: "transparent",
           // highlight when dragging into the Group
@@ -82,11 +127,12 @@ function init() {
                 alignment: go.Spot.Left,
                 editable: true,
                 margin: 5,
-                font: "bold 18px sans-serif",
+                font: "bold 14px sans-serif",
                 opacity: 0.75,
                 stroke: "#404040"
               },
-              new go.Binding("text", "text").makeTwoWay())
+              new go.Binding("text", "text").makeTwoWay()),
+              makePort("R", go.Spot.Right, true, true)
           ),  // end Horizontal Panel
           $(go.Placeholder,
             { padding: 5, alignment: go.Spot.TopLeft })
@@ -94,7 +140,7 @@ function init() {
       ));  // end Group and call to add to template Map
 
     myDiagram.groupTemplateMap.add("OfNodes",
-      $(go.Group, "Auto",
+      $(go.Group, "Auto", nodeStyle(),
         {
           background: "transparent",
           ungroupable: true,
@@ -125,11 +171,12 @@ function init() {
                 alignment: go.Spot.Left,
                 editable: true,
                 margin: 5,
-                font: "bold 16px sans-serif",
+                font: "bold 14px sans-serif",
                 opacity: 0.75,
                 stroke: "#404040"
               },
-              new go.Binding("text", "text").makeTwoWay())
+              new go.Binding("text", "text").makeTwoWay()),
+              makePort("R", go.Spot.Right, true, true)
           ),  // end Horizontal Panel
           $(go.Placeholder,
             { padding: 5, alignment: go.Spot.TopLeft })
@@ -137,7 +184,7 @@ function init() {
       ));  // end Group and call to add to template Map
 
     myDiagram.nodeTemplate =
-      $(go.Node, "Auto",
+      $(go.Node, "Auto", nodeStyle(),
         { // dropping on a Node is the same as dropping on its containing Group, even if it's top-level
           mouseDrop: function(e, nod) { finishDrop(e, nod.containingGroup); }
         },
@@ -146,37 +193,87 @@ function init() {
           new go.Binding("fill", "color")),
         $(go.TextBlock,
           {
-            margin: 5,
+            margin: 10,
             editable: true,
-            font: "bold 13px sans-serif",
+            font: "bold 14px sans-serif",
             opacity: 0.75,
             stroke: "#404040"
           },
-          new go.Binding("text", "text").makeTwoWay())
+          new go.Binding("text", "text").makeTwoWay()),
+          makePort("T", go.Spot.Top, false, true),
+          makePort("L", go.Spot.Left, true, true),
+          makePort("R", go.Spot.Right, true, true),
+          makePort("B", go.Spot.Bottom, true, false)
       );
 
     // initialize the Palette and its contents
     myPalette =
-      $(go.Palette, "myPaletteDiv",
+      $(go.Palette, "cntGProcesos_Mapa_Paleta",
         {
           nodeTemplateMap: myDiagram.nodeTemplateMap,
           groupTemplateMap: myDiagram.groupTemplateMap,
           layout: $(go.GridLayout, { wrappingColumn: 1, alignment: go.GridLayout.Position })
         });
     myPalette.model = new go.GraphLinksModel([
-      { text: "lightgreen", color: "#ACE600" },
-      { text: "yellow", color: "#FFDD33" },
-      { text: "lightblue", color: "#33D3E5" }
+      { text: "Proceso", color: "#ACE600" },
+      { text: "Sub Grupo", color: "#FFDD33" , "isGroup":true, "category":"OfNodes", "group":2},
+      { text: "Grupo", color: "#33D3E5", "isGroup":true, "category":"OfGroups"}
     ]);
-
-    load();
+    gProcesos_Mapa_CargarElUltimo();
   }
 
-  // save a model to and load a model from JSON text, displayed below the Diagram
-  function save() {
-    document.getElementById("mySavedModel").value = myDiagram.model.toJson();
-    myDiagram.isModified = false;
+  function gProcesos_Mapa_CargarElUltimo()
+  {
+    $("#btnGProcesos_Mapa_Cargar").trigger("click");
   }
-  function load() {
-    myDiagram.model = go.Model.fromJson(document.getElementById("mySavedModel").value);
+
+  $("#btnGProcesos_Mapa_Guardar").on("click", function(evento)
+    {
+      evento.preventDefault();
+      var diagrama = myDiagram.model.toJson();
+      var datos = {
+        idDiagrama : $("#txtGProcesos_Mapa_id").val(),
+        idEmpresa : Usuario.idEmpresa,
+        idUsuario : Usuario.id,
+        Diagrama : diagrama
+      };
+
+      $.post('../server/php/proyecto/gProcesos_CrearDiagrama.php', datos, function(data, textStatus, xhr) 
+      {
+        if (!isNaN(data))
+        {
+          $("#txtGProcesos_Mapa_id").val(data);
+          Mensaje("Hey", "Los cambios han sido guardados", 'success');
+          myDiagram.isModified = false;
+        } else
+        {
+          Mensaje("Error", 'No es posible crear una Empresa sin nombre', 'danger'); 
+        }
+      });
+    });
+
+  $("#btnGProcesos_Mapa_Cargar").on("click", function(evento)
+  {
+    $.post('../server/php/proyecto/gProcesos_CargarDiagrama.php', 
+      {
+        Usuario :  Usuario.id,
+        idEmpresa : Usuario.idEmpresa
+      }, function(data, textStatus, xhr) 
+      {
+        if (data != 0)
+        {
+          myDiagram.isModified = false;
+          $("#txtGProcesos_Mapa_id").val(data.id);
+          myDiagram.model = go.Model.fromJson(data.Diagrama);
+        }
+      }, 'json');
+  });
+
+
+  function gProcesos_Mapa_showPorts(node, show) {
+    var diagram = node.diagram;
+    if (!diagram || diagram.isReadOnly || !diagram.allowLink) return;
+    node.ports.each(function(port) {
+        port.stroke = (show ? "white" : null);
+      });
   }
