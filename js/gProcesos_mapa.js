@@ -13,7 +13,7 @@ function gProcesos_Mapa_IniciarDiagrama() {
           allowDrop: true, // from Palette
           // what to do when a drag-drop occurs in the Diagram's background
           mouseDrop: function(e) { finishDrop(e, null); },
-          click: function(e){console.log('click diagram', e);},
+          click: function(e){gProcesos_Mapa_SeleccionarProceso(0, 0)},
           layout:  // Diagram has simple horizontal layout
             $(go.GridLayout,
               { wrappingWidth: Infinity, alignment: go.GridLayout.Position, cellSize: new go.Size(1, 1) }),
@@ -188,7 +188,7 @@ function gProcesos_Mapa_IniciarDiagrama() {
       $(go.Node, "Auto", nodeStyle(),
         { // dropping on a Node is the same as dropping on its containing Group, even if it's top-level
           mouseDrop: function(e, nod) { finishDrop(e, nod.containingGroup); },
-          click : function(e, nod){ console.log(nod.data.key);}
+          click : function(e, nod) {gProcesos_Mapa_SeleccionarProceso(nod.data.key, 1);}
         },
         $(go.Shape, "Rectangle",
           { fill: "#ACE600", stroke: null },
@@ -222,6 +222,19 @@ function gProcesos_Mapa_IniciarDiagrama() {
       { text: "Grupo", color: "#33D3E5", "isGroup":true, "category":"OfGroups"}
     ]);
     gProcesos_Mapa_CargarElUltimo();
+  }
+
+  function gProcesos_Mapa_SeleccionarProceso(key, tipo)
+  {
+    if (tipo == 1)
+    {
+      $("#btnGProcesos_Mapa_VerProceso").slideDown();
+      $("#btnGProcesos_Mapa_VerProceso").attr("idProceso", key);
+    } else
+    {
+      $("#btnGProcesos_Mapa_VerProceso").slideUp();
+      $("#btnGProcesos_Mapa_VerProceso").attr("idProceso", 0);
+    }
   }
 
   function gProcesos_Mapa_CargarElUltimo()
@@ -271,6 +284,16 @@ function gProcesos_Mapa_IniciarDiagrama() {
       }, 'json');
   });
 
+  $("#btnGProcesos_Mapa_VerProceso").on("click", function(evento)
+  {
+    evento.preventDefault();
+    var idProceso = $(this).attr("idProceso");
+    cargarModulo('gProcesos/Hoja.html', 'Hoja de Procesos', function()
+    {
+      gProcesos_Hoja_cargarProceso(idProceso);
+    });
+  });
+
 
   function gProcesos_Mapa_showPorts(node, show) {
     var diagram = node.diagram;
@@ -279,3 +302,9 @@ function gProcesos_Mapa_IniciarDiagrama() {
         port.stroke = (show ? "white" : null);
       });
   }
+
+  $(document).delegate('.btnGProcesos_VerMapa','click', function(ev)
+  {
+    ev.preventDefault();
+    cargarModulo('gProcesos/mapa.html', 'Gestión de Procesos');
+  });
