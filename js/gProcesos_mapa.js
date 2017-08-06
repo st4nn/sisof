@@ -13,6 +13,7 @@ function gProcesos_Mapa_IniciarDiagrama() {
           allowDrop: true, // from Palette
           // what to do when a drag-drop occurs in the Diagram's background
           mouseDrop: function(e) { finishDrop(e, null); },
+          click: function(e){console.log('click diagram', e);},
           layout:  // Diagram has simple horizontal layout
             $(go.GridLayout,
               { wrappingWidth: Infinity, alignment: go.GridLayout.Position, cellSize: new go.Size(1, 1) }),
@@ -186,7 +187,8 @@ function gProcesos_Mapa_IniciarDiagrama() {
     myDiagram.nodeTemplate =
       $(go.Node, "Auto", nodeStyle(),
         { // dropping on a Node is the same as dropping on its containing Group, even if it's top-level
-          mouseDrop: function(e, nod) { finishDrop(e, nod.containingGroup); }
+          mouseDrop: function(e, nod) { finishDrop(e, nod.containingGroup); },
+          click : function(e, nod){ console.log(nod.data.key);}
         },
         $(go.Shape, "Rectangle",
           { fill: "#ACE600", stroke: null },
@@ -247,7 +249,7 @@ function gProcesos_Mapa_IniciarDiagrama() {
           myDiagram.isModified = false;
         } else
         {
-          Mensaje("Error", 'No es posible crear una Empresa sin nombre', 'danger'); 
+          Mensaje("Error", data, 'danger'); 
         }
       });
     });
