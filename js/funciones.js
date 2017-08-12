@@ -534,3 +534,54 @@ $.fn.previewIMG = function(input, texto)
         reader.readAsDataURL(input.files[0]);
     }
 }
+
+$(document).delegate('.lnkAbrirModulo', 'click', function()
+{
+  var Vinculo = $(this).attr("Vinculo");
+  var Titulo = $(this).attr("Titulo");
+  var fCallback = $(this).attr("data-callback");
+
+
+  if (fCallback !== undefined && fCallback != null && fCallback != "")
+  {
+      fCallback = eval(fCallback);
+
+    if (typeof fCallback !== "function") 
+    {
+      fCallback = function(){};
+    }
+  } else
+  {
+    fCallback = function(){};
+  }
+
+  cargarModulo(Vinculo, Titulo, fCallback);
+});
+
+$.fn.cargarArchivos = function(parametros)
+{
+  var contenedor = $(this).find(".list-group-full");
+  $(contenedor).find("li").remove();
+  $.post("../server/php/scripts/archivos_cargarPorPrefijo.php", parametros, function(data, textStatus, xhr) 
+  {
+    var tds = '';
+
+    $.each(data, function(index, val) 
+    {
+      tds += '<li class="list-group-item">';
+        tds += '<small><time class="pull-right" datetime="' + val.FechaCargue + '">' + calcularTiempoPublicacion(val.FechaCargue) + '</time></small>';
+        tds += '<p><a class="hightlight" href="../server/Archivos/' + val.Ruta + '/' + val.Nombre + '" target="_blank">' + val.Nombre + '</a></p>';
+        tds += '<p><small>' + val.Proceso + '</small><br>';
+        tds += val.Observaciones + '</p>';
+        tds += '<small>Cargado por';
+          tds += '<a class="hightlight" href="javascript:void(0)">';
+            tds += '<span>' + val.Usuario + '</span>';
+          tds += '</a>';
+        tds += '</small>';
+      tds += '</li>';
+    });
+
+    $(contenedor).append(tds);
+
+  }, 'json');
+}
