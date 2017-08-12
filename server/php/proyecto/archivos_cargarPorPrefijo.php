@@ -5,7 +5,7 @@
    $Prefijo = addslashes($_POST['Prefijo']);
    $Proceso = "";
 
-   if array_key_exists('Proceso',$_POST)
+   if (array_key_exists('Proceso',$_POST))
    {
       $Proceso = " AND Archivos.Proceso LIKE '" . addslashes($_POST['Proceso']) . "' ";
    }

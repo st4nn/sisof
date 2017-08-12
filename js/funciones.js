@@ -542,27 +542,27 @@ $(document).delegate('.lnkAbrirModulo', 'click', function()
   var fCallback = $(this).attr("data-callback");
 
 
-  if (fCallback !== undefined && fCallback != null && fCallback != "")
-  {
-      fCallback = eval(fCallback);
 
-    if (typeof fCallback !== "function") 
+  cargarModulo(Vinculo, Titulo, function()
     {
-      fCallback = function(){};
-    }
-  } else
-  {
-    fCallback = function(){};
-  }
+        console.log(fCallback);
+      if (fCallback !== undefined && fCallback != null && fCallback != "")
+      {
+        fCallback = eval(fCallback);
 
-  cargarModulo(Vinculo, Titulo, fCallback);
+        if (typeof fCallback === "function") 
+        {
+          fCallback();
+        }
+      }
+    });
 });
 
 $.fn.cargarArchivos = function(parametros)
 {
   var contenedor = $(this).find(".list-group-full");
   $(contenedor).find("li").remove();
-  $.post("../server/php/scripts/archivos_cargarPorPrefijo.php", parametros, function(data, textStatus, xhr) 
+  $.post("../server/php/proyecto/archivos_cargarPorPrefijo.php", parametros, function(data, textStatus, xhr) 
   {
     var tds = '';
 
