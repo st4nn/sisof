@@ -14,6 +14,7 @@ $(document).ready(function() {
     cargarModulo("Inicio.html", "Inicio", function()
       {
         $(".lblUsuario").text(Usuario.Nombre);
+        $("#txtInicio_idEmpresa").val(Usuario.idEmpresa);
       });
   }
 
@@ -545,7 +546,6 @@ $(document).delegate('.lnkAbrirModulo', 'click', function()
 
   cargarModulo(Vinculo, Titulo, function()
     {
-        console.log(fCallback);
       if (fCallback !== undefined && fCallback != null && fCallback != "")
       {
         fCallback = eval(fCallback);
@@ -565,21 +565,23 @@ $.fn.cargarArchivos = function(parametros)
   $.post("../server/php/proyecto/archivos_cargarPorPrefijo.php", parametros, function(data, textStatus, xhr) 
   {
     var tds = '';
-
-    $.each(data, function(index, val) 
+    if (data != 0)
     {
-      tds += '<li class="list-group-item">';
-        tds += '<small><time class="pull-right" datetime="' + val.FechaCargue + '">' + calcularTiempoPublicacion(val.FechaCargue) + '</time></small>';
-        tds += '<p><a class="hightlight" href="../server/Archivos/' + val.Ruta + '/' + val.Nombre + '" target="_blank">' + val.Nombre + '</a></p>';
-        tds += '<p><small>' + val.Proceso + '</small><br>';
-        tds += val.Observaciones + '</p>';
-        tds += '<small>Cargado por';
-          tds += '<a class="hightlight" href="javascript:void(0)">';
-            tds += '<span>' + val.Usuario + '</span>';
-          tds += '</a>';
-        tds += '</small>';
-      tds += '</li>';
-    });
+      $.each(data, function(index, val) 
+      {
+        tds += '<li class="list-group-item">';
+          tds += '<small><time class="pull-right" datetime="' + val.FechaCargue + '">' + calcularTiempoPublicacion(val.FechaCargue) + '</time></small>';
+          tds += '<p><a class="hightlight" href="../server/Archivos/' + val.Ruta + '/' + val.Nombre + '" target="_blank">' + val.Nombre + '</a></p>';
+          tds += '<p><small>' + val.Proceso + '</small><br>';
+          tds += val.Observaciones + '</p>';
+          tds += '<small>Cargado por';
+            tds += '<a class="hightlight" href="javascript:void(0)">';
+              tds += '<span>' + val.Usuario + '</span>';
+            tds += '</a>';
+          tds += '</small>';
+        tds += '</li>';
+      });
+    }
 
     $(contenedor).append(tds);
 

@@ -1,0 +1,110 @@
+<!-- Page -->
+<input type="hidden" id="txtGHumana_Cargo_idCargo">
+<div class="page" style="min-height: 90vh;">
+	<div class="page-header">
+		<button class="btn btn-primary pull-right btn-pill-left btnGHumana_VerOrganigrama">Volver al Organigrama</button>
+		<small>Perfil de Trabajador</small>
+		<h3 id="lblGHumana_Cargo_Titulo" class="page-title"></h3>
+	</div>
+ 	<div class="page-content container-fluid">
+
+ 		<div class="row">
+ 			<div class="col-sm-6">
+ 				<div class="panel panel-primary panel-bordered">
+		 			<div class="panel-heading">
+		              <h3 class="panel-title">Estudios</h3>
+		            </div>
+		 			<div class="panel-body">
+ 						<textarea id="txtGHumana_Cargo_Estudios" rows="5" class="form-control"></textarea>
+ 					</div>
+ 				</div>
+ 			</div>
+ 			<div class="col-sm-6">
+ 				<div class="panel panel-primary panel-bordered">
+		 			<div class="panel-heading">
+		              <h3 class="panel-title">Formación</h3>
+		            </div>
+		 			<div class="panel-body">
+ 						<textarea id="txtGHumana_Cargo_Formacion" rows="5" class="form-control"></textarea>
+ 					</div>
+ 				</div>
+ 			</div>
+ 		</div>
+
+ 		<div class="panel panel-primary panel-bordered">
+ 			<div class="panel-heading">
+              <h3 class="panel-title">Riesgos del Proceso</h3>
+              <div class="panel-actions">
+				<button id="btnGHumana_Cargo_AgregarRiesgo" class="btn text-left btn-default btn-block"><i class="icon fa-plus"></i> Agregar Riesgo</button>
+              </div>
+            </div>
+ 			<div class="panel-body">
+ 				<div class="table-responsive">
+ 					<table class="table table-hover table-striped">
+ 						<thead>
+ 							<tr>
+ 								<th></th>
+ 								<th>Clasificación de Riesgos</th>
+ 								<th>Riesgos</th>
+ 							</tr>
+ 						</thead>
+ 						<tbody></tbody>
+ 					</table>
+ 				</div>
+ 			</div>
+ 		</div>
+
+ 		<div class="panel panel-primary panel-bordered">
+ 			<div class="panel-heading">
+              <h3 class="panel-title">Actividades del Proceso</h3>
+              <div class="panel-actions">
+				<button id="btnGHumana_Cargo_AgregarActividad" class="btn text-left btn-default btn-block"><i class="icon fa-plus"></i> Agregar Actividad</button>
+              </div>
+            </div>
+ 			<div class="panel-body">
+ 				<div class="table-responsive">
+ 					<table class="table table-hover table-striped">
+ 						<thead>
+ 							<tr>
+ 								<th></th>
+ 								<th>Nombre de Actividad</th>
+ 								<th>Recursos</th>
+ 								<th>Insumos</th>
+ 								<th>RSST</th>
+ 							</tr>
+ 						</thead>
+ 						<tbody></tbody>
+ 					</table>
+ 				</div>
+ 			</div>
+ 		</div>
+
+ 		<div class="row">
+ 			<div class="col-sm-6">
+ 				<div class="panel panel-primary panel-bordered">
+		 			<div class="panel-heading">
+		              <h3 class="panel-title">Documentos del Proceso</h3>
+		            </div>
+		 			<div class="panel-body">
+ 						<div id="cntGHumana_Cargo_Documentos"></div>
+ 					</div>
+ 				</div>
+ 			</div>
+ 			<div class="col-sm-6">
+ 				<div class="panel panel-primary panel-bordered">
+		 			<div class="panel-heading">
+		              <h3 class="panel-title">Personal del Proceso</h3>
+		              <div class="panel-actions">
+						<button id="btnGHumana_Cargo_AgregarPersonal" class="btn text-left btn-default btn-block"><i class="icon fa-plus"></i> Agregar Actividad</button>
+		              </div>
+		            </div>
+		 			<div class="panel-body">
+ 							
+ 					</div>
+ 				</div>
+ 			</div>
+ 		</div>
+	</div>
+</div>
+
+<script src="../js/gHumana_Cargo.js"></script>

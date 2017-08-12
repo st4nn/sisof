@@ -7,7 +7,7 @@ $(document).ready(function()
 function gProcesos_Mapa_IniciarDiagrama() {
     var $ = go.GraphObject.make;
 
-    myDiagram =
+    gProcesos_Mapa_Diagrama =
       $(go.Diagram, "cntGProcesos_Mapa_Diagrama",
         {
           allowDrop: true, // from Palette
@@ -22,11 +22,9 @@ function gProcesos_Mapa_IniciarDiagrama() {
           "undoManager.isEnabled": true
         });
 
-    myDiagram.addDiagramListener("Modified", function(e) {
-      var button = document.getElementById("SaveButton");
-      if (button) button.disabled = !myDiagram.isModified;
+    gProcesos_Mapa_Diagrama.addDiagramListener("Modified", function(e) {
       var idx = document.title.indexOf("*");
-      if (myDiagram.isModified) {
+      if (gProcesos_Mapa_Diagrama.isModified) {
         if (idx < 0) document.title += "*";
       } else {
         if (idx >= 0) document.title = document.title.substr(0, idx);
@@ -97,7 +95,7 @@ function gProcesos_Mapa_IniciarDiagrama() {
       if (!ok) e.diagram.currentTool.doCancel();
     }
 
-    myDiagram.groupTemplateMap.add("OfGroups",
+    gProcesos_Mapa_Diagrama.groupTemplateMap.add("OfGroups",
       $(go.Group, "Auto", nodeStyle(),
         {
           background: "transparent",
@@ -140,7 +138,7 @@ function gProcesos_Mapa_IniciarDiagrama() {
         )  // end Vertical Panel
       ));  // end Group and call to add to template Map
 
-    myDiagram.groupTemplateMap.add("OfNodes",
+    gProcesos_Mapa_Diagrama.groupTemplateMap.add("OfNodes",
       $(go.Group, "Auto", nodeStyle(),
         {
           background: "transparent",
@@ -184,7 +182,7 @@ function gProcesos_Mapa_IniciarDiagrama() {
         )  // end Vertical Panel
       ));  // end Group and call to add to template Map
 
-    myDiagram.nodeTemplate =
+    gProcesos_Mapa_Diagrama.nodeTemplate =
       $(go.Node, "Auto", nodeStyle(),
         { // dropping on a Node is the same as dropping on its containing Group, even if it's top-level
           mouseDrop: function(e, nod) { finishDrop(e, nod.containingGroup); },
@@ -212,8 +210,8 @@ function gProcesos_Mapa_IniciarDiagrama() {
     myPalette =
       $(go.Palette, "cntGProcesos_Mapa_Paleta",
         {
-          nodeTemplateMap: myDiagram.nodeTemplateMap,
-          groupTemplateMap: myDiagram.groupTemplateMap,
+          nodeTemplateMap: gProcesos_Mapa_Diagrama.nodeTemplateMap,
+          groupTemplateMap: gProcesos_Mapa_Diagrama.groupTemplateMap,
           layout: $(go.GridLayout, { wrappingColumn: 1, alignment: go.GridLayout.Position })
         });
     myPalette.model = new go.GraphLinksModel([
@@ -245,10 +243,10 @@ function gProcesos_Mapa_IniciarDiagrama() {
   $("#btnGProcesos_Mapa_Guardar").on("click", function(evento)
     {
       evento.preventDefault();
-      var diagrama = myDiagram.model.toJson();
+      var diagrama = gProcesos_Mapa_Diagrama.model.toJson();
       var datos = {
         idDiagrama : $("#txtGProcesos_Mapa_id").val(),
-        idEmpresa : Usuario.idEmpresa,
+        idEmpresa : $("#txtInicio_idEmpresa").val(),
         idUsuario : Usuario.id,
         Diagrama : diagrama
       };
@@ -259,7 +257,7 @@ function gProcesos_Mapa_IniciarDiagrama() {
         {
           $("#txtGProcesos_Mapa_id").val(data);
           Mensaje("Hey", "Los cambios han sido guardados", 'success');
-          myDiagram.isModified = false;
+          gProcesos_Mapa_Diagrama.isModified = false;
         } else
         {
           Mensaje("Error", data, 'danger'); 
@@ -272,14 +270,14 @@ function gProcesos_Mapa_IniciarDiagrama() {
     $.post('../server/php/proyecto/gProcesos_CargarDiagrama.php', 
       {
         Usuario :  Usuario.id,
-        idEmpresa : Usuario.idEmpresa
+        idEmpresa : $("#txtInicio_idEmpresa").val()
       }, function(data, textStatus, xhr) 
       {
         if (data != 0)
         {
-          myDiagram.isModified = false;
+          gProcesos_Mapa_Diagrama.isModified = false;
           $("#txtGProcesos_Mapa_id").val(data.id);
-          myDiagram.model = go.Model.fromJson(data.Diagrama);
+          gProcesos_Mapa_Diagrama.model = go.Model.fromJson(data.Diagrama);
         }
       }, 'json');
   });

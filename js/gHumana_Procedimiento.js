@@ -5,5 +5,5 @@ $(document).ready(function()
 
 function gHumana_Procedimiento_cargarArchivos()
 {
-	$("#cntGHumana_Procedimiento_Archivos").cargarArchivos({Prefijo : '0', Proceso : 'Procedimientos de Gestión Humana'});
+	$("#cntGHumana_Procedimiento_Archivos").cargarArchivos({Prefijo : $("#txtInicio_idEmpresa").val(), Proceso : 'Procedimientos de Gestión Humana'});
 }
