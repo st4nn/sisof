@@ -12,13 +12,13 @@
 
    $sql = "SELECT 
                Archivos.*,
-               datosusuarios.Nombre AS Usuario
+               datosUsuarios.Nombre AS Usuario
             FROM
                Archivos
-               INNER JOIN datosusuarios ON datosusuarios.idLogin = Archivos.idLogin
+               INNER JOIN datosUsuarios ON datosUsuarios.idLogin = Archivos.idLogin
             WHERE Prefijo = '$Prefijo' $Proceso;";
 
-   $result = $link->query($sql);
+   $result = $link->query(utf8_decode($sql));
    $idx=0;
    if ( $result->num_rows > 0)
    {

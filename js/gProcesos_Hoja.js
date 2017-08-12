@@ -5,7 +5,7 @@ $(document).ready(function()
 
 function gProcesos_Hoja()
 {
-  $("#cntGProcesos_Hoja_Documentos").iniciarObjArchivos({objPrefijo : $("#txtGProcesos_Mapa_id"), Proceso: "Documentos del Proceso", Usuario: Usuario.id});
+  $("#cntGProcesos_Hoja_Documentos").iniciarObjArchivos({objPrefijo : $("#txtGProcesos_Hoja_idProceso"), Proceso: "Documentos del Proceso", Usuario: Usuario.id});
 }
 
 function gProcesos_Hoja_cargarProceso(idProceso)
@@ -25,6 +25,7 @@ function gProcesos_Hoja_cargarProceso(idProceso)
     } else
     {
       $("#lblGProcesos_Hoja_Titulo").text(data.Texto);
+      $("#txtGProcesos_Hoja_idProceso").val(idProceso);
     }
   }, 'json');
 }
