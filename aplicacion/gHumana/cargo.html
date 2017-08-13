@@ -31,77 +31,72 @@
  			</div>
  		</div>
 
- 		<div class="panel panel-primary panel-bordered">
- 			<div class="panel-heading">
-              <h3 class="panel-title">Riesgos del Proceso</h3>
-              <div class="panel-actions">
-				<button id="btnGHumana_Cargo_AgregarRiesgo" class="btn text-left btn-default btn-block"><i class="icon fa-plus"></i> Agregar Riesgo</button>
-              </div>
-            </div>
- 			<div class="panel-body">
- 				<div class="table-responsive">
- 					<table class="table table-hover table-striped">
- 						<thead>
- 							<tr>
- 								<th></th>
- 								<th>Clasificación de Riesgos</th>
- 								<th>Riesgos</th>
- 							</tr>
- 						</thead>
- 						<tbody></tbody>
- 					</table>
- 				</div>
- 			</div>
- 		</div>
-
- 		<div class="panel panel-primary panel-bordered">
- 			<div class="panel-heading">
-              <h3 class="panel-title">Actividades del Proceso</h3>
-              <div class="panel-actions">
-				<button id="btnGHumana_Cargo_AgregarActividad" class="btn text-left btn-default btn-block"><i class="icon fa-plus"></i> Agregar Actividad</button>
-              </div>
-            </div>
- 			<div class="panel-body">
- 				<div class="table-responsive">
- 					<table class="table table-hover table-striped">
- 						<thead>
- 							<tr>
- 								<th></th>
- 								<th>Nombre de Actividad</th>
- 								<th>Recursos</th>
- 								<th>Insumos</th>
- 								<th>RSST</th>
- 							</tr>
- 						</thead>
- 						<tbody></tbody>
- 					</table>
- 				</div>
- 			</div>
- 		</div>
-
  		<div class="row">
  			<div class="col-sm-6">
  				<div class="panel panel-primary panel-bordered">
 		 			<div class="panel-heading">
-		              <h3 class="panel-title">Documentos del Proceso</h3>
+		              <h3 class="panel-title">Elementos de Protección Personal</h3>
 		            </div>
 		 			<div class="panel-body">
- 						<div id="cntGHumana_Cargo_Documentos"></div>
+ 						<ul class="list-group list-group-full list-group-dividered">
+		                  <li class="list-group-item">
+		                    <button type="button" class="btn btn-pure btn-danger icon wb-close"></button> Cras justo odio
+		                  </li>
+		                  <li class="list-group-item">
+		                    Dapibus ac facilisis in
+		                  </li>
+		                  <li class="list-group-item">
+		                    <span class="badge badge-danger">3</span> Morbi leo risus
+		                  </li>
+		                  <li class="list-group-item active">
+		                    <span class="badge badge-info">10</span> Porta ac consectetur ac
+		                  </li>
+		                  <li class="list-group-item">
+		                    Vestibulum at eros
+		                  </li>
+		                  <li class="list-group-item">
+		                    Ibus ac facilis
+		                  </li>
+		                </ul>
  					</div>
  				</div>
  			</div>
  			<div class="col-sm-6">
  				<div class="panel panel-primary panel-bordered">
 		 			<div class="panel-heading">
-		              <h3 class="panel-title">Personal del Proceso</h3>
-		              <div class="panel-actions">
-						<button id="btnGHumana_Cargo_AgregarPersonal" class="btn text-left btn-default btn-block"><i class="icon fa-plus"></i> Agregar Actividad</button>
-		              </div>
+		              <h3 class="panel-title">Profesiograma</h3>
 		            </div>
 		 			<div class="panel-body">
- 							
+ 						<div id="cntGHumana_Cargo_Profesiograma"></div>
  					</div>
  				</div>
+ 			</div>
+ 		</div>
+
+ 		<div class="panel panel-primary panel-bordered">
+ 			<div class="panel-heading">
+              <h3 class="panel-title">Experiencia</h3>
+            </div>
+ 			<div class="panel-body">
+				<textarea id="txtGHumana_Cargo_Experiencia" rows="5" class="form-control"></textarea>
+ 			</div>
+ 		</div>
+
+ 		<div class="panel panel-primary panel-bordered">
+ 			<div class="panel-heading">
+              <h3 class="panel-title">Responsabilidades</h3>
+            </div>
+ 			<div class="panel-body">
+ 				<textarea id="txtGHumana_Cargo_Responsabilidades" rows="5" class="form-control"></textarea>
+ 			</div>
+ 		</div>
+
+ 		<div class="panel panel-primary panel-bordered">
+ 			<div class="panel-heading">
+              <h3 class="panel-title">Rendición de Cuentas</h3>
+            </div>
+ 			<div class="panel-body">
+ 				<textarea id="txtGHumana_Cargo_RendicionDeCuentas" rows="5" class="form-control"></textarea>
  			</div>
  		</div>
 	</div>

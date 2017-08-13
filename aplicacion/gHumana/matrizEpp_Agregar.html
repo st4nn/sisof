@@ -1,0 +1,87 @@
+<!-- Page -->
+<input type="hidden" id="txtGHumana_MatrizEPP_idEPP">
+<div class="page" style="min-height: 90vh;">
+	<div class="page-header">
+		<button class="btn btn-primary pull-right btn-pill-left lnkAbrirModulo" Vinculo="gHumana/matrizEPP.html" Titulo="Matriz de EPP">Volver a la Matriz</button>
+		<small>ELEMENTO DE PROTECCIÓN PERSONAL</small>
+		<h3 id="lblGHumana_MatrizEPP_Titulo" class="page-title"></h3>
+	</div>
+ 	<div class="page-content container-fluid">
+ 		<div class="panel panel-primary panel-bordered">
+ 			<div class="panel-heading">
+              <h3 id="lblGHumana_MatrizEPP_Agregar_Titulo" class="panel-title"></h3>
+				<div class="panel-actions">
+					<button class="btn text-left btn-danger"><i class="icon fa-trash"></i> Borrar Elemento</button>
+					<button class="btn text-left btn-warning"><i class="icon fa-plus"></i> Agregar Elemento</button>
+		      	</div>
+            </div>
+ 			<div class="panel-body">
+	 			<form id="frmGHumana_MatrizEPP_Agregar">
+	 				<input type="hidden" id="txtGHumana_MatrizEPP_Prefijo" class="guardar" value="NULL">
+					<div class="col-md-6 form-group">
+		 				<div class="form-group">
+	                    	<label for="txtGHumana_MatrizEPP_Tipo_de_Proteccion" class="control-label">Tipo de Protección</label>
+		                  <div class="input-group">
+	                    	<select class="form-control guardar" id="txtGHumana_MatrizEPP_Tipo_de_Proteccion" required="">
+	                    	</select>
+		                    <span class="input-group-btn">
+		                      <button id="btnGHumana_MatrizEPP_Tipo_de_Proteccion_Agregar" type="button" class="btn btn-primary"><i class="icon wb-plus"></i></button>
+		                    </span>
+		                  </div>
+		                </div>
+	                </div>
+
+	                <div class="col-md-6 form-group">
+	                  <div class="form-group">
+	                    <label for="txtGHumana_MatrizEPP_EPP" class="control-label">EPP</label>
+	                    <input class="form-control guardar" id="txtGHumana_MatrizEPP_EPP" required="">
+	                  </div>
+	                </div>
+
+	                <div class="row">
+		                <div class="col-md-4 col-sm-6">
+		                  	<div class="form-group">
+			    				<h4>Imagen del EPP</h4>
+			    				<div id="cntGHumana_MatrizEPP_Imagen"></div>	
+			    			</div>
+			    		</div>
+
+			    		<div class="col-md-4 col-sm-6">
+		                  	<div class="form-group">
+		                  		<label for="txtGHumana_MatrizEPP_Norma" class="control-label">Norma</label>
+	                    		<textarea class="form-control guardar" rows="5" id="txtGHumana_MatrizEPP_Norma" required=""></textarea>
+		                  	</div>
+		                </div>
+
+		                <div class="col-md-4 col-sm-12">
+		                  	<div class="form-group">
+		                  		<label for="txtGHumana_MatrizEPP_Limitaciones" class="control-label">Limitaciones</label>
+	                    		<textarea class="form-control guardar" rows="5" id="txtGHumana_MatrizEPP_Limitaciones" required=""></textarea>
+		                  	</div>
+		                </div>
+	                </div>
+
+	                <div class="row">
+			    		<div class="col-md-6 col-sm-12">
+		                  	<div class="form-group">
+		                  		<label for="txtGHumana_MatrizEPP_Mantenimiento" class="control-label">Mantenimiento</label>
+	                    		<textarea class="form-control guardar" rows="5" id="txtGHumana_MatrizEPP_Mantenimiento" required=""></textarea>
+		                  	</div>
+		                </div>
+
+		                <div class="col-md-6 col-sm-12">
+		                  	<div class="form-group">
+		                  		<label for="txtGHumana_MatrizEPP_Tiempo_de_Reposicion" class="control-label">Tiempo de Reposición</label>
+	                    		<textarea class="form-control guardar" rows="5" id="txtGHumana_MatrizEPP_Tiempo_de_Reposicion" required=""></textarea>
+		                  	</div>
+		                </div>
+	                </div>
+
+	                <button type="submit" class="btn btn-success btn-block">Guardar</button>
+	            </form>
+ 			</div>
+ 		</div>
+	</div>
+</div>
+
+<script src="../js/gHumana_MatrizEPP_Agregar.js"></script>

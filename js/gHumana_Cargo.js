@@ -5,7 +5,7 @@ $(document).ready(function()
 
 function gHumana_Cargo()
 {
-  //$("#cntGProcesos_Hoja_Documentos").iniciarObjArchivos({objPrefijo : $("#txtGProcesos_Hoja_idProceso"), Proceso: "Documentos del Proceso", Usuario: Usuario.id});
+  $("#cntGHumana_Cargo_Profesiograma").iniciarObjArchivos({objPrefijo : $("#txtGHumana_Cargo_idCargo"), Proceso: "Profesiograma", Usuario: Usuario.id});
 }
 
 function gHumana_Cargo_cargarCargo(idCargo)
@@ -25,7 +25,8 @@ function gHumana_Cargo_cargarCargo(idCargo)
     } else
     {
       $("#lblGHumana_Cargo_Titulo").text(data.Texto);
-      $("#txtGHumana_Cargo_idCargo").val(idProceso);
+      $("#txtGHumana_Cargo_idCargo").val(idCargo);
+      $("#cntGHumana_Cargo_Profesiograma").cargarArchivos({Prefijo : $("#txtGHumana_Cargo_idCargo").val(), Proceso : 'Profesiograma'});
     }
   }, 'json');
 }

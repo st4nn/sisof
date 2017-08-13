@@ -56,6 +56,11 @@ $(document).ready(function()
       gHumana_Cargo_cargarCargo(idProceso);
     });
   });
+
+  $(document).delegate('.btnGHumana_VerOrganigrama', 'click', function()
+  {
+    cargarModulo('gHumana/organigrama.html', 'Organigrama de Gestión Humana');
+  });
 });
 
   function gHumana_Organigrama_iniciarDiagrama() {

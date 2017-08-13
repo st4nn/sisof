@@ -489,7 +489,7 @@ $.fn.iniciar_CargadorImagenes = function(vdefault)
   tds += '<div class="input-group input-group-file">';
     tds += '<input id="txt' + parametros.idObj + '_Etiqueta" type="text" class="form-control inputText" readonly="">';
     tds += '<span class="input-group-btn">';
-      tds += '<span class="btn btn-success btn-file">';
+      tds += '<span class="btn btn-primary btn-file">';
         tds += '<i class="icon wb-more-horizontal" aria-hidden="true"></i>';
         tds += parametros.txtBtn;
         tds += '<input type="file" id="txt' + parametros.idObj + '_Archivo" class="inputControl" name="txt' + parametros.idObj + '_Archivo">';
@@ -586,4 +586,13 @@ $.fn.cargarArchivos = function(parametros)
     $(contenedor).append(tds);
 
   }, 'json');
+}
+
+$.fn.limpiarDataTable = function()
+{
+  var table = $(this).DataTable();
+ 
+  table
+    .clear()
+    .draw();
 }
