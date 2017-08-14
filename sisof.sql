@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.6.6
--- https://www.phpmyadmin.net/
+-- version 4.5.1
+-- http://www.phpmyadmin.net
 --
--- Servidor: localhost:3306
--- Tiempo de generación: 14-08-2017 a las 10:50:08
--- Versión del servidor: 5.6.35
--- Versión de PHP: 5.6.30
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 15-08-2017 a las 00:42:02
+-- Versión del servidor: 10.1.13-MariaDB
+-- Versión de PHP: 5.5.37
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -17,7 +17,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `sisoftwa_app`
+-- Base de datos: `sisof`
 --
 
 -- --------------------------------------------------------
@@ -36,6 +36,97 @@ CREATE TABLE `Archivos` (
   `Proceso` varchar(45) DEFAULT NULL,
   `FechaCargue` timestamp NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `Archivos`
+--
+
+INSERT INTO `Archivos` (`id`, `idlogin`, `Prefijo`, `Ruta`, `Nombre`, `Observaciones`, `Proceso`, `FechaCargue`) VALUES
+(11, 1, 2, 'Archivos/2', '54568-minipic.jpg', '789', 'imagen_EPP', '2017-08-14 18:54:01'),
+(10, 1, 7, 'Archivos/7', '2z9mdq9.jpg', '', 'empresa_Logo', '2017-08-14 16:26:53'),
+(12, 1, 0, 'Archivos/0', '18_Close-128.png', 'a789', 'imagen_EPP', '2017-08-14 19:05:37');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `confRiesgos`
+--
+
+CREATE TABLE `confRiesgos` (
+  `id` int(11) NOT NULL,
+  `idClasificacion` int(11) NOT NULL,
+  `Nombre` varchar(255) NOT NULL,
+  `fechaCargue` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `confRiesgos`
+--
+
+INSERT INTO `confRiesgos` (`id`, `idClasificacion`, `Nombre`, `fechaCargue`) VALUES
+(1, 1, 'Virus ', '2017-08-14 22:20:48'),
+(2, 1, 'Bacterias ', '2017-08-14 22:20:48'),
+(3, 1, 'Hongos ', '2017-08-14 22:20:48'),
+(4, 1, 'Ricketsias ', '2017-08-14 22:20:48'),
+(5, 1, 'Para?sitos ', '2017-08-14 22:20:48'),
+(6, 1, 'Picaduras ', '2017-08-14 22:20:48'),
+(7, 1, 'Mordeduras ', '2017-08-14 22:20:48'),
+(8, 1, 'Fluidos o excrementos ', '2017-08-14 22:20:48'),
+(9, 5, 'Ruido (impacto intermitente y continuo) ', '2017-08-14 22:20:48'),
+(10, 5, 'Iluminacio?n (luz visible por exceso o deficiencia) ', '2017-08-14 22:20:48'),
+(11, 5, 'Vibracio?n (cuerpo entero, segmentaria) ', '2017-08-14 22:20:48'),
+(12, 5, 'Temperaturas extremas (calor y fri?o) ', '2017-08-14 22:20:48'),
+(13, 5, 'Presio?n atmosfe?rica (normal y ajustada) ', '2017-08-14 22:20:48'),
+(14, 5, 'Radiaciones ionizantes (rayos x, gama, beta y alfa) ', '2017-08-14 22:20:48'),
+(15, 5, 'Radiaciones no ionizantes (la?ser, ultravioleta infraroja) ', '2017-08-14 22:20:48'),
+(16, 6, 'Polvos orga?nicos inorga?nicos ', '2017-08-14 22:20:48'),
+(17, 6, 'Fibras ', '2017-08-14 22:20:48'),
+(18, 6, 'Li?quidos (nieblas y roci?os) ', '2017-08-14 22:20:48'),
+(19, 6, 'Gases y vapores ', '2017-08-14 22:20:48'),
+(20, 6, 'Humos meta?licos, no meta?licos ', '2017-08-14 22:20:48'),
+(21, 6, 'Material particulado ', '2017-08-14 22:20:48'),
+(22, 3, 'Gestio?n organizacional (estilo de mando, pago, contratacio?n, participacio?n, induccio?n y capacitacio?n, bienestar social, evaluacio?n del desempen?o, manejo de cambios) ', '2017-08-14 22:20:48'),
+(23, 3, 'Caracteri?sticas de la organizacio?n del trabajo (comunicacio?n, tecnologi?a, organizacio?n del trabajo, demandas cualitativas y cuantitativas de la labor', '2017-08-14 22:20:48'),
+(24, 3, 'Caracteri?sticas del grupo social del trabajo (relaciones, cohesio?n, calidad de interacciones, trabajo en equipo ', '2017-08-14 22:20:48'),
+(25, 3, 'Condiciones de la tarea (carga mental, contenido de la tarea, demandas emocionales, sistemas de control, definicio?n de roles, monotoni?a, etc).', '2017-08-14 22:20:48'),
+(26, 3, 'Interfase persona tarea (conocimientos, habilidades con relacio?n a la demanda de la tarea, iniciativa, autonomi?a y reconocimiento, identificacio?n de la persona con la tarea y la organizacio?n', '2017-08-14 22:20:48'),
+(27, 3, 'Jornada de trabajo (pausas, trabajo nocturno, rotacio?n, horas extras, descansos) ', '2017-08-14 22:20:48'),
+(28, 2, 'Postura (prologada mantenida, forzada, antigravitacionales) ', '2017-08-14 22:20:48'),
+(29, 2, 'Esfuerzo ', '2017-08-14 22:20:48'),
+(30, 2, 'Movimiento repetitivo ', '2017-08-14 22:20:48'),
+(31, 2, 'Manipulacio?n manual de cargas ', '2017-08-14 22:20:48'),
+(32, 4, 'Meca?nico (elementos de ma?quinas, herramientas, piezas a trabajar, materiales proyectados so?lidos o fluidos ', '2017-08-14 22:20:48'),
+(33, 4, 'Ele?ctrico (alta y baja tensio?n, esta?tica) ', '2017-08-14 22:20:48'),
+(34, 4, 'Locativo (almacenamiento, superficies de trabajo (irregularidades, deslizantes, con diferencia del nivel) condiciones de orden y aseo, cai?das de objeto) ', '2017-08-14 22:20:48'),
+(35, 4, 'Tecnolo?gico (explosio?n, fuga, derrame, incendio) ', '2017-08-14 22:20:48'),
+(36, 4, 'Accidentes de tra?nsito ', '2017-08-14 22:20:48'),
+(37, 4, 'Pu?blicos (Robos, atracos, asaltos, atentados, desorden pu?blico, etc.) ', '2017-08-14 22:20:48'),
+(38, 4, 'Trabajo en Alturas ', '2017-08-14 22:20:48'),
+(39, 4, 'Espacios Confinados ', '2017-08-14 22:20:48');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `confRiesgos_Clasificacion`
+--
+
+CREATE TABLE `confRiesgos_Clasificacion` (
+  `id` int(11) NOT NULL,
+  `Nombre` varchar(50) NOT NULL,
+  `fechaCargue` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `confRiesgos_Clasificacion`
+--
+
+INSERT INTO `confRiesgos_Clasificacion` (`id`, `Nombre`, `fechaCargue`) VALUES
+(1, 'Biolo?gico ', '2017-08-14 22:18:08'),
+(2, 'Biomeca?nicos ', '2017-08-14 22:18:08'),
+(3, 'Clasificacio?n Psicosocial ', '2017-08-14 22:18:08'),
+(4, 'Condiciones de seguridad ', '2017-08-14 22:18:08'),
+(5, 'Fi?sico ', '2017-08-14 22:18:08'),
+(6, 'Qui?mico ', '2017-08-14 22:18:08');
 
 -- --------------------------------------------------------
 
@@ -69,9 +160,20 @@ INSERT INTO `datosUsuarios` (`idLogin`, `Nombre`, `Correo`, `idPerfil`, `idSede`
 CREATE TABLE `Empresas` (
   `id` int(11) NOT NULL,
   `Nombre` varchar(255) NOT NULL,
+  `Direccion` mediumint(9) NOT NULL,
+  `Correo` varchar(85) NOT NULL,
+  `Telefono` int(45) NOT NULL,
   `idUsuario` int(11) NOT NULL,
   `fechaCargue` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `Empresas`
+--
+
+INSERT INTO `Empresas` (`id`, `Nombre`, `Direccion`, `Correo`, `Telefono`, `idUsuario`, `fechaCargue`) VALUES
+(1, 'Soporte', 0, '', 0, 1, '2017-07-09 17:02:06'),
+(7, '852', 951, '2313', 4567, 1, '2017-08-14 16:26:53');
 
 -- --------------------------------------------------------
 
@@ -99,6 +201,14 @@ CREATE TABLE `gHumana_Cargos` (
   `Texto` varchar(255) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
+--
+-- Volcado de datos para la tabla `gHumana_Cargos`
+--
+
+INSERT INTO `gHumana_Cargos` (`id`, `idDiagrama`, `idInterno`, `Texto`) VALUES
+(1, 1, -1, 'Cargo 1'),
+(2, 1, -2, 'Cargo 2');
+
 -- --------------------------------------------------------
 
 --
@@ -119,6 +229,15 @@ CREATE TABLE `gHumana_MatrizEPP` (
   `Tiempo_de_Reposicion` longtext
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
+--
+-- Volcado de datos para la tabla `gHumana_MatrizEPP`
+--
+
+INSERT INTO `gHumana_MatrizEPP` (`id`, `idEmpresa`, `idUsuario`, `fechaCargue`, `Prefijo`, `Tipo_de_Proteccion`, `EPP`, `Norma`, `Limitaciones`, `Mantenimiento`, `Tiempo_de_Reposicion`) VALUES
+(1, 7, 1, '2017-08-14 18:53:07', 20170814135242001, '123', '456', '789', '012', '345', '678'),
+(2, 7, 1, '2017-08-14 18:54:01', 20170814135342001, '456', '789', '012', '345', '678', '901'),
+(3, 7, 1, '2017-08-14 19:04:02', 20170814140334001, '123', 'a789', 'asas', 'asas', 'asasa', 'as');
+
 -- --------------------------------------------------------
 
 --
@@ -132,6 +251,47 @@ CREATE TABLE `gHumana_Organigrama_Diagrama` (
   `Diagrama` longtext NOT NULL,
   `fechaCargue` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `gHumana_Organigrama_Diagrama`
+--
+
+INSERT INTO `gHumana_Organigrama_Diagrama` (`id`, `idEmpresa`, `idUsuario`, `Diagrama`, `fechaCargue`) VALUES
+(1, 1, 1, '{ "class": "go.GraphLinksModel",\n  "nodeDataArray": [ \n{"text":"Cargo 1", "key":-1, "loc":"430 240"},\n{"text":"Cargo 2", "key":-2, "loc":"290 440"}\n ],\n  "linkDataArray": []}', '2017-08-14 21:25:14');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `gHumana_Personal`
+--
+
+CREATE TABLE `gHumana_Personal` (
+  `id` int(11) NOT NULL,
+  `idUsuario` int(11) NOT NULL,
+  `idLogin` int(11) NOT NULL,
+  `fechaCargue` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `Numero_id` varchar(25) NOT NULL,
+  `Apellidos` varchar(120) NOT NULL,
+  `Nombres` varchar(120) NOT NULL,
+  `talla_Camisa` varchar(15) NOT NULL,
+  `talla_Pantalon` varchar(15) NOT NULL,
+  `talla_Zapatos` varchar(15) NOT NULL,
+  `fecha_de_Ingreso` date NOT NULL,
+  `idCargo` int(11) NOT NULL,
+  `RH` varchar(5) NOT NULL,
+  `Telefono` varchar(25) NOT NULL,
+  `email` varchar(150) NOT NULL,
+  `Direccion` varchar(255) NOT NULL,
+  `estado_Civil` varchar(45) NOT NULL,
+  `idEmpresa` int(11) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `gHumana_Personal`
+--
+
+INSERT INTO `gHumana_Personal` (`id`, `idUsuario`, `idLogin`, `fechaCargue`, `Numero_id`, `Apellidos`, `Nombres`, `talla_Camisa`, `talla_Pantalon`, `talla_Zapatos`, `fecha_de_Ingreso`, `idCargo`, `RH`, `Telefono`, `email`, `Direccion`, `estado_Civil`, `idEmpresa`) VALUES
+(1, 1, 0, '2017-08-14 21:43:30', '789', '123', '456', '012', '345', '678', '0000-00-00', -1, '234', '567', '890', '123', 'Soltero', 1);
 
 -- --------------------------------------------------------
 
@@ -147,6 +307,14 @@ CREATE TABLE `gProcesos_Mapa_Diagrama` (
   `fechaCargue` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
+--
+-- Volcado de datos para la tabla `gProcesos_Mapa_Diagrama`
+--
+
+INSERT INTO `gProcesos_Mapa_Diagrama` (`id`, `idEmpresa`, `idUsuario`, `Diagrama`, `fechaCargue`) VALUES
+(7, 7, 1, '{ "class": "go.GraphLinksModel",\n  "nodeDataArray": [ {"text":"Proceso", "color":"#ACE600", "key":-1, "loc":"38.1240234375 18.08037109374999"} ],\n  "linkDataArray": []}', '2017-08-14 18:45:43'),
+(8, 1, 1, '{ "class": "go.GraphLinksModel",\n  "nodeDataArray": [ \n{"text":"Proceso 1", "color":"#ACE600", "key":-1, "loc":"49.9619140625 49.241113281249994", "group":-2},\n{"text":"Sub Grupo", "color":"#FFDD33", "isGroup":true, "category":"OfNodes", "key":-2, "loc":"49.9619140625 49.241113281249994"},\n{"text":"Proceso2", "color":"#ACE600", "key":-3, "loc":"174.01708984375 18.08037109375"}\n ],\n  "linkDataArray": []}', '2017-08-14 21:53:07');
+
 -- --------------------------------------------------------
 
 --
@@ -161,6 +329,16 @@ CREATE TABLE `gProcesos_Procesos` (
   `Texto` varchar(255) NOT NULL,
   `idContenedor` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `gProcesos_Procesos`
+--
+
+INSERT INTO `gProcesos_Procesos` (`id`, `idDiagrama`, `Tipo`, `idInterno`, `Texto`, `idContenedor`) VALUES
+(88, 7, 'Proceso', -1, 'Proceso', 0),
+(89, 8, 'Proceso', -1, 'Proceso 1', -2),
+(90, 8, 'SubGrupo', -2, 'Sub Grupo', 0),
+(91, 8, 'Proceso', -3, 'Proceso2', 0);
 
 -- --------------------------------------------------------
 
@@ -222,6 +400,19 @@ CREATE TABLE `Perfiles_hasnot_Funciones` (
 -- Indices de la tabla `Archivos`
 --
 ALTER TABLE `Archivos`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `id` (`id`);
+
+--
+-- Indices de la tabla `confRiesgos`
+--
+ALTER TABLE `confRiesgos`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `confRiesgos_Clasificacion`
+--
+ALTER TABLE `confRiesgos_Clasificacion`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -262,6 +453,12 @@ ALTER TABLE `gHumana_Organigrama_Diagrama`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indices de la tabla `gHumana_Personal`
+--
+ALTER TABLE `gHumana_Personal`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indices de la tabla `gProcesos_Mapa_Diagrama`
 --
 ALTER TABLE `gProcesos_Mapa_Diagrama`
@@ -299,12 +496,22 @@ ALTER TABLE `Perfiles_hasnot_Funciones`
 -- AUTO_INCREMENT de la tabla `Archivos`
 --
 ALTER TABLE `Archivos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+--
+-- AUTO_INCREMENT de la tabla `confRiesgos`
+--
+ALTER TABLE `confRiesgos`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+--
+-- AUTO_INCREMENT de la tabla `confRiesgos_Clasificacion`
+--
+ALTER TABLE `confRiesgos_Clasificacion`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT de la tabla `Empresas`
 --
 ALTER TABLE `Empresas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT de la tabla `Funciones`
 --
@@ -314,27 +521,32 @@ ALTER TABLE `Funciones`
 -- AUTO_INCREMENT de la tabla `gHumana_Cargos`
 --
 ALTER TABLE `gHumana_Cargos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT de la tabla `gHumana_MatrizEPP`
 --
 ALTER TABLE `gHumana_MatrizEPP`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT de la tabla `gHumana_Organigrama_Diagrama`
 --
 ALTER TABLE `gHumana_Organigrama_Diagrama`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT de la tabla `gHumana_Personal`
+--
+ALTER TABLE `gHumana_Personal`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT de la tabla `gProcesos_Mapa_Diagrama`
 --
 ALTER TABLE `gProcesos_Mapa_Diagrama`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT de la tabla `gProcesos_Procesos`
 --
 ALTER TABLE `gProcesos_Procesos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=88;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=92;
 --
 -- AUTO_INCREMENT de la tabla `Login`
 --
