@@ -133,7 +133,8 @@ function Mensaje(Titulo, Mensaje, Tipo)
           title: Titulo,
           text: Mensaje,
           type: Tipo,
-          showCancelButton: true
+          showCancelButton: true,
+          cancelButtonText : 'Cancelar'
   }); 
 }
 
@@ -497,6 +498,7 @@ $.fn.iniciar_CargadorImagenes = function(vdefault)
     tds += '</span>';
   tds += '</div>';
   tds += '<div class="col-sm-12">';
+    tds += '<br>';
     tds += '<img id="img' + parametros.idObj + '_Preview" class="col-xs-12" height="auto" src="" alt="">';
   tds += '</div>';
 
@@ -505,6 +507,7 @@ $.fn.iniciar_CargadorImagenes = function(vdefault)
   $('#txt' + parametros.idObj + '_Archivo').on("change", function(evento)
   {
     $('#img' + parametros.idObj + '_Preview').previewIMG(this, $('#txt' + parametros.idObj + '_Etiqueta'));
+    files = evento.target.files;
   });
 }
 
@@ -595,4 +598,53 @@ $.fn.limpiarDataTable = function()
   table
     .clear()
     .draw();
+}
+
+function subirArchivos(vFiles, parametros, fCallback, fCallback_Error)
+{
+   var data = new FormData();
+
+   fCallback = fCallback || function(){};
+   fCallback_Error = fCallback_Error || function(){};
+
+    $.each(vFiles, function(key, value)
+    {
+        data.append(key, value);
+    });
+
+    if (parametros != undefined && parametros != null)
+    {
+      $.each(parametros, function(index, val) 
+      {
+        data.append(index, val);
+      });
+    }
+
+
+    $.ajax({
+          url: '../server/php/subirArchivos.php',
+          type: 'POST',
+          data: data,
+          cache: false,
+          dataType: 'html',
+          processData: false, // Don't process the files
+          contentType: false, // Set content type to false as jQuery will tell the server its a query string request
+          success: function(data, textStatus, jqXHR)
+          {
+              if( parseInt(data) >= 1)
+              {
+                fCallback(data);
+              }
+              else
+              {
+                  Mensaje('Error:', data);
+                  fCallback_Error(data);
+              }
+          },
+          error: function(jqXHR, textStatus, errorThrown)
+          {
+              Mensaje('Error:', textStatus);
+              fCallback_Error(textStatus);
+          }
+      });
 }

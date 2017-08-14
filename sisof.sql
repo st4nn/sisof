@@ -1,15 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.0
+-- version 4.6.6
 -- https://www.phpmyadmin.net/
 --
--- Servidor: localhost
--- Tiempo de generación: 10-07-2017 a las 03:41:03
--- Versión del servidor: 10.1.21-MariaDB
+-- Servidor: localhost:3306
+-- Tiempo de generación: 14-08-2017 a las 10:50:08
+-- Versión del servidor: 5.6.35
 -- Versión de PHP: 5.6.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -19,7 +17,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `sisof`
+-- Base de datos: `sisoftwa_app`
 --
 
 -- --------------------------------------------------------
@@ -75,13 +73,6 @@ CREATE TABLE `Empresas` (
   `fechaCargue` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
---
--- Volcado de datos para la tabla `Empresas`
---
-
-INSERT INTO `Empresas` (`id`, `Nombre`, `idUsuario`, `fechaCargue`) VALUES
-(1, 'Soporte', 1, '2017-07-09 17:02:06');
-
 -- --------------------------------------------------------
 
 --
@@ -93,6 +84,82 @@ CREATE TABLE `Funciones` (
   `Descripcion` longtext NOT NULL,
   `control` varchar(85) NOT NULL,
   `fechaCargue` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `gHumana_Cargos`
+--
+
+CREATE TABLE `gHumana_Cargos` (
+  `id` int(11) NOT NULL,
+  `idDiagrama` int(11) NOT NULL,
+  `idInterno` int(11) NOT NULL,
+  `Texto` varchar(255) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `gHumana_MatrizEPP`
+--
+
+CREATE TABLE `gHumana_MatrizEPP` (
+  `id` int(11) NOT NULL,
+  `idEmpresa` int(11) NOT NULL,
+  `idUsuario` int(11) NOT NULL,
+  `fechaCargue` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `Prefijo` bigint(25) NOT NULL,
+  `Tipo_de_Proteccion` varchar(85) DEFAULT NULL,
+  `EPP` varchar(255) DEFAULT NULL,
+  `Norma` mediumtext,
+  `Limitaciones` longtext,
+  `Mantenimiento` longtext,
+  `Tiempo_de_Reposicion` longtext
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `gHumana_Organigrama_Diagrama`
+--
+
+CREATE TABLE `gHumana_Organigrama_Diagrama` (
+  `id` int(11) NOT NULL,
+  `idEmpresa` int(11) NOT NULL,
+  `idUsuario` int(11) NOT NULL,
+  `Diagrama` longtext NOT NULL,
+  `fechaCargue` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `gProcesos_Mapa_Diagrama`
+--
+
+CREATE TABLE `gProcesos_Mapa_Diagrama` (
+  `id` int(11) NOT NULL,
+  `idEmpresa` int(11) NOT NULL,
+  `idUsuario` int(11) NOT NULL,
+  `Diagrama` longtext NOT NULL,
+  `fechaCargue` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `gProcesos_Procesos`
+--
+
+CREATE TABLE `gProcesos_Procesos` (
+  `id` int(11) NOT NULL,
+  `idDiagrama` int(11) NOT NULL,
+  `Tipo` varchar(12) NOT NULL,
+  `idInterno` int(11) NOT NULL,
+  `Texto` varchar(255) NOT NULL,
+  `idContenedor` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -176,6 +243,37 @@ ALTER TABLE `Funciones`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indices de la tabla `gHumana_Cargos`
+--
+ALTER TABLE `gHumana_Cargos`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `gHumana_MatrizEPP`
+--
+ALTER TABLE `gHumana_MatrizEPP`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `Prefijo` (`Prefijo`);
+
+--
+-- Indices de la tabla `gHumana_Organigrama_Diagrama`
+--
+ALTER TABLE `gHumana_Organigrama_Diagrama`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `gProcesos_Mapa_Diagrama`
+--
+ALTER TABLE `gProcesos_Mapa_Diagrama`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `gProcesos_Procesos`
+--
+ALTER TABLE `gProcesos_Procesos`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indices de la tabla `Login`
 --
 ALTER TABLE `Login`
@@ -201,7 +299,7 @@ ALTER TABLE `Perfiles_hasnot_Funciones`
 -- AUTO_INCREMENT de la tabla `Archivos`
 --
 ALTER TABLE `Archivos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT de la tabla `Empresas`
 --
@@ -213,6 +311,31 @@ ALTER TABLE `Empresas`
 ALTER TABLE `Funciones`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
+-- AUTO_INCREMENT de la tabla `gHumana_Cargos`
+--
+ALTER TABLE `gHumana_Cargos`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT de la tabla `gHumana_MatrizEPP`
+--
+ALTER TABLE `gHumana_MatrizEPP`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT de la tabla `gHumana_Organigrama_Diagrama`
+--
+ALTER TABLE `gHumana_Organigrama_Diagrama`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT de la tabla `gProcesos_Mapa_Diagrama`
+--
+ALTER TABLE `gProcesos_Mapa_Diagrama`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+--
+-- AUTO_INCREMENT de la tabla `gProcesos_Procesos`
+--
+ALTER TABLE `gProcesos_Procesos`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=88;
+--
 -- AUTO_INCREMENT de la tabla `Login`
 --
 ALTER TABLE `Login`
@@ -221,8 +344,7 @@ ALTER TABLE `Login`
 -- AUTO_INCREMENT de la tabla `Perfiles`
 --
 ALTER TABLE `Perfiles`
-  MODIFY `idPerfil` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;COMMIT;
-
+  MODIFY `idPerfil` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

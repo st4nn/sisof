@@ -28,31 +28,66 @@ $(document).ready(function()
         $('#imgEmpresas_Crear_Preview').attr('src', '');  
 	});
 
+	var vFrmEmpresas_Crear = false;
+
 	$("#frmEmpresas_Crear").on("submit", function(evento)
 	{
 		evento.preventDefault();
 
-		if ($("#txtEmpresas_Crear_Archivo").val() == '')
+		if (!vFrmEmpresas_Crear)
 		{
-			Mensaje("Error", 'Por favor seleccione una imagen que identifique a la Empresa', 'Error');
-		} else
-		{
-			if ($("#txtEmpresas_Crear_Nombre").val() == '')
+			vFrmEmpresas_Crear = true;
+			if ($("#txtEmpresas_Crear_Archivo").val() == '')
 			{
-				Mensaje("Error", 'No es posible crear una Empresa sin nombre', 'Error');
-				$("#txtEmpresas_Crear_Nombre").focus();
+				Mensaje("Error", 'Por favor seleccione una imagen que identifique a la Empresa', 'danger');
+				vFrmEmpresas_Crear = false;
 			} else
 			{
-				if ($("#txtEmpresas_Crear_Correo").val() == '')
+				if ($("#txtEmpresas_Crear_Nombre").val() == '')
 				{
-					Mensaje("Error", 'Es importante poner un correo de Contacto', 'Error');
-					$("#txtEmpresas_Crear_Correo").focus();
+					Mensaje("Error", 'No es posible crear una Empresa sin nombre', 'danger');
+					$("#txtEmpresas_Crear_Nombre").focus();
+					vFrmEmpresas_Crear = false;
 				} else
 				{
-
+					if ($("#txtEmpresas_Crear_Correo").val() == '')
+					{
+						Mensaje("Error", 'Es importante poner un correo de Contacto', 'danger');
+						$("#txtEmpresas_Crear_Correo").focus();
+						vFrmEmpresas_Crear = false;
+					} else
+					{
+						$("#frmEmpresas_Crear").generarDatosEnvio("txtEmpresas_Crear_", function(datos)
+						{
+							datos = JSON.parse(datos);
+							vFrmEmpresas_Crear = false;
+							$.post('../server/php/proyecto/Empresas_Crear.php', datos, function(data, textStatus, xhr) 
+							{
+								vFrmEmpresas_Crear = false;
+								if (!isNaN(data))
+								{
+									subirArchivos(files, {
+										Prefijo : data,
+										Proceso : 'empresa_Logo',
+										Observaciones : '',
+										Usuario : Usuario.id
+									}, function()
+									{
+										Mensaje("Hey", "Los datos han sido ingresados", "success");
+										$("#txtEmpresas_Crear_id").val(data);
+									});
+								} else
+								{
+									Mensaje("Error", data, "danger");
+									vFrmEmpresas_Crear = false;
+								}
+							});
+						});
+					}
 				}
 			}
 		}
+
 	});
 
 	$("#btnEmpresas_Guardar").on("click", function()
