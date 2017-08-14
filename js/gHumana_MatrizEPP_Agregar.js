@@ -2,6 +2,7 @@ $(document).ready(gHumana_MatrizEPP_Agregar);
 
 function gHumana_MatrizEPP_Agregar()
 {
+
 	$("#cntGHumana_MatrizEPP_Imagen").iniciar_CargadorImagenes({idObj : 'gHumana_MatrizEPP_Imagen'});
 
 	$('#btnGHumana_MatrizEPP_Tipo_de_Proteccion_Agregar').on('click', function() {
@@ -42,13 +43,23 @@ function gHumana_MatrizEPP_Agregar()
     				idEmpresa : $("#txtInicio_idEmpresa").val()
     			}, function(data, textStatus, xhr) 
     			{
-    				if (data != 1)
+    				if (isNaN(data))
     				{
     					Mensaje("Error", data, "danger");
     				}	else
     				{
-    					Mensaje("Ok", "Los datos han sido ingresados", "success");
-    					gHumana_MatrizEPP_Cargar();
+                        if ($("#txtGHumana_MatrizEPP_EPP").val() != "")
+                        {
+                            subirArchivo(data, 'imagen_EPP', $("#txtGHumana_MatrizEPP_EPP").val(), function(data)
+                            {
+            					Mensaje("Ok", "Los datos han sido ingresados", "success");
+            					gHumana_MatrizEPP_Cargar();
+                            });
+                        } else
+                        {
+                            Mensaje("Ok", "Los datos han sido ingresados", "success");
+                            gHumana_MatrizEPP_Cargar();
+                        }
     				}
     			});
     	});
@@ -73,7 +84,10 @@ function gHumana_MatrizEPP_Cargar(Prefijo)
 		{
 			$.each(data, function(index, val) 
 			{
-				 //if ($("#"))
+				 if ($("#txtGHumana_MatrizEPP_" + index).length > 0)
+                 {
+                    $("#txtGHumana_MatrizEPP_" + index).val(val);
+                 }
 			});
 		}, 'json');
 	}

@@ -3,17 +3,14 @@
   include("datosUsuario.php"); 
    $link = Conectar();
    $idUsuario = addslashes($_POST['Usuario']);
-   $idEmpresa = addslashes($_POST['idEmpresa']);
+   $Prefijo = addslashes($_POST['Prefijo']);
    
    $sql = "SELECT
-            gHumana_MatrizEPP.*,
-            Archivos.Ruta,
-            Archivos.Nombre AS Archivo
+            gHumana_MatrizEPP.*
           FROM
             gHumana_MatrizEPP
-            LEFT JOIN Archivos ON Archivos.Proceso = 'imagen_EPP' AND Archivos.Prefijo = gHumana_MatrizEPP.id
          WHERE
-            gHumana_MatrizEPP.idEmpresa = '$idEmpresa';";
+            gHumana_MatrizEPP.Prefijo = '$Prefijo';";
             
    $result = $link->query($sql);
    $idx = 0;
@@ -22,10 +19,10 @@
       $Resultado = array();
       while ($row = mysqli_fetch_assoc($result))
       {
-         $Resultado[$idx] = array();
+         //$Resultado[$idx] = array();
          foreach ($row as $key => $value) 
          {
-            $Resultado[$idx][$key] = utf8_encode($value);
+            $Resultado[$key] = utf8_encode($value);
          }
          $idx++;
       }

@@ -233,8 +233,9 @@ function calcularTiempoPublicacion(fecha)
     return respuesta;
 }
 
-$.fn.crearDataTable = function(tds, callback)
+$.fn.crearDataTable = function(tds, callback, responsive)
 {
+  responsive = responsive || true;
   if (callback === undefined)
     {callback = function(){};}
 
@@ -273,7 +274,7 @@ $.fn.crearDataTable = function(tds, callback)
           [10, 25, 50, -1],
           [10, 25, 50, "Todos"]
         ],
-        responsive: true,
+        responsive: responsive,
         "sDom": 'lBfrtip',
         buttons: [
         'copy', 'excel', 'pdf'
@@ -647,4 +648,22 @@ function subirArchivos(vFiles, parametros, fCallback, fCallback_Error)
               fCallback_Error(textStatus);
           }
       });
+}
+
+function subirArchivo (Prefijo, Proceso, Observaciones, callback)
+{
+  Prefijo = Prefijo || obtenerPrefijo();
+  Observaciones = Observaciones || '';
+  callback == callback || function(){};
+
+  subirArchivos(files, {
+    Prefijo : Prefijo,
+    Proceso : Proceso,
+    Observaciones : Observaciones,
+    Usuario : Usuario.id
+  }, function()
+  {
+    Mensaje("Hey", "Los datos han sido ingresados", "success");
+    callback(Prefijo);
+  });
 }

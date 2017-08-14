@@ -1,0 +1,141 @@
+<!-- Page -->
+<input type="hidden" id="txtGHumana_Personal_idEPP">
+<div class="page" style="min-height: 90vh;">
+	<div class="page-header">
+		<button class="btn btn-primary pull-right btn-pill-left lnkAbrirModulo" Vinculo="gHumana/personal.html" Titulo="Personal">Volver al Personal</button>
+		<small>Personal</small>
+		<h3 id="lblGHumana_Personal_Titulo" class="page-title"></h3>
+	</div>
+ 	<div class="page-content container-fluid">
+ 		<div class="panel panel-primary panel-bordered">
+ 			<div class="panel-heading">
+              <h3 id="lblGHumana_Personal_Agregar_Titulo" class="panel-title"></h3>
+				<div class="panel-actions">
+					<button class="btn text-left btn-danger"><i class="icon fa-trash"></i> Borrar Personal</button>
+					<!--
+					<button class="btn text-left btn-warning"><i class="icon fa-plus"></i> Agregar Elemento</button>
+					-->
+		      	</div>
+            </div>
+ 			<div class="panel-body">
+	 			<form id="frmGHumana_Personal_Agregar">
+	 				
+	 				<input type="hidden" id="txtGHumana_Personal_Prefijo" class="guardar" value="NULL">
+					
+					<div class="row">
+						<div class="col-md-6 form-group">
+			 				<div class="form-group">
+		                    	<label for="txtGHumana_Personal_Apellidos" class="control-label">Apellidos</label>
+		                    	<input class="form-control guardar" id="txtGHumana_Personal_Apellidos" required="">
+			                </div>
+		                </div>
+
+		                <div class="col-md-6 form-group">
+		                  <div class="form-group">
+		                    <label for="txtGHumana_Personal_EPP" class="control-label">Nombres</label>
+		                    <input class="form-control guardar" id="txtGHumana_Personal_Nombres" required="">
+		                  </div>
+		                </div>
+		            </div>
+
+	                <div class="row">
+	                	<div class="col-md-3 col-sm-6">
+		                  	<div class="form-group">
+		                  		<label for="txtGHumana_Personal_Numero_id" class="control-label">Número de Identificación</label>
+	                    		<input class="form-control guardar" id="txtGHumana_Personal_Numero_id" required="">
+		                  	</div>
+		                </div>
+
+			    		<div class="col-md-3 col-sm-6">
+		                  	<div class="form-group">
+		                  		<label for="txtGHumana_Personal_talla_Camisa" class="control-label">Talla Camisa</label>
+	                    		<input class="form-control guardar" id="txtGHumana_Personal_talla_Camisa" required="">
+		                  	</div>
+		                </div>
+
+		                <div class="col-md-3 col-sm-6">
+		                  	<div class="form-group">
+		                  		<label for="txtGHumana_Personal_talla_Pantalon" class="control-label">Talla Pantalon</label>
+	                    		<input class="form-control guardar" id="txtGHumana_Personal_talla_Pantalon" required="">
+		                  	</div>
+		                </div>
+
+		                <div class="col-md-3 col-sm-6">
+		                  	<div class="form-group">
+		                  		<label for="txtGHumana_Personal_talla_Zapatos" class="control-label">Talla Zapatos</label>
+	                    		<input class="form-control guardar" id="txtGHumana_Personal_talla_Zapatos" required="">
+		                  	</div>
+		                </div>
+	                </div>
+
+	                <div class="row">
+			    		<div class="col-sm-4">
+		                  	<div class="form-group">
+		                  		<label for="txtGHumana_Personal_fecha_de_Ingreso" class="control-label">Fecha de Ingreso</label>
+	                    		<input class="form-control guardar datepicker" id="txtGHumana_Personal_fecha_de_Ingreso" required="">
+		                  	</div>
+		                </div>
+
+		                <div class="col-sm-4">
+		                  	<div class="form-group">
+		                  		<label for="txtGHumana_Personal_RH" class="control-label">RH</label>
+	                    		<input class="form-control guardar" rows="5" id="txtGHumana_Personal_RH" required="">
+		                  	</div>
+		                </div>
+
+		                <div class="col-sm-4">
+		                  	<div class="form-group">
+		                  		<label for="txtGHumana_Personal_idCargo" class="control-label">Cargo</label>
+	                    		<select class="form-control guardar" id="txtGHumana_Personal_idCargo" required=""></select>
+		                  	</div>
+		                </div>
+	                </div>
+
+	                <div class="row">
+
+	                	<div class="col-sm-6">
+		                  	<div class="form-group">
+		                  		<label for="txtGHumana_Personal_Telefono" class="control-label">Teléfono</label>
+	                    		<input class="form-control guardar" id="txtGHumana_Personal_Telefono" required="">
+		                  	</div>
+		                </div>
+
+		                <div class="col-sm-6">
+		                  	<div class="form-group">
+		                  		<label for="txtGHumana_Personal_email" class="control-label">Correo Electrónico</label>
+	                    		<input type="email" class="form-control guardar" id="txtGHumana_Personal_email" required="">
+		                  	</div>
+		                </div>
+		            </div>
+
+		            <div class="row">
+
+	                	<div class="col-sm-6">
+		                  	<div class="form-group">
+		                  		<label for="txtGHumana_Personal_Direccion" class="control-label">Dirección</label>
+	                    		<input class="form-control guardar" id="txtGHumana_Personal_Direccion" required="">
+		                  	</div>
+		                </div>
+
+		                <div class="col-sm-6">
+		                  	<div class="form-group">
+		                  		<label for="txtGHumana_Personal_estado_Civil" class="control-label">Estado Civil</label>
+	                    		<select class="form-control guardar" id="txtGHumana_Personal_estado_Civil" required="">
+	                    			<option value="Soltero">Soltero/a</option>
+									<option value="Comprometido">Comprometido/a</option>
+									<option value="Casado">Casado/a</option>
+									<option value="Divorciado">Divorciado/a</option>
+									<option value="Viudo">Viudo/a</option>
+	                    		</select>
+		                  	</div>
+		                </div>
+		            </div>
+
+	                <button type="submit" class="btn btn-success btn-block">Guardar</button>
+	            </form>
+ 			</div>
+ 		</div>
+	</div>
+</div>
+
+<script src="../js/gHumana_Personal_Agregar.js"></script>

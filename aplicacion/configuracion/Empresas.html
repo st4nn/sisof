@@ -17,37 +17,32 @@
 				    </div>
 				    <div class="row col-sm-12 buscarGoogle_col">
 					    <div class="col-lg-2 hidden-sm buscarGoogle_col_del"></div>
-					    	<button type="submit" class="btn btn-success col-lg-4 col-sm-5  col-xs-12 margin-10"><i class="icon wb-search" aria-hidden="true"></i> Buscar</button>		    
-					    	<button type="button" class="btn btn-warning col-lg-4 col-sm-5  col-xs-12 margin-10" id="btnEmpresas_CrearEmpresa"><i class="icon wb-plus" aria-hidden="true"></i> Crear Empresa</button>
+					    	<button type="submit" class="btn btn-success col-lg-4 col-sm-5  col-xs-12 margin-10 ladda-button" data-style="expand-left" data-size="l">
+					    		<span class="ladda-label">
+					    			<i class="icon wb-search" aria-hidden="true"></i> Buscar
+					    		</span>
+					    	</button>		    
+					    	<button type="button" class="btn btn-warning col-lg-4 col-sm-5  col-xs-12 margin-10" id="btnEmpresas_CrearEmpresa">
+					    		<i class="icon wb-plus" aria-hidden="true"></i> Crear Empresa
+					    	</button>
 					    <div class="col-lg-2 col-sm-1 buscarGoogle_col_del"></div>
 				    </div>
 			    </div>
 		  	</form>
 
-		    <div class="panel panel-primary panel-bordered hide col-md-12">
+	      	<br><br>
+		    <div class="panel panel-primary panel-bordered col-md-12">
 		      <div class="panel-heading">
 		        <div class="panel-actions">
+		          <!--
 		          <button id="btnEmpresas_Listado_Actualizar" class="btn btn-success btn-floating"><i class="icon wb-refresh"></i></button> 
+		          -->
 		        </div>
 		      </div>
 		      <div class="panel-body">
-		        <div class="table-responsive">
-		          <table id="tblEmpresas_Listado" class="table table-hover table-striped">
-		            <thead>
-		              <tr>
-		              	<th></th>
-		                <th>Consecutivo</th>
-		                <th>Nombre</th>
-		                <th>Correo de Contacto</th>
-		                <th>Teléfono de Contacto</th>
-		                <th>Fecha de Creación</th>
-		                <th>Creada por</th>
-		              </tr>
-		            </thead>
-		            <tbody>
-		            </tbody>
-		          </table>
-		        </div>
+		      	<ul id="tblEmpresas_Listado" class="list-group list-group-dividered hide">
+		      		
+		      	</ul>
 		      </div>
 		    </div>
 		</div>

@@ -6,14 +6,12 @@
    $idEmpresa = addslashes($_POST['idEmpresa']);
    
    $sql = "SELECT
-            gHumana_MatrizEPP.*,
-            Archivos.Ruta,
-            Archivos.Nombre AS Archivo
-          FROM
-            gHumana_MatrizEPP
-            LEFT JOIN Archivos ON Archivos.Proceso = 'imagen_EPP' AND Archivos.Prefijo = gHumana_MatrizEPP.id
+            gHumana_Cargos.*
+         FROM
+            gHumana_Cargos
+            INNER JOIN gHumana_Organigrama_Diagrama ON gHumana_Organigrama_Diagrama.id = gHumana_Cargos.idDiagrama
          WHERE
-            gHumana_MatrizEPP.idEmpresa = '$idEmpresa';";
+            gHumana_Organigrama_Diagrama.idEmpresa = '$idEmpresa';";
             
    $result = $link->query($sql);
    $idx = 0;

@@ -5,10 +5,10 @@
 
 	$link = Conectar();
 
-	$Prefijo = addslashes($_POST['Prefijo']);
-	$Proceso = addslashes($_POST['Proceso']);
-	$Observaciones = addslashes($_POST['Observaciones']);
-	$Usuario = addslashes($_POST['Usuario']);
+	$Prefijo = trim(addslashes($_POST['Prefijo']));
+	$Proceso = trim(addslashes($_POST['Proceso']));
+	$Observaciones = trim(addslashes($_POST['Observaciones']));
+	$Usuario = trim(addslashes($_POST['Usuario']));
 
 	$targetDir = 'Archivos/' . $Prefijo;
 

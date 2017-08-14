@@ -3,17 +3,23 @@
   include("datosUsuario.php"); 
    $link = Conectar();
    $idUsuario = addslashes($_POST['Usuario']);
-   $idEmpresa = addslashes($_POST['idEmpresa']);
+   $Parametro = addslashes($_POST['Parametro']);
    
    $sql = "SELECT
-            gHumana_MatrizEPP.*,
+            Empresas.*,
             Archivos.Ruta,
-            Archivos.Nombre AS Archivo
+            Archivos.Nombre AS Archivo,
+            datosUsuarios.Nombre AS Usuario,
+            datosUsuarios.Correo AS Correo
           FROM
-            gHumana_MatrizEPP
-            LEFT JOIN Archivos ON Archivos.Proceso = 'imagen_EPP' AND Archivos.Prefijo = gHumana_MatrizEPP.id
+            Empresas
+            LEFT JOIN Archivos ON Archivos.Proceso = 'empresa_Logo' AND Archivos.Prefijo = Empresas.id
+            INNER JOIN datosUsuarios ON datosUsuarios.idLogin = Empresas.idUsuario
          WHERE
-            gHumana_MatrizEPP.idEmpresa = '$idEmpresa';";
+            Empresas.Nombre LIKE '%$Parametro%'
+            OR Empresas.Direccion LIKE '%$Parametro%'
+            OR Empresas.Correo LIKE '%$Parametro%'
+            OR Empresas.Telefono LIKE '%$Parametro%';";
             
    $result = $link->query($sql);
    $idx = 0;

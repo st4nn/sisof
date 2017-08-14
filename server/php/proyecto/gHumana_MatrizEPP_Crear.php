@@ -36,7 +36,7 @@
    $link->query(utf8_decode($sql));
    if ( $link->error == "")
    {
-      echo 1;
+      echo $link->insert_id;
    } else
    {
       echo $link->error;
