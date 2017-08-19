@@ -69,7 +69,7 @@ function gProcesos_Hoja()
     {
       if ($("#txtGProcesos_Hoja_Riesgo").val() != null)
       {
-        $.post('../server/php/proyecto/gProcesos_AsociarRiesgo.php', 
+        $.post('../server/php/proyecto/gProcesos_RiesgoAsociar.php', 
           {
             Usuario: Usuario.id,
             idEmpresa : $("#txtInicio_idEmpresa").val(),
@@ -115,6 +115,35 @@ function gProcesos_Hoja()
         */
     });
 
+  $(document).delegate('.btnGprocesos_Hoja_QuitaRiesgo', 'click', function(evento)
+    {
+      evento.preventDefault();
+      var fila = $(this).parent('td').parent('tr');
+      var idRiesgo = $(this).attr("idRiesgo");
+      bootbox.confirm({
+        message: "Estas seguro de quitar este riesgo del Listado?",
+        buttons: {
+            confirm: {
+                label: 'Si, quitarlo',
+                className: 'btn-danger'
+            },
+            cancel: {
+                label: 'No',
+                className: 'btn-default'
+            }
+        },
+        callback: function (result) {
+          if (result)
+          {
+            $.post('../server/php/proyecto/gProcesos_RiesgoQuitar.php', {idRiesgo: idRiesgo}, function(data, textStatus, xhr) 
+            {
+              $(fila).remove();
+            });
+          }
+        }
+      });
+    });
+
 
 }
 
@@ -135,9 +164,13 @@ function gProcesos_Hoja_cargarProceso(idProceso)
       });
     } else
     {
-      $("#lblGProcesos_Hoja_Titulo").text(data.Texto);
+      $("#lblGProcesos_Hoja_Titulo").text(data.Datos.Texto);
       $("#txtGProcesos_Hoja_idProceso").val(idProceso);
 
+      $.each(data.Riesgos, function(index, val) 
+      {
+        gProcesos_Hoja_ponerRiesgo(val);  
+      });
     }
   }, 'json');
 }
@@ -153,7 +186,7 @@ function gProcesos_Hoja_ponerRiesgo(datos)
       tds += datos.Riesgo;
     tds += '</td>';
     tds += '<td class="text-center">';
-      tds += '<button type="button" class="btn btn-pure btn-danger icon wb-close"></button>';
+      tds += '<button idRiesgo="' + datos.id + '" type="button" class="btn btn-pure btn-danger icon wb-close btnGprocesos_Hoja_QuitaRiesgo"></button>';
     tds += '</td>';
   tds += '</tr>';
 
