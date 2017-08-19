@@ -65,22 +65,15 @@ var tdsOpersonal_Option = '';
 
 function gHumana_Personal_CargarCargos()
 {
-    $.post('../server/php/proyecto/gHumana_CargarCargos.php', {Usuario : Usuario.id, idEmpresa : $("#txtInicio_idEmpresa").val()}, 
-        function(data, textStatus, xhr) 
+	cargarCargos(function(data)
+	{
+		tdsOpersonal_Option = '';
+        if (data != 0)
         {
-            tdsOpersonal_Option = '';
-            if (data != 0)
+            $.each(data, function(index, val) 
             {
-                $.each(data, function(index, val) 
-                {
-                    tdsOpersonal_Option += '<option value="' + val.idInterno + '">'  + val.Texto + '</option>';
-                });
-            } else
-            {
-            	cargarModulo('gHumana/organigrama.html', 'Organigrama de Gestión Humana', function()
-            	{
-            		Mensaje("Hey", "Debes crear primero el Organigrama", "danger");
-            	});
-            }
-        }, 'json');
+                tdsOpersonal_Option += '<option value="' + val.idInterno + '">'  + val.Texto + '</option>';
+            });
+        }
+	});
 }

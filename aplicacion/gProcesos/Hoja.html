@@ -17,10 +17,21 @@
               <div class="col-md-12 form-group">
               	<div class="row">
 	              	<div class="col-md-4 text-right">
-	                	<label for="txtGProcesos_Hoja_Titulo" class="control-label">Responsable del Proceso</label>
+	                	<label for="txtGProcesos_Hoja_Responsable" class="control-label">Responsable del Proceso</label>
 	              	</div>
-	              	<div class="col-md-8">
-	                	<input id="txtGProcesos_Hoja_Titulo" type="text" class="form-control guardar">
+	              	<div class="col-md-6">
+	              		<div class="form-group">
+		                  <div class="input-group">
+		                    <select id="txtGProcesos_Hoja_Responsable" class="form-control guardar">
+							
+	                		</select>
+		                    <span class="input-group-btn">
+		                      <button id="btnGProcesos_Hoja_CargarResponsables" type="button" class="btn btn-primary">
+		                      	<i class="icon wb-refresh" aria-hidden="true"></i>
+		                      </button>
+		                    </span>
+		                  </div>
+		                </div>
 	              	</div>
 	            </div>
               </div>
@@ -30,18 +41,35 @@
  		<div class="panel panel-primary panel-bordered">
  			<div class="panel-heading">
               <h3 class="panel-title">Riesgos del Proceso</h3>
-              <div class="panel-actions">
-				<button id="btnGProcesos_Hoja_AgregarRiesgo" class="btn text-left btn-default btn-block"><i class="icon fa-plus"></i> Agregar Riesgo</button>
-              </div>
             </div>
  			<div class="panel-body">
+ 				<div class="row">
+ 					<div class="col-sm-4">
+ 						
+ 					</div>
+ 				</div>
  				<div class="table-responsive">
- 					<table class="table table-hover table-striped">
+ 					<table id="tblGProcesos_Hoja_Riesgos" class="table table-hover table-striped">
  						<thead>
  							<tr>
- 								<th></th>
- 								<th>Clasificación de Riesgos</th>
- 								<th>Riesgos</th>
+ 								<th class="col-sm-5">Clasificación de Riesgos</th>
+ 								<th class="col-sm-5">Riesgos</th>
+ 								<th class="col-sm-2"></th>
+ 							</tr>
+ 							<tr>
+ 								<th>
+ 									<select id="txtGProcesos_Hoja_Riesgo_Clasificacion" class="form-control select2">
+			 						</select>
+ 								</th>	
+ 								<th>
+ 									<select id="txtGProcesos_Hoja_Riesgo" class="form-control select2">
+			 						</select>
+ 								</th>
+ 								<th>
+ 									<button id="btnGProcesos_Hoja_AgregarRiesgo" type="button" class="btn btn-success btn-block">
+ 										<i class="icon wb-plus"></i>
+ 									</button>
+ 								</th>
  							</tr>
  						</thead>
  						<tbody></tbody>
@@ -101,7 +129,7 @@
  			</div>
  		</div>
 
- 		<div class="form-group">
+ 		<!--<div class="form-group">
       		<label for="txtGProcesos_Hoja_Riesgo_Clasificacion" class="control-label">Limitaciones</label>
     		<textarea class="form-control guardar" rows="5" id="txtGProcesos_Hoja_Riesgo_Clasificacion" required=""></textarea>
       	</div>
@@ -109,6 +137,7 @@
       		<label for="txtGHumana_MatrizEPP_Limitaciones" class="control-label">Limitaciones</label>
     		<textarea class="form-control guardar" rows="5" id="txtGHumana_MatrizEPP_Limitaciones" required=""></textarea>
       	</div>
+      	-->
 
 	</div>
 </div>
