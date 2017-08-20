@@ -265,16 +265,30 @@ function gProcesos_Hoja_cargarProceso(idProceso)
       $("#txtGProcesos_Hoja_idProceso").val(idProceso);
 
       $("#tblGProcesos_Hoja_Riesgos tbody tr").remove();
-      $.each(data.Riesgos, function(index, val) 
+      if (data.Riesgos.length > 0)
       {
-        gProcesos_Hoja_ponerRiesgo(val);  
-      });
+        $.each(data.Riesgos, function(index, val) 
+        {
+          gProcesos_Hoja_ponerRiesgo(val);  
+        });
+      }
       
       if (Object.keys(data.Info).length > 0)
       {
         $("#txtGProcesos_Hoja_Objetivo").val(data.Info.Objetivo);
         $("#txtGProcesos_Hoja_Responsable").val(data.Info.idResponsable);
       }
+
+      $("#tblGProcesos_Hoja_Actividades tbody tr").remove();
+      if (data.Actividades.length > 0)
+      {
+        $.each(data.Actividades, function(index, val) 
+        {
+          gProcesos_Hoja_ponerActividad(val);  
+        });
+      }
+
+      
     }
   }, 'json');
 }
