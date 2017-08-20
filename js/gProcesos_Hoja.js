@@ -11,6 +11,8 @@ function gProcesos_Hoja()
   {
     evento.preventDefault();
     $("#txtGProcesos_Hoja_Responsable option").remove();
+    $("#txtGProcesos_Hoja_Personal option").remove();
+
     var tds = '<option value="0">Seleccione un Cargo de la lista</option>';
     cargarCargos(function(datos)
     {
@@ -19,6 +21,8 @@ function gProcesos_Hoja()
         tds += '<option value="' + val.idInterno + '">' + val.Texto + '</option>';
       });
       $("#txtGProcesos_Hoja_Responsable").append(tds);
+      $("#txtGProcesos_Hoja_Personal").append(tds);
+      
     });
   });
 
@@ -83,35 +87,13 @@ function gProcesos_Hoja()
             { 
               gProcesos_Hoja_ponerRiesgo(
                 {
-                  id : data, 
+                  id : data.trim(), 
                   Clasificacion : $("#txtGProcesos_Hoja_Riesgo_Clasificacion option:selected").text(),
                   Riesgo : $("#txtGProcesos_Hoja_Riesgo option:selected").text()
                 })
             }
           });
       }
-        /*
-        bootbox.confirm({message:"<form id='infos' action=''>\
-                        First name:<input type='text' name='first_name' /><br/>\
-                        Last name:<input type='text' name='last_name' />\
-                    </form>", 
-                    buttons: {
-                confirm: {
-                    label: 'Agregar',
-                    className: 'btn-success'
-                },
-                cancel: {
-                    label: 'Cancelar',
-                    className: 'btn-danger btn-inverse'
-                }
-            },
-            callback : function(result) {
-                if(result)
-                {
-                    //$('#infos').submit();
-                }
-            }});  
-        */
     });
 
   $(document).delegate('.btnGprocesos_Hoja_QuitaRiesgo', 'click', function(evento)
@@ -185,15 +167,21 @@ function gProcesos_Hoja()
         $.post('../server/php/proyecto/gProcesos_Hoja_ActividadCrear.php', datos, 
           function(data, textStatus, xhr) 
           {
-            $("#tblGProcesos_Hoja_Actividades tbody tr[idActividad=" + data + "]").remove();
-            $("#cntGProcesos_Hoja_Actividad").modal('hide');
-            gProcesos_Hoja_ponerActividad({
-              id : data, 
-              Nombre : $("#txtGProcesos_Hoja_Actividad_Nombre").val(),
-              Recursos : $("#txtGProcesos_Hoja_Actividad_Recursos").val(),
-              Insumos : $("#txtGProcesos_Hoja_Actividad_Insumos").val(),
-              RSST : $("#txtGProcesos_Hoja_Actividad_RSST").val()
-              });
+            if (isNaN(data))
+            {
+              Mensaje("Error", data, "danger");
+            } else
+            {
+              $("#tblGProcesos_Hoja_Actividades tbody tr[idActividad=" + data + "]").remove();
+              $("#cntGProcesos_Hoja_Actividad").modal('hide');
+              gProcesos_Hoja_ponerActividad({
+                id : data.trim(), 
+                Nombre : $("#txtGProcesos_Hoja_Actividad_Nombre").val(),
+                Recursos : $("#txtGProcesos_Hoja_Actividad_Recursos").val(),
+                Insumos : $("#txtGProcesos_Hoja_Actividad_Insumos").val(),
+                RSST : $("#txtGProcesos_Hoja_Actividad_RSST").val()
+                });
+            }
           });
       });
   });
@@ -239,6 +227,67 @@ function gProcesos_Hoja()
       }
     });
   });
+
+  $("#btnGProcesos_Hoja_AgregarPersonal").on('click', function(evento)
+  {
+    evento.preventDefault();
+    var idPersonal = $("#txtGProcesos_Hoja_Personal").val();
+    if ($("#txtGProcesos_Hoja_Personal").val() != '')
+    {
+      if ($("#tblGProcesos_Hoja_Personal li[idCargo=" + idPersonal + "]").length == 0)
+      {
+        var datos = {idCargo : idPersonal, Usuario : Usuario.id};
+        datos.idEmpresa = $("#txtInicio_idEmpresa").val();
+        datos.idDiagrama = $("#txtGProcesos_Mapa_id").val();
+        datos.idKey = $("#txtGProcesos_Hoja_idProceso").val();
+
+        $.post('../server/php/proyecto/gProcesos_Hoja_PersonalCrear.php', datos, 
+        function(data, textStatus, xhr) {
+          if (isNaN(data))
+          {
+            Mensaje("Error", data, "danger");
+          } else
+          {
+            gProcesos_Hoja_ponerPersonal({
+              id : data.trim(),
+              idCargo : idPersonal,
+              Cargo : $("#txtGProcesos_Hoja_Personal option:selected").text()
+            });
+          }
+        });
+      }      
+    }
+  });
+
+  $(document).delegate('.btnGprocesos_Hoja_QuitarPersonal', 'click', function(evento)
+    {
+      evento.preventDefault();
+      var fila = $(this).parent('li');
+      var idPersonal = $(this).attr("idPersonal");
+      bootbox.confirm({
+        message: "Estas seguro de quitar este Cargo del Listado?",
+        buttons: {
+            confirm: {
+                label: 'Si, quitarlo',
+                className: 'btn-danger'
+            },
+            cancel: {
+                label: 'No',
+                className: 'btn-default'
+            }
+        },
+        callback: function (result) {
+          if (result)
+          {
+            $.post('../server/php/proyecto/gProcesos_PersonalQuitar.php', {idPersonal: idPersonal}, function(data, textStatus, xhr) 
+            {
+              $(fila).remove();
+            });
+          }
+        }
+      });
+
+    });
 
 
 }
@@ -288,6 +337,15 @@ function gProcesos_Hoja_cargarProceso(idProceso)
         });
       }
 
+      $("#tblGProcesos_Hoja_Personal li").remove();
+      if (data.Personal.length > 0)
+      {
+        $.each(data.Personal, function(index, val) 
+        {
+          gProcesos_Hoja_ponerPersonal(val);  
+        });
+      }
+
       
     }
   }, 'json');
@@ -334,4 +392,19 @@ function gProcesos_Hoja_ponerActividad(datos)
   tds += '</tr>';
 
   $("#tblGProcesos_Hoja_Actividades tbody").append(tds);
+}
+
+function gProcesos_Hoja_ponerPersonal(datos)
+{
+  if ($("#tblGProcesos_Hoja_Personal li[idCargo=" + datos.idCargo + "]").length == 0)
+  {
+    var tds = '';
+    tds += '<li idCargo="' + datos.idCargo + '" class="list-group-item list-group-dividered">';
+      tds += '<button idPersonal="' + datos.id + '" class="btn btn-pure btn-danger pull-right icon fa-user-times btnGprocesos_Hoja_QuitarPersonal"></button> ';
+      tds += datos.Cargo;
+    tds += '</li>';
+
+    $("#tblGProcesos_Hoja_Personal").append(tds);
+  }
+  
 }
