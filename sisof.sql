@@ -1,13 +1,15 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.1
--- http://www.phpmyadmin.net
+-- version 4.7.0
+-- https://www.phpmyadmin.net/
 --
--- Servidor: 127.0.0.1
--- Tiempo de generación: 15-08-2017 a las 00:42:02
--- Versión del servidor: 10.1.13-MariaDB
--- Versión de PHP: 5.5.37
+-- Servidor: localhost
+-- Tiempo de generación: 20-08-2017 a las 04:36:51
+-- Versión del servidor: 10.1.21-MariaDB
+-- Versión de PHP: 5.6.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -68,39 +70,39 @@ INSERT INTO `confRiesgos` (`id`, `idClasificacion`, `Nombre`, `fechaCargue`) VAL
 (2, 1, 'Bacterias ', '2017-08-14 22:20:48'),
 (3, 1, 'Hongos ', '2017-08-14 22:20:48'),
 (4, 1, 'Ricketsias ', '2017-08-14 22:20:48'),
-(5, 1, 'Para?sitos ', '2017-08-14 22:20:48'),
+(5, 1, 'Parásitos ', '2017-08-14 22:20:48'),
 (6, 1, 'Picaduras ', '2017-08-14 22:20:48'),
 (7, 1, 'Mordeduras ', '2017-08-14 22:20:48'),
 (8, 1, 'Fluidos o excrementos ', '2017-08-14 22:20:48'),
 (9, 5, 'Ruido (impacto intermitente y continuo) ', '2017-08-14 22:20:48'),
-(10, 5, 'Iluminacio?n (luz visible por exceso o deficiencia) ', '2017-08-14 22:20:48'),
-(11, 5, 'Vibracio?n (cuerpo entero, segmentaria) ', '2017-08-14 22:20:48'),
-(12, 5, 'Temperaturas extremas (calor y fri?o) ', '2017-08-14 22:20:48'),
-(13, 5, 'Presio?n atmosfe?rica (normal y ajustada) ', '2017-08-14 22:20:48'),
+(10, 5, 'Iluminacion (luz visible por exceso o deficiencia) ', '2017-08-14 22:20:48'),
+(11, 5, 'Vibración (cuerpo entero, segmentaria) ', '2017-08-14 22:20:48'),
+(12, 5, 'Temperaturas extremas (calor y frío) ', '2017-08-14 22:20:48'),
+(13, 5, 'Presión atmosférica (normal y ajustada) ', '2017-08-14 22:20:48'),
 (14, 5, 'Radiaciones ionizantes (rayos x, gama, beta y alfa) ', '2017-08-14 22:20:48'),
-(15, 5, 'Radiaciones no ionizantes (la?ser, ultravioleta infraroja) ', '2017-08-14 22:20:48'),
-(16, 6, 'Polvos orga?nicos inorga?nicos ', '2017-08-14 22:20:48'),
+(15, 5, 'Radiaciones no ionizantes (láser, ultravioleta infraroja) ', '2017-08-14 22:20:48'),
+(16, 6, 'Polvos orgánicos inorgánicos ', '2017-08-14 22:20:48'),
 (17, 6, 'Fibras ', '2017-08-14 22:20:48'),
-(18, 6, 'Li?quidos (nieblas y roci?os) ', '2017-08-14 22:20:48'),
+(18, 6, 'Líquidos (nieblas y rocíos) ', '2017-08-14 22:20:48'),
 (19, 6, 'Gases y vapores ', '2017-08-14 22:20:48'),
-(20, 6, 'Humos meta?licos, no meta?licos ', '2017-08-14 22:20:48'),
+(20, 6, 'Humos metálicos, no metálicos ', '2017-08-14 22:20:48'),
 (21, 6, 'Material particulado ', '2017-08-14 22:20:48'),
-(22, 3, 'Gestio?n organizacional (estilo de mando, pago, contratacio?n, participacio?n, induccio?n y capacitacio?n, bienestar social, evaluacio?n del desempen?o, manejo de cambios) ', '2017-08-14 22:20:48'),
-(23, 3, 'Caracteri?sticas de la organizacio?n del trabajo (comunicacio?n, tecnologi?a, organizacio?n del trabajo, demandas cualitativas y cuantitativas de la labor', '2017-08-14 22:20:48'),
-(24, 3, 'Caracteri?sticas del grupo social del trabajo (relaciones, cohesio?n, calidad de interacciones, trabajo en equipo ', '2017-08-14 22:20:48'),
-(25, 3, 'Condiciones de la tarea (carga mental, contenido de la tarea, demandas emocionales, sistemas de control, definicio?n de roles, monotoni?a, etc).', '2017-08-14 22:20:48'),
-(26, 3, 'Interfase persona tarea (conocimientos, habilidades con relacio?n a la demanda de la tarea, iniciativa, autonomi?a y reconocimiento, identificacio?n de la persona con la tarea y la organizacio?n', '2017-08-14 22:20:48'),
-(27, 3, 'Jornada de trabajo (pausas, trabajo nocturno, rotacio?n, horas extras, descansos) ', '2017-08-14 22:20:48'),
+(22, 3, 'Gestión organizacional (estilo de mando, pago, contratación, participación, inducción y capacitación, bienestar social, evaluación del desempeño, manejo de cambios) ', '2017-08-14 22:20:48'),
+(23, 3, 'Características de la organización del trabajo (comunicación, tecnología, organización del trabajo, demandas cualitativas y cuantitativas de la labor', '2017-08-14 22:20:48'),
+(24, 3, 'Características del grupo social del trabajo (relaciones, cohesión, calidad de interacciones, trabajo en equipo ', '2017-08-14 22:20:48'),
+(25, 3, 'Condiciones de la tarea (carga mental, contenido de la tarea, demandas emocionales, sistemas de control, definición de roles, monotonía, etc).', '2017-08-14 22:20:48'),
+(26, 3, 'Interfase persona tarea (conocimientos, habilidades con relación a la demanda de la tarea, iniciativa, autonomía y reconocimiento, identificación de la persona con la tarea y la organización', '2017-08-14 22:20:48'),
+(27, 3, 'Jornada de trabajo (pausas, trabajo nocturno, rotación, horas extras, descansos) ', '2017-08-14 22:20:48'),
 (28, 2, 'Postura (prologada mantenida, forzada, antigravitacionales) ', '2017-08-14 22:20:48'),
 (29, 2, 'Esfuerzo ', '2017-08-14 22:20:48'),
 (30, 2, 'Movimiento repetitivo ', '2017-08-14 22:20:48'),
-(31, 2, 'Manipulacio?n manual de cargas ', '2017-08-14 22:20:48'),
-(32, 4, 'Meca?nico (elementos de ma?quinas, herramientas, piezas a trabajar, materiales proyectados so?lidos o fluidos ', '2017-08-14 22:20:48'),
-(33, 4, 'Ele?ctrico (alta y baja tensio?n, esta?tica) ', '2017-08-14 22:20:48'),
-(34, 4, 'Locativo (almacenamiento, superficies de trabajo (irregularidades, deslizantes, con diferencia del nivel) condiciones de orden y aseo, cai?das de objeto) ', '2017-08-14 22:20:48'),
-(35, 4, 'Tecnolo?gico (explosio?n, fuga, derrame, incendio) ', '2017-08-14 22:20:48'),
-(36, 4, 'Accidentes de tra?nsito ', '2017-08-14 22:20:48'),
-(37, 4, 'Pu?blicos (Robos, atracos, asaltos, atentados, desorden pu?blico, etc.) ', '2017-08-14 22:20:48'),
+(31, 2, 'Manipulación manual de cargas ', '2017-08-14 22:20:48'),
+(32, 4, 'Mecánico (elementos de máquinas, herramientas, piezas a trabajar, materiales proyectados sólidos o fluidos ', '2017-08-14 22:20:48'),
+(33, 4, 'Eléctrico (alta y baja tensión, estática) ', '2017-08-14 22:20:48'),
+(34, 4, 'Locativo (almacenamiento, superficies de trabajo (irregularidades, deslizantes, con diferencia del nivel) condiciones de orden y aseo, caídas de objeto) ', '2017-08-14 22:20:48'),
+(35, 4, 'Tecnológico (explosión, fuga, derrame, incendio) ', '2017-08-14 22:20:48'),
+(36, 4, 'Accidentes de tránsito ', '2017-08-14 22:20:48'),
+(37, 4, 'Públicos (Robos, atracos, asaltos, atentados, desorden público, etc.) ', '2017-08-14 22:20:48'),
 (38, 4, 'Trabajo en Alturas ', '2017-08-14 22:20:48'),
 (39, 4, 'Espacios Confinados ', '2017-08-14 22:20:48');
 
@@ -121,12 +123,12 @@ CREATE TABLE `confRiesgos_Clasificacion` (
 --
 
 INSERT INTO `confRiesgos_Clasificacion` (`id`, `Nombre`, `fechaCargue`) VALUES
-(1, 'Biolo?gico ', '2017-08-14 22:18:08'),
-(2, 'Biomeca?nicos ', '2017-08-14 22:18:08'),
-(3, 'Clasificacio?n Psicosocial ', '2017-08-14 22:18:08'),
+(1, 'Biológico ', '2017-08-14 22:18:08'),
+(2, 'Biomecánicos ', '2017-08-14 22:18:08'),
+(3, 'Clasificación Psicosocial ', '2017-08-14 22:18:08'),
 (4, 'Condiciones de seguridad ', '2017-08-14 22:18:08'),
-(5, 'Fi?sico ', '2017-08-14 22:18:08'),
-(6, 'Qui?mico ', '2017-08-14 22:18:08');
+(5, 'Físico ', '2017-08-14 22:18:08'),
+(6, 'Químico ', '2017-08-14 22:18:08');
 
 -- --------------------------------------------------------
 
@@ -257,7 +259,7 @@ CREATE TABLE `gHumana_Organigrama_Diagrama` (
 --
 
 INSERT INTO `gHumana_Organigrama_Diagrama` (`id`, `idEmpresa`, `idUsuario`, `Diagrama`, `fechaCargue`) VALUES
-(1, 1, 1, '{ "class": "go.GraphLinksModel",\n  "nodeDataArray": [ \n{"text":"Cargo 1", "key":-1, "loc":"430 240"},\n{"text":"Cargo 2", "key":-2, "loc":"290 440"}\n ],\n  "linkDataArray": []}', '2017-08-14 21:25:14');
+(1, 1, 1, '{ \"class\": \"go.GraphLinksModel\",\n  \"nodeDataArray\": [ \n{\"text\":\"Cargo 1\", \"key\":-1, \"loc\":\"430 240\"},\n{\"text\":\"Cargo 2\", \"key\":-2, \"loc\":\"290 440\"}\n ],\n  \"linkDataArray\": []}', '2017-08-14 21:25:14');
 
 -- --------------------------------------------------------
 
@@ -312,8 +314,8 @@ CREATE TABLE `gProcesos_Mapa_Diagrama` (
 --
 
 INSERT INTO `gProcesos_Mapa_Diagrama` (`id`, `idEmpresa`, `idUsuario`, `Diagrama`, `fechaCargue`) VALUES
-(7, 7, 1, '{ "class": "go.GraphLinksModel",\n  "nodeDataArray": [ {"text":"Proceso", "color":"#ACE600", "key":-1, "loc":"38.1240234375 18.08037109374999"} ],\n  "linkDataArray": []}', '2017-08-14 18:45:43'),
-(8, 1, 1, '{ "class": "go.GraphLinksModel",\n  "nodeDataArray": [ \n{"text":"Proceso 1", "color":"#ACE600", "key":-1, "loc":"49.9619140625 49.241113281249994", "group":-2},\n{"text":"Sub Grupo", "color":"#FFDD33", "isGroup":true, "category":"OfNodes", "key":-2, "loc":"49.9619140625 49.241113281249994"},\n{"text":"Proceso2", "color":"#ACE600", "key":-3, "loc":"174.01708984375 18.08037109375"}\n ],\n  "linkDataArray": []}', '2017-08-14 21:53:07');
+(7, 7, 1, '{ \"class\": \"go.GraphLinksModel\",\n  \"nodeDataArray\": [ {\"text\":\"Proceso\", \"color\":\"#ACE600\", \"key\":-1, \"loc\":\"38.1240234375 18.08037109374999\"} ],\n  \"linkDataArray\": []}', '2017-08-14 18:45:43'),
+(8, 1, 1, '{ \"class\": \"go.GraphLinksModel\",\n  \"nodeDataArray\": [ \n{\"text\":\"Proceso 1\", \"color\":\"#ACE600\", \"key\":-1, \"loc\":\"49.9619140625 49.241113281249994\", \"group\":-2},\n{\"text\":\"Sub Grupo\", \"color\":\"#FFDD33\", \"isGroup\":true, \"category\":\"OfNodes\", \"key\":-2, \"loc\":\"49.9619140625 49.241113281249994\"},\n{\"text\":\"Proceso2\", \"color\":\"#ACE600\", \"key\":-3, \"loc\":\"174.01708984375 18.08037109375\"}\n ],\n  \"linkDataArray\": []}', '2017-08-14 21:53:07');
 
 -- --------------------------------------------------------
 
@@ -339,6 +341,100 @@ INSERT INTO `gProcesos_Procesos` (`id`, `idDiagrama`, `Tipo`, `idInterno`, `Text
 (89, 8, 'Proceso', -1, 'Proceso 1', -2),
 (90, 8, 'SubGrupo', -2, 'Sub Grupo', 0),
 (91, 8, 'Proceso', -3, 'Proceso2', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `gProcesos_Procesos_Actividades`
+--
+
+CREATE TABLE `gProcesos_Procesos_Actividades` (
+  `id` int(11) NOT NULL,
+  `idEmpresa` int(11) NOT NULL,
+  `idProceso` int(11) NOT NULL,
+  `Nombre` longtext NOT NULL,
+  `Recursos` longtext NOT NULL,
+  `Insumos` longtext NOT NULL,
+  `RSST` longtext NOT NULL,
+  `idUsuario` int(11) NOT NULL,
+  `fechaCargue` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `gProcesos_Procesos_Actividades`
+--
+
+INSERT INTO `gProcesos_Procesos_Actividades` (`id`, `idEmpresa`, `idProceso`, `Nombre`, `Recursos`, `Insumos`, `RSST`, `idUsuario`, `fechaCargue`) VALUES
+(1, 1, -3, '123', '456789', '789', '012', 1, '2017-08-20 01:38:36');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `gProcesos_Procesos_Info`
+--
+
+CREATE TABLE `gProcesos_Procesos_Info` (
+  `id` int(11) NOT NULL,
+  `idEmpresa` int(11) NOT NULL,
+  `idProceso` int(11) NOT NULL,
+  `Objetivo` longtext NOT NULL,
+  `idResponsable` int(11) NOT NULL,
+  `idUsuario` int(11) NOT NULL,
+  `fechaCargue` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `gProcesos_Procesos_Info`
+--
+
+INSERT INTO `gProcesos_Procesos_Info` (`id`, `idEmpresa`, `idProceso`, `Objetivo`, `idResponsable`, `idUsuario`, `fechaCargue`) VALUES
+(3, 1, -3, '123', -1, 1, '2017-08-20 00:40:43');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `gProcesos_Procesos_Personal`
+--
+
+CREATE TABLE `gProcesos_Procesos_Personal` (
+  `id` int(11) NOT NULL,
+  `idEmpresa` int(11) NOT NULL,
+  `idProceso` int(11) NOT NULL,
+  `idCargo` int(11) NOT NULL,
+  `idUsuario` int(11) NOT NULL,
+  `fechaCargue` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `gProcesos_Procesos_Personal`
+--
+
+INSERT INTO `gProcesos_Procesos_Personal` (`id`, `idEmpresa`, `idProceso`, `idCargo`, `idUsuario`, `fechaCargue`) VALUES
+(5, 1, -3, -2, 1, '2017-08-20 02:32:06'),
+(4, 1, -3, -1, 1, '2017-08-20 02:31:03');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `gProcesos_Procesos_Riesgos`
+--
+
+CREATE TABLE `gProcesos_Procesos_Riesgos` (
+  `id` int(11) NOT NULL,
+  `idEmpresa` int(11) NOT NULL,
+  `idProceso` int(11) NOT NULL,
+  `idRiesgo` int(11) NOT NULL,
+  `idUsuario` int(11) NOT NULL,
+  `fechaCargue` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `gProcesos_Procesos_Riesgos`
+--
+
+INSERT INTO `gProcesos_Procesos_Riesgos` (`id`, `idEmpresa`, `idProceso`, `idRiesgo`, `idUsuario`, `fechaCargue`) VALUES
+(1, 1, -3, 28, 1, '2017-08-19 17:47:56'),
+(2, 1, -3, 22, 1, '2017-08-19 17:50:20');
 
 -- --------------------------------------------------------
 
@@ -471,6 +567,31 @@ ALTER TABLE `gProcesos_Procesos`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indices de la tabla `gProcesos_Procesos_Actividades`
+--
+ALTER TABLE `gProcesos_Procesos_Actividades`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `gProcesos_Procesos_Info`
+--
+ALTER TABLE `gProcesos_Procesos_Info`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `gProcesos_Procesos_Info_key` (`idEmpresa`,`idProceso`);
+
+--
+-- Indices de la tabla `gProcesos_Procesos_Personal`
+--
+ALTER TABLE `gProcesos_Procesos_Personal`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `gProcesos_Procesos_Riesgos`
+--
+ALTER TABLE `gProcesos_Procesos_Riesgos`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indices de la tabla `Login`
 --
 ALTER TABLE `Login`
@@ -548,6 +669,26 @@ ALTER TABLE `gProcesos_Mapa_Diagrama`
 ALTER TABLE `gProcesos_Procesos`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=92;
 --
+-- AUTO_INCREMENT de la tabla `gProcesos_Procesos_Actividades`
+--
+ALTER TABLE `gProcesos_Procesos_Actividades`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT de la tabla `gProcesos_Procesos_Info`
+--
+ALTER TABLE `gProcesos_Procesos_Info`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT de la tabla `gProcesos_Procesos_Personal`
+--
+ALTER TABLE `gProcesos_Procesos_Personal`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+--
+-- AUTO_INCREMENT de la tabla `gProcesos_Procesos_Riesgos`
+--
+ALTER TABLE `gProcesos_Procesos_Riesgos`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+--
 -- AUTO_INCREMENT de la tabla `Login`
 --
 ALTER TABLE `Login`
@@ -556,7 +697,8 @@ ALTER TABLE `Login`
 -- AUTO_INCREMENT de la tabla `Perfiles`
 --
 ALTER TABLE `Perfiles`
-  MODIFY `idPerfil` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idPerfil` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;COMMIT;
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
