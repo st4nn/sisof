@@ -164,6 +164,82 @@ function gProcesos_Hoja()
     });
   });
 
+  $("#btnGProcesos_Hoja_AgregarActividad").on("click", function(evento)
+  {
+    evento.preventDefault();
+    $("#frmGProcesos_Hoja_Actividad")[0].reset();
+    $("#txtGProcesos_Hoja_Actividad_id").val("NULL")
+    $("#cntGProcesos_Hoja_Actividad").modal('show');
+  });
+
+  $("#frmGProcesos_Hoja_Actividad").on("submit", function(evento)
+  {
+    evento.preventDefault();
+    $(this).generarDatosEnvio('txtGProcesos_Hoja_Actividad_', function(datos)
+      {
+        datos = $.parseJSON(datos);
+        datos.idEmpresa = $("#txtInicio_idEmpresa").val();
+        datos.idDiagrama = $("#txtGProcesos_Mapa_id").val();
+        datos.idKey = $("#txtGProcesos_Hoja_idProceso").val();
+        
+        $.post('../server/php/proyecto/gProcesos_Hoja_ActividadCrear.php', datos, 
+          function(data, textStatus, xhr) 
+          {
+            $("#tblGProcesos_Hoja_Actividades tbody tr[idActividad=" + data + "]").remove();
+            $("#cntGProcesos_Hoja_Actividad").modal('hide');
+            gProcesos_Hoja_ponerActividad({
+              id : data, 
+              Nombre : $("#txtGProcesos_Hoja_Actividad_Nombre").val(),
+              Recursos : $("#txtGProcesos_Hoja_Actividad_Recursos").val(),
+              Insumos : $("#txtGProcesos_Hoja_Actividad_Insumos").val(),
+              RSST : $("#txtGProcesos_Hoja_Actividad_RSST").val()
+              });
+          });
+      });
+  });
+
+  $(document).delegate('.btnGprocesos_Hoja_EditarActividad', 'click', function(evento)
+  {
+    evento.preventDefault();
+    var fila = $(this).parent('td').parent('tr').find('td');
+    $("#txtGProcesos_Hoja_Actividad_id").val($(this).attr('idActividad'));
+    $("#txtGProcesos_Hoja_Actividad_Nombre").val($(fila[0]).text());
+    $("#txtGProcesos_Hoja_Actividad_Recursos").val($(fila[1]).text());
+    $("#txtGProcesos_Hoja_Actividad_Insumos").val($(fila[2]).text());
+    $("#txtGProcesos_Hoja_Actividad_RSST").val($(fila[3]).text());
+
+    $("#cntGProcesos_Hoja_Actividad").modal('show');
+  });
+
+  $(document).delegate('.btnGprocesos_Hoja_QuitarActividad', 'click', function(evento)
+  {
+    evento.preventDefault();
+    var fila = $(this).parent('td').parent('tr');
+    var idActividad = $(this).attr("idActividad");
+    bootbox.confirm({
+      message: "Estas seguro de quitar esta Actividad del Listado?",
+      buttons: {
+          confirm: {
+              label: 'Si, quitarla',
+              className: 'btn-danger'
+          },
+          cancel: {
+              label: 'No',
+              className: 'btn-default'
+          }
+      },
+      callback: function (result) {
+        if (result)
+        {
+          $.post('../server/php/proyecto/gProcesos_ActividadQuitar.php', {idActividad: idActividad}, function(data, textStatus, xhr) 
+          {
+            $(fila).remove();
+          });
+        }
+      }
+    });
+  });
+
 
 }
 
@@ -219,4 +295,29 @@ function gProcesos_Hoja_ponerRiesgo(datos)
   tds += '</tr>';
 
   $("#tblGProcesos_Hoja_Riesgos tbody").append(tds);
+}
+
+function gProcesos_Hoja_ponerActividad(datos)
+{
+  var tds = '';
+  tds += '<tr idActividad="' + datos.id + '">';
+    tds += '<td>';
+      tds += datos.Nombre;
+    tds += '</td> ';
+    tds += '<td>';
+      tds += datos.Recursos;
+    tds += '</td>';
+    tds += '<td>';
+      tds += datos.Insumos;
+    tds += '</td>';
+    tds += '<td>';
+      tds += datos.RSST;
+    tds += '</td>';
+    tds += '<td class="text-center">';
+      tds += '<button idActividad="' + datos.id + '" type="button" class="btn btn-pure btn-primary icon wb-edit btnGprocesos_Hoja_EditarActividad"></button>';
+      tds += '<button idActividad="' + datos.id + '" type="button" class="btn btn-pure btn-danger icon wb-close btnGprocesos_Hoja_QuitarActividad"></button>';
+    tds += '</td>';
+  tds += '</tr>';
+
+  $("#tblGProcesos_Hoja_Actividades tbody").append(tds);
 }
