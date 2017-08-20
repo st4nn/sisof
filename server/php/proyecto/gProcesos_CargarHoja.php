@@ -58,6 +58,29 @@
          }
          mysqli_free_result($result);  
       }
+
+      $sql = "SELECT
+            gProcesos_Procesos_Info.*
+          FROM
+            gProcesos_Procesos_Info
+            INNER JOIN gProcesos_Procesos ON gProcesos_Procesos.idInterno = gProcesos_Procesos_Info.idProceso AND gProcesos_Procesos.idDiagrama = '$idDiagrama'
+         WHERE
+            gProcesos_Procesos.idInterno = '$idKey';";
+
+            
+      $result = $link->query($sql);
+      if ( $result->num_rows > 0)
+      {
+         while ($row = mysqli_fetch_assoc($result))
+         {
+            foreach ($row as $key => $value) 
+            {
+               $Resultado['Info'][$key] = utf8_encode($value);
+            }
+         }
+         mysqli_free_result($result);  
+      }
+
        echo json_encode($Resultado);
    } else
    {

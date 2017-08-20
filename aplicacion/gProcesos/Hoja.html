@@ -9,32 +9,35 @@
  	<div class="page-content container-fluid">
  		<div class="panel panel-primary panel-bordered">
  			<div class="panel-body">
-              <div class="col-md-12 form-group">
-                <label for="txtGProcesos_Hoja_Titulo" class="control-label">OBJETIVO DEL PROCESO</label>
-                <textarea id="txtGProcesos_Hoja_Titulo" rows="3" class="form-control guardar"></textarea>
-              </div>
+ 				<form id="frmGProcesos_Hoja_Info">
+	              <div class="col-md-12 form-group">
+	                <label for="txtGProcesos_Hoja_Objetivo" class="control-label">OBJETIVO DEL PROCESO</label>
+	                <textarea id="txtGProcesos_Hoja_Objetivo" rows="3" class="form-control guardar"></textarea>
+	              </div>
 
-              <div class="col-md-12 form-group">
-              	<div class="row">
-	              	<div class="col-md-4 text-right">
-	                	<label for="txtGProcesos_Hoja_Responsable" class="control-label">Responsable del Proceso</label>
-	              	</div>
-	              	<div class="col-md-8">
-	              		<div class="form-group">
-		                  <div class="input-group">
-		                    <select id="txtGProcesos_Hoja_Responsable" class="form-control guardar">
-							
-	                		</select>
-		                    <span class="input-group-btn">
-		                      <button id="btnGProcesos_Hoja_CargarResponsables" type="button" class="btn btn-primary">
-		                      	<i class="icon wb-refresh" aria-hidden="true"></i>
-		                      </button>
-		                    </span>
-		                  </div>
-		                </div>
-	              	</div>
-	            </div>
-              </div>
+	              <div class="col-md-12 form-group">
+	              	<div class="row">
+		              	<div class="col-md-4 text-right">
+		                	<label for="txtGProcesos_Hoja_Responsable" class="control-label">Responsable del Proceso</label>
+		              	</div>
+		              	<div class="col-md-8">
+		              		<div class="form-group">
+			                  <div class="input-group">
+			                    <select id="txtGProcesos_Hoja_Responsable" class="form-control guardar">
+								
+		                		</select>
+			                    <span class="input-group-btn">
+			                      <button id="btnGProcesos_Hoja_CargarResponsables" type="button" class="btn btn-primary">
+			                      	<i class="icon wb-refresh" aria-hidden="true"></i>
+			                      </button>
+			                    </span>
+			                  </div>
+			                </div>
+		              	</div>
+		            </div>
+	              </div>
+	              <button type="submit" class="btn btn-success btn-block"><i class="icon fa-floppy-o"></i> Guardar</button>
+	            </form>
  			</div>
  		</div>
 

@@ -21,7 +21,6 @@ function gProcesos_Hoja()
       $("#txtGProcesos_Hoja_Responsable").append(tds);
     });
   });
-  $("#btnGProcesos_Hoja_CargarResponsables").trigger("click");
 
   cargarRiesgos_Clasificacion(function(data)
   {
@@ -144,6 +143,27 @@ function gProcesos_Hoja()
       });
     });
 
+  $("#frmGProcesos_Hoja_Info").on("submit", function(evento)
+  {
+    evento.preventDefault();
+    $(this).generarDatosEnvio("txtGProcesos_Hoja_", function(datos)
+    {
+      datos = $.parseJSON(datos);
+      datos.idEmpresa = $("#txtInicio_idEmpresa").val();
+      datos.idDiagrama = $("#txtGProcesos_Mapa_id").val();
+      datos.idKey = $("#txtGProcesos_Hoja_idProceso").val();
+      $.post('../server/php/proyecto/gProcesos_Hoja_InfoGuardar.php', datos, function(data, textStatus, xhr) {
+        if (isNaN(data))
+        {
+          Mensaje("Error", data, "danger");
+        } else
+        {
+          Mensaje("Hey", 'Los cambios han sido ingresados', 'success');
+        }
+      });
+    });
+  });
+
 
 }
 
@@ -165,12 +185,20 @@ function gProcesos_Hoja_cargarProceso(idProceso)
     } else
     {
       $("#lblGProcesos_Hoja_Titulo").text(data.Datos.Texto);
+      
       $("#txtGProcesos_Hoja_idProceso").val(idProceso);
 
+      $("#tblGProcesos_Hoja_Riesgos tbody tr").remove();
       $.each(data.Riesgos, function(index, val) 
       {
         gProcesos_Hoja_ponerRiesgo(val);  
       });
+      
+      if (Object.keys(data.Info).length > 0)
+      {
+        $("#txtGProcesos_Hoja_Objetivo").val(data.Info.Objetivo);
+        $("#txtGProcesos_Hoja_Responsable").val(data.Info.idResponsable);
+      }
     }
   }, 'json');
 }

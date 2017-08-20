@@ -1,5 +1,63 @@
 $(document).ready(function()
 {
+  $("#btnGProcesos_Mapa_Guardar").on("click", function(evento)
+    {
+      evento.preventDefault();
+      var diagrama = gProcesos_Mapa_Diagrama.model.toJson();
+      var datos = {
+        idDiagrama : $("#txtGProcesos_Mapa_id").val(),
+        idEmpresa : $("#txtInicio_idEmpresa").val(),
+        idUsuario : Usuario.id,
+        Diagrama : diagrama
+      };
+
+      $.post('../server/php/proyecto/gProcesos_CrearDiagrama.php', datos, function(data, textStatus, xhr) 
+      {
+        if (!isNaN(data))
+        {
+          $("#txtGProcesos_Mapa_id").val(data);
+          Mensaje("Hey", "Los cambios han sido guardados", 'success');
+          gProcesos_Mapa_Diagrama.isModified = false;
+        } else
+        {
+          Mensaje("Error", data, 'danger'); 
+        }
+      });
+    });
+
+  $("#btnGProcesos_Mapa_Cargar").on("click", function(evento)
+  {
+    $.post('../server/php/proyecto/gProcesos_CargarDiagrama.php', 
+      {
+        Usuario :  Usuario.id,
+        idEmpresa : $("#txtInicio_idEmpresa").val()
+      }, function(data, textStatus, xhr) 
+      {
+        if (data != 0)
+        {
+          gProcesos_Mapa_Diagrama.isModified = false;
+          $("#txtGProcesos_Mapa_id").val(data.id);
+          gProcesos_Mapa_Diagrama.model = go.Model.fromJson(data.Diagrama);
+        }
+      }, 'json');
+  });
+
+  $("#btnGProcesos_Mapa_VerProceso").on("click", function(evento)
+  {
+    evento.preventDefault();
+    var idProceso = $(this).attr("idProceso");
+    cargarModulo('gProcesos/Hoja.html', 'Hoja de Procesos', function()
+    {
+      gProcesos_Hoja_cargarProceso(idProceso);
+    });
+  });
+
+  $(document).delegate('.btnGProcesos_VerMapa','click', function(ev)
+  {
+    ev.preventDefault();
+    cargarModulo('gProcesos/mapa.html', 'Gestión de Procesos');
+  });
+
 	gProcesos_Mapa_IniciarDiagrama();
 });
 
@@ -235,64 +293,6 @@ function gProcesos_Mapa_IniciarDiagrama() {
     }
   }
 
-  function gProcesos_Mapa_CargarElUltimo()
-  {
-    $("#btnGProcesos_Mapa_Cargar").trigger("click");
-  }
-
-  $("#btnGProcesos_Mapa_Guardar").on("click", function(evento)
-    {
-      evento.preventDefault();
-      var diagrama = gProcesos_Mapa_Diagrama.model.toJson();
-      var datos = {
-        idDiagrama : $("#txtGProcesos_Mapa_id").val(),
-        idEmpresa : $("#txtInicio_idEmpresa").val(),
-        idUsuario : Usuario.id,
-        Diagrama : diagrama
-      };
-
-      $.post('../server/php/proyecto/gProcesos_CrearDiagrama.php', datos, function(data, textStatus, xhr) 
-      {
-        if (!isNaN(data))
-        {
-          $("#txtGProcesos_Mapa_id").val(data);
-          Mensaje("Hey", "Los cambios han sido guardados", 'success');
-          gProcesos_Mapa_Diagrama.isModified = false;
-        } else
-        {
-          Mensaje("Error", data, 'danger'); 
-        }
-      });
-    });
-
-  $("#btnGProcesos_Mapa_Cargar").on("click", function(evento)
-  {
-    $.post('../server/php/proyecto/gProcesos_CargarDiagrama.php', 
-      {
-        Usuario :  Usuario.id,
-        idEmpresa : $("#txtInicio_idEmpresa").val()
-      }, function(data, textStatus, xhr) 
-      {
-        if (data != 0)
-        {
-          gProcesos_Mapa_Diagrama.isModified = false;
-          $("#txtGProcesos_Mapa_id").val(data.id);
-          gProcesos_Mapa_Diagrama.model = go.Model.fromJson(data.Diagrama);
-        }
-      }, 'json');
-  });
-
-  $("#btnGProcesos_Mapa_VerProceso").on("click", function(evento)
-  {
-    evento.preventDefault();
-    var idProceso = $(this).attr("idProceso");
-    cargarModulo('gProcesos/Hoja.html', 'Hoja de Procesos', function()
-    {
-      gProcesos_Hoja_cargarProceso(idProceso);
-    });
-  });
-
-
   function gProcesos_Mapa_showPorts(node, show) {
     var diagram = node.diagram;
     if (!diagram || diagram.isReadOnly || !diagram.allowLink) return;
@@ -301,8 +301,7 @@ function gProcesos_Mapa_IniciarDiagrama() {
       });
   }
 
-  $(document).delegate('.btnGProcesos_VerMapa','click', function(ev)
+  function gProcesos_Mapa_CargarElUltimo()
   {
-    ev.preventDefault();
-    cargarModulo('gProcesos/mapa.html', 'Gestión de Procesos');
-  });
+    $("#btnGProcesos_Mapa_Cargar").trigger("click");
+  }
