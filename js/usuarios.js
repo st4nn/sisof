@@ -1,250 +1,186 @@
-function funUsuarios()
+$(document).ready(function()
 {
-	$("#tblUsuarios").crearDataTable("");
-	usuarios_CargarUsuarios();
-	usuarios_CargarEmpresas();	
-	usuarios_CargarPerfiles();
 
-	$("#frmCrearEmpresa").on("submit", function(evento)
-		{
-			evento.preventDefault();
-
-			var Nombre = $("#txtCrearEmpresa_Nombre").val();
-			var NIT = $("#txtCrearEmpresa_NIT").val();
-			var Descripcion = $("#txtCrearEmpresa_Descripcion").val();
-			var Telefono = $("#txtCrearEmpresa_Telefono").val();
-			var Direccion = $("#txtCrearEmpresa_Direccion").val();
-
-			if (Nombre == '')
-			{
-				Mensaje("Error", 'No es posible crear una empresa', 'danger');
-			} else
-			{
-				$.post('../server/php/proyecto/configuracion_CrearEmpresa.php', 
-				{
-					Usuario : Usuario.id,
-					Nombre : Nombre,
-					NIT : NIT,
-					Descripcion : Descripcion,
-					Telefono : Telefono,
-					Direccion : Direccion
-				}, 
-				function(data, textStatus, xhr) 
-				{
-					if (typeof(data) == 'object')
-					{
-						if (data.Error != '')
-						{
-							Mensaje("Error", data.Error, 'danger');
-						} else
-						{
-							Mensaje("Hey", 'Se ha creado una nueva empresa', 'success');
-							$(".txtEmpresa").append('<option value="' + data.id + '">' + Nombre + '</option>');
-							$("#cntCrearEmpresa").modal('hide');
-							$(".txtEmpresa").val(data.id);
-							$("#frmCrearEmpresa")[0].reset();
-						}
-					} else
-					{
-						Mensaje("Error Crítico", data, 'cancel');
-					}
-				}, 'json');
-			}
-		});
-
-	$("#btnUsuarios_CrearEmpresa").on("click", function(evento)
+	$("#lnkUsuarios_VolverABusqueda").on("click", function(evento)
 	{
 		evento.preventDefault();
-
-		$("#txtCrearEmpresa_Nombre").val('');
-		$("#txtCrearEmpresa_NIT").val('');
-		$("#txtCrearEmpresa_Descripcion").val('');
-
-		$("#cntCrearEmpresa").modal('show');
+		$("#cntUsuarios_Creacion").hide();
+		$("#cntUsuarios_Listado").slideDown();
 	});
 
-	$("#btnUsuarios_CrearUsuario").on("click", function()
+	$("#btnUsuarios_CrearUsuario").on("click", function(evento)
 	{
-		$("#cntUsuarios_VerUsuarios").hide();
-		$("#cntUsuarios_CrearUsuario").slideDown();
+		evento.preventDefault();
+		$("#lblUsuarios_Creacion_Titulo").text('Crear Usuario');
+		$("#cntUsuarios_Listado").hide();
+		$("#cntUsuarios_Creacion").slideDown();	
+
+		$("#btnUsuarios_Crear_Borrar").hide();
+	});
+
+	$("#cntUsuarios_Imagen").iniciar_CargadorImagenes({idObj : 'Usuarios_Crear'});
+
+	$("#btnUsuarios_Crear_Limpiar").on("click", function(evento)
+	{
+		evento.preventDefault();
 		$("#frmUsuarios_Crear")[0].reset();
-		$("#txtUsuarios_Crear_idLogin").val("");
-		$("#lblUsuarios_Crear_Tipo").text("Creación");
-		$("#cntUsuarios_Crear_DatosUsuario .form-control").attr("disabled", false);
-		$("#cntUsuarios_Crear_DatosSesion .form-control").attr("disabled", false);
+		$('#txtUsuarios_Crear_Etiqueta').val('');
+        $('#txtUsuarios_Crear_Archivo').val('');
+        $('#imgUsuarios_Crear_Preview').attr('src', '');  
 	});
 
-	$("#btnUsuarios_VerUsuarios").on("click", function()
-	{
-		$("#cntUsuarios_CrearUsuario").hide();
-		$("#cntUsuarios_VerUsuarios").slideDown();
-
-		usuarios_CargarUsuarios();
-	});
-
-	$(document).delegate('#tblUsuarios tbody button', 'click', function(event) 
-	{
-		$("#lblUsuarios_Crear_Tipo").text("Edición");
-
-		var fila = $(this).parent("div").parent("td").parent("tr").find("td");
-		$("#txtUsuarios_Crear_idLogin").val($(fila[1]).text());
-
-		
-		$("#txtUsuarios_Crear_Nombre").val($(fila[3]).text());
-		$("#txtUsuarios_Crear_Cargo").val($(fila[4]).text());
-		$("#txtUsuarios_Crear_idPerfil").val($(fila[5]).attr("idPerfil"));
-		$("#txtUsuarios_Crear_Correo").val($(fila[6]).text());
-		$("#txtUsuarios_Crear_idEmpresa").val($(fila[7]).attr("idEmpresa"));
-		$("#txtUsuarios_Crear_Estado").val($(fila[8]).text());
-
-		$("#txtUsuarios_Crear_nUsuario").val($(fila[2]).text());
-		$("#txtUsuarios_Crear_Clave").val("laClaveEstaProtegida");
-		$("#txtUsuarios_Crear_Clave2").val("laClaveEstaProtegida");
-
-		$("#cntUsuarios_VerUsuarios").hide();
-		$("#cntUsuarios_CrearUsuario").slideDown();
-	});
-
-	$(document).delegate('.btnUsuarios_EditarDatos', 'click', function(event) 
-	{
-		$("#cntUsuarios_Crear_DatosUsuario .form-control").attr("disabled", false);
-		$("#cntUsuarios_Crear_DatosSesion .form-control").attr("disabled", true);
-		
-		$("#txtUsuarios_Crear_Correo").attr("disabled", true);
-	});
-
-	$(document).delegate('.btnUsuarios_EditarClave', 'click', function(event) 
-	{
-		$("#cntUsuarios_Crear_DatosUsuario .form-control").attr("disabled", true);
-		$("#cntUsuarios_Crear_DatosSesion .form-control").attr("disabled", false);
-
-		$("#txtUsuarios_Crear_nUsuario").attr("disabled", true);
-	});	
+	var vFrmUsuarios_Crear = false;
 
 	$("#frmUsuarios_Crear").on("submit", function(evento)
 	{
 		evento.preventDefault();
-		$("#frmUsuarios_Crear").generarDatosEnvio("txtUsuarios_Crear_", function(datos)
+
+		if (!vFrmUsuarios_Crear)
 		{
-			$.post('../server/php/proyecto/usuarios_crearUsuario.php', {datos : datos}, function(data, textStatus, xhr) 
+			vFrmUsuarios_Crear = true;
+			if ($("#txtUsuarios_Crear_Archivo").val() == '')
 			{
-				if (data.Error != "")
+				Mensaje("Error", 'Por favor seleccione una imagen que identifique a la Usuario', 'danger');
+				vFrmUsuarios_Crear = false;
+			} else
+			{
+				if ($("#txtUsuarios_Crear_Nombre").val() == '')
 				{
-					Mensaje("Error", data.Error, "danger");
+					Mensaje("Error", 'No es posible crear una Usuario sin nombre', 'danger');
+					$("#txtUsuarios_Crear_Nombre").focus();
+					vFrmUsuarios_Crear = false;
 				} else
 				{
-					$("#txtUsuarios_Crear_idLogin").val(data.datos);
-					Mensaje("Hey", "Los datos han sido ingresados", "success");
-					if (typeof fichaTraje_CargarUsuarios == 'function')
+					if ($("#txtUsuarios_Crear_Correo").val() == '')
 					{
-						fichaTraje_CargarUsuarios();	
+						Mensaje("Error", 'Es importante poner un correo de Contacto', 'danger');
+						$("#txtUsuarios_Crear_Correo").focus();
+						vFrmUsuarios_Crear = false;
+					} else
+					{
+						$("#frmUsuarios_Crear").generarDatosEnvio("txtUsuarios_Crear_", function(datos)
+						{
+							datos = JSON.parse(datos);
+							vFrmUsuarios_Crear = false;
+							$.post('../server/php/proyecto/Usuarios_Crear.php', datos, function(data, textStatus, xhr) 
+							{
+								vFrmUsuarios_Crear = false;
+								if (!isNaN(data))
+								{
+									subirArchivos(files, {
+										Prefijo : data,
+										Proceso : 'Usuario_Logo',
+										Observaciones : '',
+										Usuario : Usuario.id
+									}, function()
+									{
+										Mensaje("Hey", "Los datos han sido ingresados", "success");
+										$("#txtUsuarios_Crear_id").val(data);
+									});
+								} else
+								{
+									Mensaje("Error", data, "danger");
+									vFrmUsuarios_Crear = false;
+								}
+							});
+						});
 					}
 				}
-			}, "json");
-		});
+			}
+		}
+
 	});
-}
 
-function usuarios_CargarUsuarios()
-{
-	$.post('../server/php/proyecto/usuarios_cargarUsuarios.php', {Usuario: Usuario.id}, function(data, textStatus, xhr) 
+	$("#btnUsuarios_Guardar").on("click", function()
 	{
-		if (data == 0)
+		$("#frmUsuarios_Crear").trigger("submit");
+	});
+
+	$("#frmUsuarios_Buscar").on("submit", function(evento)
+	{
+		evento.preventDefault();
+
+		$("#tblUsuarios_Listado").slideDown();
+
+		var l = Ladda.create(this);
+		l.start();
+
+		$("#tblUsuarios_Listado li").remove();
+
+
+		$.post('../server/php/proyecto/Usuarios_Buscar.php', {Usuario : Usuario.id, Parametro : $("#txtReportes_OT_Buscar").val()}, function(data, textStatus, xhr) 
 		{
-			Mensaje("Error", "No hay datos en la Tabla", "danger");
-		} else
-		{
-			if (typeof(data) == "object")
+			var tds = '';
+			if (data != 0)
 			{
-				var tds = "";
 				$.each(data, function(index, val) 
 				{
-					tds += '<tr>';
-	    				tds += '<td>';
-	    					tds += '<div>';
-	    						tds += '<button type="button" class="btn btn-icon btn-info btnUsuarios_EditarDatos"><i class="icon wb-edit" aria-hidden="true"></i></button>';
-	    						tds += '<button type="button" class="btn btn-icon btn-warning btnUsuarios_EditarClave margin-left-5"><i class="icon wb-lock" aria-hidden="true"></i></button>';
-	    					tds += '</div>';
-	    				tds += '</td>';
-	    				tds += '<td>' + val.id + '</td>';
-	    				tds += '<td>' + val.Usuario + '</td>';
-	    				tds += '<td>' + val.Nombre + '</td>';
-	    				tds += '<td>' + val.Cargo + '</td>';
-	    				tds += '<td idPerfil="' + val.idPerfil + '">' + val.Perfil + '</td>';
-	    				tds += '<td>' + val.Correo + '</td>';
-	    				tds += '<td idEmpresa="' + val.idEmpresa + '">' + val.Empresa + '</td>';
-	    				tds += '<td>' + val.Estado + '</td>';
-	    			tds += '</tr>';
-
+					tds += '<li class="list-group-item">';
+	                    tds += '<div class="media">';
+	                      tds += '<div class="media-left">';
+	                        tds += '<div class="avatar avatar-online">';
+	                          tds += '<img src="../assets/portraits/5.png" alt="...">';
+	                          tds += '<i class="avatar avatar-online"></i>';
+	                        tds += '</div>';
+	                      tds += '</div>';
+	                      tds += '<div class="media-body">';
+	                        tds += '<h4 class="media-heading">';
+	                          tds += '<span>' + val.Nombre + '</span>';
+	                          tds += '<small> ' + val.fechaCargue + '</small>';
+	                        tds += '</h4>';
+	                        tds += '<p class="col-lg-3 col-md-4 col-sm-6">';
+	                          tds += '<i class="icon icon-color wb-map" aria-hidden="true"></i>' + val.Cargo;
+	                        tds += '</p>';
+	                        tds += '<p class="col-lg-3 col-md-4 col-sm-6">';
+	                          tds += '<i class="icon icon-color wb-envelope" aria-hidden="true"></i>' + val.Correo;
+	                        tds += '</p>';
+	                        tds += '<p class="col-lg-3 col-md-4 col-sm-6">';
+	                          tds += '<i class="icon icon-color wb-mobile" aria-hidden="true"></i>' + val.Usuario;
+	                        tds += '</p>';
+	                        tds += '<p class="col-lg-3 col-md-4 col-sm-6">';
+	                          tds += '<small>' + val.Perfil +'</small> ' + val.Empresa;
+	                        tds += '</p>';
+	                      tds += '</div>';
+	                      tds += '<div class="media-footer">';
+	                        tds += '<button type="button" idUsuario="' + val.id + '"class="btn btn-outline btn-success btn-sm btnUsuarios_Abrir"><i class="icon wb-play"></i>Abrir</button>';
+	                        tds += '<button type="button" idUsuario="' + val.id + '"class="btn btn-outline btn-info btn-sm"><i class="icon wb-edit"></i>Editar</button>';
+	                        tds += '<button type="button" idUsuario="' + val.id + '"class="btn btn-outline btn-warning btn-sm"><i class="icon wb-stop"></i>Desactivar</button>';
+	                      tds += '</div>';
+	                    tds += '</div>';
+	                tds += '</li>';
 				});
-				
-    			$("#tblUsuarios").crearDataTable(tds, function(){});
 			} else
 			{
-				Mensaje("Error", data, "danger");
+				tds += '<li class="list-group-item">';
+                    tds += '<h1>No hay datos para mostras</h1>';
+                tds += '</li>';
 			}
-		}
-	}, "json");
-}
 
+			$("#tblUsuarios_Listado").append(tds);
 
+		}, 'json').always(function() { l.stop(); });
+	});
 
-function usuarios_CargarPerfiles()
-{
-	$("#txtUsuarios_Crear_idPerfil option").remove();
-	$.post('../server/php/proyecto/configuracion_CargarPerfiles.php', {Usuario: Usuario.id}, function(data, textStatus, xhr) 
-	{
-		if (data == 0)
+	$(document).delegate('.btnUsuarios_Abrir', 'click', function(evento)
 		{
-			Mensaje("Error", "No hay datos en la Tabla", "danger");
-		} else
-		{
-			if (typeof(data) == "object")
-			{
-				var tds = "";
-				var tds2 = "";
-				
-				$.each(data, function(index, val) 
-				{
-	    			tds2 += '<option value="' + val.id + '">' + val.Nombre + '</option>';
-				});
-				
-    			$("#txtUsuarios_Crear_idPerfil").append(tds2);
-			} else
-			{
-				Mensaje("Error", data, "danger");
-			}
-		}
-	}, "json");
-}
+			evento.preventDefault();
+			var contenedor = $(this).parent("div").parent('div');
+			var tmp = $(contenedor).find("img").attr("src");
+			$(".imgLogoUsuario").attr("src", tmp);
+			
+			tmp = $(contenedor).find(".media-heading").find("span");
+			$(".lblUsuario_Nombre").text($(tmp).text());
+			
+			tmp = $(contenedor).find(".media-body").find("p");
 
-function usuarios_CargarEmpresas()
-{
-	$("#txtUsuarios_Crear_idEmpresa option").remove();
-	$.post('../server/php/proyecto/configuracion_CargarEmpresas.php', {Usuario: Usuario.id}, function(data, textStatus, xhr) 
-	{
-		if (data == 0)
-		{
-			Mensaje("Error", "No hay datos en la Tabla", "danger");
-		} else
-		{
-			if (typeof(data) == "object")
-			{
-				var tds = "";
-				var tds2 = "";
-				
-				$.each(data, function(index, val) 
-				{
-	    			tds2 += '<option value="' + val.id + '">' + val.Nombre + ' (' + val.NIT + ')' + '</option>';
-				});
-				
-    			$("#txtUsuarios_Crear_idEmpresa").append(tds2);
-			} else
-			{
-				Mensaje("Error", data, "danger");
-			}
-		}
-	}, "json");
-}
+			$(".lblUsuario_Direccion").text($(tmp[0]).text());
+			$(".lblUsuario_Telefono").text($(tmp[2]).text());
+			$(".lblUsuario_Responsable").text($(tmp[1]).text());
 
+			tmp = $(this).attr("idUsuario");
 
+			$("#txtInicio_idUsuario").val(tmp);
+
+			cargarModulo("Inicio.html", 'Inicio');
+		});
+});
