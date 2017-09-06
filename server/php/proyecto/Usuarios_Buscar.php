@@ -9,6 +9,7 @@
             datosUsuarios.*,
             Login.idEmpresa,
             Login.Usuario,
+            Login.Estado,
             Empresas.Nombre AS 'Empresa',
             Perfiles.Nombre AS 'Perfil'
           FROM

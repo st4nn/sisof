@@ -30,6 +30,13 @@
    } else
    {
 
+      $fClave = '';
+
+      if ($Clave != '************')
+      {
+         $fClave = 'Clave = VALUES(Clave), ';
+      }
+
       $sql = "INSERT INTO Login(idLogin, Usuario, Clave, Estado, idEmpresa) VALUES 
       (
          $id, 
@@ -39,7 +46,7 @@
          '" . $idEmpresa . "'
       ) ON DUPLICATE KEY UPDATE
       Usuario = VALUES(Usuario),
-      Clave = VALUES(Clave),
+      $fClave
       Estado = VALUES(Estado),
       idEmpresa = VALUES(idEmpresa);";
 
