@@ -8,7 +8,7 @@
    $Telefono = addslashes($_POST['Telefono']);
    $idUsuario = addslashes($_POST['Usuario']);
 
-   if ($id == "" OR is_null($id) OR $id == " ")
+   if ($id == "" OR is_null($id) OR $id == " " OR $id == "NULL")
    {
       $id = "NULL";
    }

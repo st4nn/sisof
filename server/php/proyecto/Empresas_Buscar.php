@@ -10,18 +10,22 @@
             Archivos.Ruta,
             Archivos.Nombre AS Archivo,
             datosUsuarios.Nombre AS Usuario,
-            datosUsuarios.Correo AS Correo
+            datosUsuarios.Correo AS uCorreo
           FROM
             Empresas
-            LEFT JOIN Archivos ON Archivos.Proceso = 'empresa_Logo' AND Archivos.Prefijo = Empresas.id
             INNER JOIN datosUsuarios ON datosUsuarios.idLogin = Empresas.idUsuario
+            LEFT JOIN (SELECT Prefijo, MAX(id) AS id FROM Archivos WHERE Proceso = 'empresa_Logo' GROUP BY Prefijo) bArchivos ON bArchivos.Prefijo = Empresas.id
+            LEFT JOIN Archivos ON Archivos.id = bArchivos.id
          WHERE
-            Empresas.Nombre LIKE '%$Parametro%'
+            Empresas.Estado > 0 AND (Empresas.Nombre LIKE '%$Parametro%'
             OR Empresas.Direccion LIKE '%$Parametro%'
             OR Empresas.Correo LIKE '%$Parametro%'
-            OR Empresas.Telefono LIKE '%$Parametro%';";
+            OR Empresas.Telefono LIKE '%$Parametro%')
+         GROUP BY
+            Empresas.id
+         ORDER BY Empresas.Nombre;";
             
-   $result = $link->query($sql);
+   $result = $link->query(utf8_decode($sql));
    $idx = 0;
    if ( $result->num_rows > 0)
    {

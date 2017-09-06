@@ -12,6 +12,7 @@ $(document).ready(function()
 	{
 		evento.preventDefault();
 		$("#lblEmpresas_Creacion_Titulo").text('Crear Empresa');
+		$("#txtEmpresas_Crear_id").val("NULL");
 		$("#cntEmpresas_Listado").hide();
 		$("#cntEmpresas_Creacion").slideDown();	
 
@@ -38,7 +39,7 @@ $(document).ready(function()
 		if (!vFrmEmpresas_Crear)
 		{
 			vFrmEmpresas_Crear = true;
-			if ($("#txtEmpresas_Crear_Archivo").val() == '')
+			if ($("#txtEmpresas_Crear_Archivo").val() == '' && $("#txtEmpresas_Crear_id").val() == "NULL")
 			{
 				Mensaje("Error", 'Por favor seleccione una imagen que identifique a la Empresa', 'danger');
 				vFrmEmpresas_Crear = false;
@@ -67,16 +68,24 @@ $(document).ready(function()
 								vFrmEmpresas_Crear = false;
 								if (!isNaN(data))
 								{
-									subirArchivos(files, {
-										Prefijo : data,
-										Proceso : 'empresa_Logo',
-										Observaciones : '',
-										Usuario : Usuario.id
-									}, function()
+									if ($("#txtEmpresas_Crear_Archivo").val() != '')
+									{
+										subirArchivos(files, {
+											Prefijo : data,
+											Proceso : 'empresa_Logo',
+											Observaciones : '',
+											Usuario : Usuario.id
+										}, function()
+										{
+											Mensaje("Hey", "Los datos han sido ingresados", "success");
+											$("#txtEmpresas_Crear_id").val(data);
+										});
+									} else
 									{
 										Mensaje("Hey", "Los datos han sido ingresados", "success");
 										$("#txtEmpresas_Crear_id").val(data);
-									});
+									}
+									$("#frmEmpresas_Buscar").trigger('submit');
 								} else
 								{
 									Mensaje("Error", data, "danger");
@@ -113,12 +122,29 @@ $(document).ready(function()
 			var tds = '';
 			if (data != 0)
 			{
+				var tmpEstado = 'online'; //away
+				var tmpEstadoLabel = 'Desactivar';
+				var tmpEstadoid = '1';
+
 				$.each(data, function(index, val) 
 				{
+					tmpEstado = 'online';
+					tmpEstadoLabel = 'Desactivar';
+					tmpEstadoIcon = 'stop';
+					tmpEstadoid = '2';
+
+					if (val.Estado == 2)
+					{
+						tmpEstado = 'away';
+						tmpEstadoLabel = 'Activar';
+						tmpEstadoIcon = 'play';
+						tmpEstadoid = '1';
+					} 
+
 					tds += '<li class="list-group-item">';
 	                    tds += '<div class="media">';
 	                      tds += '<div class="media-left">';
-	                        tds += '<div class="avatar avatar-online">';
+	                        tds += '<div class="avatar avatar-' + tmpEstado + '">';
 	                          tds += '<img src="../server/php/' + val.Ruta + '/' + val.Archivo + '" alt="...">';
 	                          tds += '<i class="avatar avatar-online"></i>';
 	                        tds += '</div>';
@@ -132,20 +158,20 @@ $(document).ready(function()
 	                          tds += '<i class="icon icon-color wb-map" aria-hidden="true"></i>' + val.Direccion;
 	                        tds += '</p>';
 	                        tds += '<p class="col-lg-3 col-md-4 col-sm-6">';
-	                          tds += '<i class="icon icon-color wb-envelope" aria-hidden="true"></i>' + val.Correo;
+	                          tds += '<i class="icon icon-color wb-envelope" aria-hidden="true"></i><a href="mailto:' + val.Correo + '">' + val.Correo + '</a>';
 	                        tds += '</p>';
 	                        tds += '<p class="col-lg-3 col-md-4 col-sm-6">';
 	                          tds += '<i class="icon icon-color wb-mobile" aria-hidden="true"></i>' + val.Telefono;
 	                        tds += '</p>';
 	                        tds += '<p class="col-lg-3 col-md-4 col-sm-6">';
-	                          tds += '<small><strong>Creado por:</strong> <a href="mailto:' + val.Correo + '">' + val.Usuario +'</a></small>';
+	                          tds += '<small><strong>Creado por:</strong> <a href="mailto:' + val.uCorreo + '">' + val.Usuario +'</a></small>';
 	                        tds += '</p>';
 	                      tds += '</div>';
 	                      tds += '<div class="media-footer">';
-	                        tds += '<button type="button" idEmpresa="' + val.id + '"class="btn btn-outline btn-success btn-sm btnEmpresas_Abrir"><i class="icon wb-play"></i>Abrir</button>';
-	                        tds += '<button type="button" idEmpresa="' + val.id + '"class="btn btn-outline btn-info btn-sm"><i class="icon wb-edit"></i>Editar</button>';
-	                        tds += '<button type="button" idEmpresa="' + val.id + '"class="btn btn-outline btn-warning btn-sm"><i class="icon wb-stop"></i>Desactivar</button>';
-	                        tds += '<button type="button" idEmpresa="' + val.id + '"class="btn btn-outline btn-danger btn-sm"><i class="icon fa-trash-o"></i>Borrar</button>';
+	                        tds += '<button type="button" idEmpresa="' + val.id + '"class="btn btn-outline btn-success btn-sm col-md-2 margin-left-5 btnEmpresas_Abrir"><i class="icon wb-play"></i>Abrir</button>';
+	                        tds += '<button type="button" idEmpresa="' + val.id + '"class="btn btn-outline btn-info btn-sm col-md-2 margin-left-5 btnEmpresas_Editar"><i class="icon wb-edit"></i>Editar</button>';
+	                        tds += '<button type="button" idEmpresa="' + val.id + '"class="btn btn-outline btn-warning btn-sm col-md-2 margin-left-5 btnEmpresas_Activacion" idEstado="' + tmpEstadoid + '"><i class="icon wb-' + tmpEstadoIcon + '"></i>' + tmpEstadoLabel + '</button>';
+	                        tds += '<button type="button" idEmpresa="' + val.id + '"class="btn btn-outline btn-danger btn-sm col-md-2 margin-left-5 btnEmpresas_Activacion" idEstado="0"><i class="icon fa-trash-o"></i>Borrar</button>';
 	                      tds += '</div>';
 	                    tds += '</div>';
 	                tds += '</li>';
@@ -184,4 +210,87 @@ $(document).ready(function()
 
 			cargarModulo("Inicio.html", 'Inicio');
 		});
+
+	$(document).delegate('.btnEmpresas_Editar', 'click', function(event) 
+	{
+		event.preventDefault();
+
+		$("#lblEmpresas_Creacion_Titulo").text('Editar Empresa');
+		$("#cntEmpresas_Listado").hide();
+		$("#cntEmpresas_Creacion").slideDown();	
+
+		$("#btnEmpresas_Crear_Borrar").hide();
+
+		var contenedor = $(this).parent("div").parent('div');
+		var tmp = $(contenedor).find("img").attr("src");
+		$("#imgEmpresas_Crear_Preview").attr('src', tmp);
+		
+		tmp = $(contenedor).find(".media-heading").find("span");
+		$("#txtEmpresas_Crear_Nombre").val($(tmp).text());
+		
+		tmp = $(contenedor).find(".media-body").find("p");
+
+		$("#txtEmpresas_Crear_Direccion").val($(tmp[0]).text());
+		$("#txtEmpresas_Crear_Telefono").val($(tmp[2]).text());
+		$("#txtEmpresas_Crear_Correo").val($(tmp[1]).text());
+		
+
+		tmp = $(this).attr("idEmpresa");
+		$("#txtEmpresas_Crear_id").val(tmp);
+	});
+
+	$(document).delegate('.btnEmpresas_Activacion', 'click', function(event) 
+	{
+		event.preventDefault();
+
+		var idEstado = parseInt($(this).attr("idEstado"));
+		var idEmpresa = $(this).attr("idEmpresa");
+
+		var tmpEstado = 'Borrar';
+
+		if (idEstado == 1)
+		{
+			tmpEstado = 'Activar';
+		}
+
+		if (idEstado == 2)
+		{
+			tmpEstado = 'Desactivar';
+		}
+
+		bootbox.confirm({
+        message: "Estas seguro de " + tmpEstado + " esta Empresa?",
+        buttons: {
+            confirm: {
+                label: 'Si, ' + tmpEstado,
+                className: 'btn-danger'
+            },
+            cancel: {
+                label: 'No',
+                className: 'btn-default'
+            }
+        },
+        callback: function (result) {
+          if (result)
+          {
+			$.post('../server/php/proyecto/Empresas_CambiarEstado.php', 
+				{
+					Usuario : Usuario.id,
+					idEstado : idEstado,
+					idEmpresa : idEmpresa
+				}, function(data, textStatus, xhr) 
+				{
+					if (data == 1)
+					{
+						$("#frmEmpresas_Buscar").trigger('submit');
+					} else
+					{
+						Mensaje("Error", data, "danger");
+					}
+				});
+          }
+        }
+      });
+
+	});
 });

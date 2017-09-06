@@ -21,11 +21,13 @@
                Empresas.Nombre AS 'Empresa'
             FROM 
                Login AS Login
-               LEFT JOIN Empresas ON Login.idEmpresa = Empresas.id
+               INNER JOIN Empresas ON Login.idEmpresa = Empresas.id
                INNER JOIN datosUsuarios AS Datos ON Login.idLogin = Datos.idLogin
             WHERE 
                Login.Usuario = '$usuario' 
-               AND Login.Clave = '" . $clave . "';";
+               AND Login.Clave = '" . $clave . "'
+               AND Empresas.Estado = 1
+               AND Login.Estado = 'Activo';";
 
    $result = $link->query($sql);
 
