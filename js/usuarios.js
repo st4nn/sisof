@@ -1,6 +1,6 @@
 $(document).ready(function()
 {
-
+	console.log("algo");
 	$("#lnkUsuarios_VolverABusqueda").on("click", function(evento)
 	{
 		evento.preventDefault();
@@ -16,6 +16,8 @@ $(document).ready(function()
 		$("#cntUsuarios_Creacion").slideDown();	
 
 		$("#btnUsuarios_Crear_Borrar").hide();
+
+		$("#btnUsuarios_Crear_Limpiar").trigger('click');
 	});
 
 	$("#cntUsuarios_Imagen").iniciar_CargadorImagenes({idObj : 'Usuarios_Crear'});
@@ -29,6 +31,8 @@ $(document).ready(function()
         $('#imgUsuarios_Crear_Preview').attr('src', '');  
 	});
 
+	usuarios_CargarParametros();
+
 	var vFrmUsuarios_Crear = false;
 
 	$("#frmUsuarios_Crear").on("submit", function(evento)
@@ -38,16 +42,16 @@ $(document).ready(function()
 		if (!vFrmUsuarios_Crear)
 		{
 			vFrmUsuarios_Crear = true;
-			if ($("#txtUsuarios_Crear_Archivo").val() == '')
+			if ($("#txtUsuarios_Crear_Nombre").val() == '')
 			{
-				Mensaje("Error", 'Por favor seleccione una imagen que identifique a la Usuario', 'danger');
+				Mensaje("Error", 'Es importante poner un Nombre', 'danger');
 				vFrmUsuarios_Crear = false;
 			} else
 			{
-				if ($("#txtUsuarios_Crear_Nombre").val() == '')
+				if ($("#txtUsuarios_Crear_Clave").val() != $("#txtUsuarios_Crear_Clave2").val())
 				{
-					Mensaje("Error", 'No es posible crear una Usuario sin nombre', 'danger');
-					$("#txtUsuarios_Crear_Nombre").focus();
+					Mensaje("Error", 'Las contraseñas deben coincidir', 'danger');
+					$("#txtUsuarios_Crear_Clave").focus();
 					vFrmUsuarios_Crear = false;
 				} else
 				{
@@ -58,42 +62,61 @@ $(document).ready(function()
 						vFrmUsuarios_Crear = false;
 					} else
 					{
-						$("#frmUsuarios_Crear").generarDatosEnvio("txtUsuarios_Crear_", function(datos)
+						if ($("#txtUsuarios_Crear_idEmpresa").val() == '')
 						{
-							datos = JSON.parse(datos);
+							Mensaje("Error", 'Es importante seleccionar una empresa', 'danger');
+							$("#txtUsuarios_Crear_idEmpresa").focus();
 							vFrmUsuarios_Crear = false;
-							$.post('../server/php/proyecto/Usuarios_Crear.php', datos, function(data, textStatus, xhr) 
+						} else
+						{
+							if ($("#txtUsuarios_Crear_idPerfil").val() == '')
 							{
+								Mensaje("Error", 'Es importante seleccionar un Perfil', 'danger');
+								$("#txtUsuarios_Crear_idPerfil").focus();
 								vFrmUsuarios_Crear = false;
-								if (!isNaN(data))
+							} else
+							{
+								if ($("#txtUsuarios_Crear_nUsuario").val() == '')
 								{
-									subirArchivos(files, {
-										Prefijo : data,
-										Proceso : 'Usuario_Logo',
-										Observaciones : '',
-										Usuario : Usuario.id
-									}, function()
-									{
-										Mensaje("Hey", "Los datos han sido ingresados", "success");
-										$("#txtUsuarios_Crear_id").val(data);
-									});
+									Mensaje("Error", 'No puedes dejar el Usuario vacío', 'danger');
+									$("#txtUsuarios_Crear_nUsuario").focus();
+									vFrmUsuarios_Crear = false;
 								} else
 								{
-									Mensaje("Error", data, "danger");
-									vFrmUsuarios_Crear = false;
+									if ($("#txtUsuarios_Crear_Clave").val().length < 8)
+									{
+										Mensaje("Error", 'La clave debe ser de mínimo 8 caracteres', 'danger');
+										$("#txtUsuarios_Crear_Clave").focus();
+										vFrmUsuarios_Crear = false;
+									} else
+									{
+										$("#frmUsuarios_Crear").generarDatosEnvio("txtUsuarios_Crear_", function(datos)
+										{
+											datos = JSON.parse(datos);
+											vFrmUsuarios_Crear = false;
+											$.post('../server/php/proyecto/Usuarios_Crear.php', datos, function(data, textStatus, xhr) 
+											{
+												vFrmUsuarios_Crear = false;
+												if (!isNaN(data))
+												{
+													Mensaje("Hey", "Los datos han sido ingresados", "success");
+													$("#txtUsuarios_Crear_id").val(data);
+												} else
+												{
+													Mensaje("Error", data, "danger");
+													vFrmUsuarios_Crear = false;
+												}
+											});
+										});
+									}
 								}
-							});
-						});
+							}
+						}
 					}
 				}
 			}
 		}
 
-	});
-
-	$("#btnUsuarios_Guardar").on("click", function()
-	{
-		$("#frmUsuarios_Crear").trigger("submit");
 	});
 
 	$("#frmUsuarios_Buscar").on("submit", function(evento)
@@ -184,3 +207,20 @@ $(document).ready(function()
 			cargarModulo("Inicio.html", 'Inicio');
 		});
 });
+
+function usuarios_CargarParametros()
+{
+	$("#txtUsuarios_Crear_idEmpresa").optCargarParametro(
+	{
+		Parametro : '',
+		url : 'Empresas_Cargar.php'
+	});
+
+
+
+	$("#txtUsuarios_Crear_idPerfil").optCargarParametro(
+	{
+		Parametro : '',
+		url : 'Perfiles_Cargar.php'
+	});
+}

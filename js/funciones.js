@@ -667,3 +667,26 @@ function subirArchivo (Prefijo, Proceso, Observaciones, callback)
     callback(Prefijo);
   });
 }
+
+$.fn.optCargarParametro = function(d)
+{
+  var obj = this;
+  $(obj).find("option").remove();
+
+  d.textoInicial = d.textoInicial || 'Selecciona una opción';
+  d.Parametro = d.Parametro || '';
+
+  $.post('../server/php/proyecto/' + d.url, 
+  {
+    Usuario : Usuario.id,
+    Parametro : d.Parametro
+  }, function(data, textStatus, xhr) 
+  {
+    var tds = '<option value="">' + d.textoInicial + '</option>';
+    $.each(data, function(index, val) 
+    {
+      tds += '<option value="' + val.id + '">' + val.Nombre + '</option>';
+    });
+    $(obj).append(tds);
+  }, 'json'); 
+}
