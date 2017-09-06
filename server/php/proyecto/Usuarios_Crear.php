@@ -14,57 +14,69 @@
    $Clave = addslashes($_POST['Clave']);
    $Clave2 = addslashes($_POST['Clave2']);
 
-   if ($id == "" OR is_null($id) OR $id == " " OR $id == "NULL")
+   if ($id == "" OR is_null($id) OR $id == " " OR $id == "NULL"  OR $id == 0)
    {
-      $id = "NULL";
+      $id = 'NULL';
    }
 
-   $sql = "INSERT INTO Login(idLogin, Usuario, Clave, Estado, idEmpresa) VALUES 
-   (
-      $id, 
-      '" . $nUsuario . "',
-      '" . md5(md5(md5($Clave))) . "',
-      'Activo',
-      '" . $idEmpresa . "'
-   ) ON DUPLICATE KEY UPDATE
-   Usuario = VALUES(Usuario),
-   Clave = VALUES(Clave),
-   Estado = VALUES(Estado),
-   idEmpresa = VALUES(idEmpresa);";
+   $sql = "SELECT COUNT(*) AS 'Cantidad' FROM Login WHERE Usuario = '$nUsuario' AND idEmpresa = '$idEmpresa' AND idLogin <> '$id';";
+   $result = $link->query($sql);
 
-   $link->query(utf8_decode($sql));
+   $fila =  $result->fetch_array(MYSQLI_ASSOC);
 
-   if ( $link->error == "")
+   if ($fila['Cantidad'] > 0)
    {
-      if ($id == 'NULL')
-      {
-         $id = $link->insert_id;
-      } 
+      echo "Por favor selecciona otro Nombre de Usuario.";
+   } else
+   {
 
-      $sql = "INSERT INTO datosUsuarios(idLogin, Nombre, Correo, idPerfil, Cargo) VALUES
+      $sql = "INSERT INTO Login(idLogin, Usuario, Clave, Estado, idEmpresa) VALUES 
       (
          $id, 
-         '" . $Nombre . "',
-         '" . $Correo . "',
-         '" . $idPerfil . "',
-         '" . $Cargo . "'
+         '" . $nUsuario . "',
+         '" . md5(md5(md5($Clave))) . "',
+         'Activo',
+         '" . $idEmpresa . "'
       ) ON DUPLICATE KEY UPDATE
-      Nombre = VALUES(Nombre),
-      Correo = VALUES(Correo),
-      idPerfil = VALUES(idPerfil),
-      Cargo = VALUES(Cargo);";
+      Usuario = VALUES(Usuario),
+      Clave = VALUES(Clave),
+      Estado = VALUES(Estado),
+      idEmpresa = VALUES(idEmpresa);";
 
       $link->query(utf8_decode($sql));
 
       if ( $link->error == "")
       {
-         echo $id;
+         if ($id == 'NULL')
+         {
+            $id = $link->insert_id;
+         } 
+
+         $sql = "INSERT INTO datosUsuarios(idLogin, Nombre, Correo, idPerfil, Cargo) VALUES
+         (
+            $id, 
+            '" . $Nombre . "',
+            '" . $Correo . "',
+            '" . $idPerfil . "',
+            '" . $Cargo . "'
+         ) ON DUPLICATE KEY UPDATE
+         Nombre = VALUES(Nombre),
+         Correo = VALUES(Correo),
+         idPerfil = VALUES(idPerfil),
+         Cargo = VALUES(Cargo);";
+
+         $link->query(utf8_decode($sql));
+
+         if ( $link->error == "")
+         {
+            echo $id;
+         } else
+         {
+            echo $link->error;
+         }
       } else
       {
          echo $link->error;
       }
-   } else
-   {
-      echo $link->error;
    }
 ?> 

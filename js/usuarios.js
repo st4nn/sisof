@@ -31,6 +31,11 @@ $(document).ready(function()
         $('#imgUsuarios_Crear_Preview').attr('src', '');  
 	});
 
+	$("#txtUsuarios_Crear_nUsuario").on("change", function()
+	{
+		$(this).val(NumText($(this).val()));
+	});
+
 	usuarios_CargarParametros();
 
 	var vFrmUsuarios_Crear = false;
@@ -136,14 +141,32 @@ $(document).ready(function()
 			var tds = '';
 			if (data != 0)
 			{
+				var tmpEstado = 'online'; //away
+				var tmpEstadoLabel = 'Desactivar';
+				var tmpEstadoIcon = 'stop';
+				var tmpEstadoid = '1';
+
 				$.each(data, function(index, val) 
 				{
+					tmpEstado = 'online';
+					tmpEstadoLabel = 'Desactivar';
+					tmpEstadoIcon = 'stop';
+					tmpEstadoid = 'Inactivo';
+
+					if (val.Estado == 'Inactivo')
+					{
+						tmpEstado = 'away';
+						tmpEstadoLabel = 'Activar';
+						tmpEstadoIcon = 'play';
+						tmpEstadoid = 'Activo';
+					} 
+
 					tds += '<li class="list-group-item">';
 	                    tds += '<div class="media">';
 	                      tds += '<div class="media-left">';
-	                        tds += '<div class="avatar avatar-online">';
+	                        tds += '<div class="avatar avatar-' + tmpEstado + '">';
 	                          tds += '<img src="../assets/portraits/5.png" alt="...">';
-	                          tds += '<i class="avatar avatar-online"></i>';
+	                          tds += '<i class="avatar avatar-' + tmpEstado + '"></i>';
 	                        tds += '</div>';
 	                      tds += '</div>';
 	                      tds += '<div class="media-body">';
@@ -165,9 +188,8 @@ $(document).ready(function()
 	                        tds += '</p>';
 	                      tds += '</div>';
 	                      tds += '<div class="media-footer">';
-	                        tds += '<button type="button" idUsuario="' + val.id + '"class="btn btn-outline btn-success btn-sm btnUsuarios_Abrir"><i class="icon wb-play"></i>Abrir</button>';
-	                        tds += '<button type="button" idUsuario="' + val.id + '"class="btn btn-outline btn-info btn-sm"><i class="icon wb-edit"></i>Editar</button>';
-	                        tds += '<button type="button" idUsuario="' + val.id + '"class="btn btn-outline btn-warning btn-sm"><i class="icon wb-stop"></i>Desactivar</button>';
+	                        tds += '<button type="button" idUsuario="' + val.id + '"class="btn btn-outline btn-info btn-sm col-md-2 margin-left-5 btnUsuarios_Editar"><i class="icon wb-edit"></i>Editar</button>';
+	                        tds += '<button type="button" idUsuario="' + val.id + '"class="btn btn-outline btn-warning btn-sm col-md-2 margin-left-5 btnUsuarios_Activacion" idEstado="' + tmpEstadoid + '"><i class="icon wb-' + tmpEstadoIcon + '"></i>' + tmpEstadoLabel + '</button>';
 	                      tds += '</div>';
 	                    tds += '</div>';
 	                tds += '</li>';

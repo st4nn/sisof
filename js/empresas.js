@@ -124,6 +124,7 @@ $(document).ready(function()
 			{
 				var tmpEstado = 'online'; //away
 				var tmpEstadoLabel = 'Desactivar';
+				var tmpEstadoIcon = 'stop';
 				var tmpEstadoid = '1';
 
 				$.each(data, function(index, val) 
