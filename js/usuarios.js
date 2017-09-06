@@ -179,7 +179,7 @@ $(document).ready(function()
 	                          tds += '<i class="icon icon-color fa-credit-card" aria-hidden="true"></i>' + val.Cargo;
 	                        tds += '</p>';
 	                        tds += '<p class="col-lg-3 col-md-4 col-sm-6">';
-	                          tds += '<i class="icon icon-color wb-envelope" aria-hidden="true"></i>' + val.Correo;
+	                          tds += '<i class="icon icon-color wb-envelope" aria-hidden="true"></i><a href="mailto:' + val.Correo + '">' + val.Correo + '</a>';
 	                        tds += '</p>';
 	                        tds += '<p class="col-lg-3 col-md-4 col-sm-6">';
 	                          tds += '<i class="icon icon-color fa-user" aria-hidden="true"></i>' + val.Usuario;

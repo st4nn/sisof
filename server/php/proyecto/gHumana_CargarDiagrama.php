@@ -14,6 +14,8 @@
             gHumana_Organigrama_Diagrama.idEmpresa = '$idEmpresa'
          ORDER BY
             gHumana_Organigrama_Diagrama.fechaCargue DESC;";
+
+            echo $sql;
             
    $result = $link->query($sql);
    $idx = 0;

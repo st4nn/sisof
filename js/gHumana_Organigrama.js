@@ -10,7 +10,7 @@ $(document).ready(function()
       var diagrama = gHumana_Organigrama_Diagrama.model.toJson();
       var datos = {
         idDiagrama : $("#txtInicio_idEmpresa").val(),
-        idEmpresa : Usuario.idEmpresa,
+        idEmpresa : $("#txtInicio_idEmpresa").val(),
         idUsuario : Usuario.id,
         Diagrama : diagrama
       };
