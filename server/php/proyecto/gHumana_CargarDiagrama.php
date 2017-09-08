@@ -15,8 +15,6 @@
          ORDER BY
             gHumana_Organigrama_Diagrama.fechaCargue DESC;";
 
-            echo $sql;
-            
    $result = $link->query($sql);
    $idx = 0;
    if ( $result->num_rows > 0)
@@ -29,7 +27,7 @@
          {
             $Resultado[$key] = utf8_encode($value);
          }
-         $Resultado['Diagrama'] = $row['Diagrama'];
+         //$Resultado['Diagrama'] = $row['Diagrama'];
          $idx++;
       }
          mysqli_free_result($result);  

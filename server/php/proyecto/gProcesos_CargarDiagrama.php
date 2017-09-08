@@ -13,7 +13,8 @@
          WHERE
             gProcesos_Mapa_Diagrama.idEmpresa = '$idEmpresa'
          ORDER BY
-            gProcesos_Mapa_Diagrama.fechaCargue DESC;";
+            gProcesos_Mapa_Diagrama.fechaCargue ASC;";
+
             
    $result = $link->query($sql);
    $idx = 0;
@@ -27,7 +28,7 @@
          {
             $Resultado[$key] = utf8_encode($value);
          }
-         $Resultado['Diagrama'] = $row['Diagrama'];
+         //$Resultado['Diagrama'] = utf8_encode($row['Diagrama']);
          $idx++;
       }
          mysqli_free_result($result);  
