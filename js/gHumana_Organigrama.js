@@ -51,7 +51,7 @@ $(document).ready(function()
   {
     evento.preventDefault();
     var idProceso = $(this).attr("idCargo");
-    cargarModulo('gHumana/Cargo.html', 'Ficha de Cargo', function()
+    cargarModulo('gHumana/cargo.html', 'Ficha de Cargo', function()
     {
       gHumana_Cargo_cargarCargo(idProceso);
     });

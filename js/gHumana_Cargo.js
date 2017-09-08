@@ -27,6 +27,8 @@ function gHumana_Cargo_cargarCargo(idCargo)
       $("#lblGHumana_Cargo_Titulo").text(data.Texto);
       $("#txtGHumana_Cargo_idCargo").val(idCargo);
       $("#cntGHumana_Cargo_Profesiograma").cargarArchivos({Prefijo : $("#txtGHumana_Cargo_idCargo").val(), Proceso : 'Profesiograma'});
+
+      
     }
   }, 'json');
 }

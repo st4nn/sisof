@@ -2,7 +2,6 @@ $(document).ready(gHumana_MatrizEPP_Agregar);
 
 function gHumana_MatrizEPP_Agregar()
 {
-
 	$("#cntGHumana_MatrizEPP_Imagen").iniciar_CargadorImagenes({idObj : 'gHumana_MatrizEPP_Imagen'});
 
 	$('#btnGHumana_MatrizEPP_Tipo_de_Proteccion_Agregar').on('click', function() {
@@ -66,7 +65,7 @@ function gHumana_MatrizEPP_Agregar()
     });
 }	
 
-function gHumana_MatrizEPP_Cargar(Prefijo)
+/*function gHumana_MatrizEPP_Cargar(Prefijo)
 {
 	if (Prefijo === undefined)
 	{
@@ -93,4 +92,4 @@ function gHumana_MatrizEPP_Cargar(Prefijo)
 	}
 
 
-}
+}*/
