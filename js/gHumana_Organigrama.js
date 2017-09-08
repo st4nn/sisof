@@ -307,3 +307,9 @@ function gHumana_Organigrama_SeleccionarProceso(key, tipo)
   }
 }
 
+
+
+function gHumana_Organigrama_CargarElUltimo()
+{
+  $("#btnGHumana_Organigrama_Cargar").trigger('click');
+}

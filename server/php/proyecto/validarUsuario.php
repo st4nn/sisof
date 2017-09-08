@@ -12,6 +12,7 @@
    $sql = "SELECT 
                Login.idLogin AS 'id',
                Login.Usuario AS 'Usuario',
+               md5(Login.Clave) AS 'hash',
                Login.Estado AS 'Estado',
                Datos.Nombre AS 'Nombre',
                Datos.Correo AS 'Correo',

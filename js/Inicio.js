@@ -1,10 +1,42 @@
 function fun_Inicio()
 {
+
   $(document).delegate('.btnCargarMenu', 'click', function(evento) 
   {
     evento.preventDefault();
     $(this).inicio_CargarMenu();
   });
+
+  $.post('../server/php/proyecto/Usuarios_Cargar.php', {u: Usuario.id, k : Usuario.hash}, function(data, textStatus, xhr) 
+  {
+    if (data == 0)
+    {
+      cerrarSesion();
+    } else
+    {
+      $.extend( Usuario, data);
+      localStorage.setItem("ls_sisof", JSON.stringify(Usuario));    
+
+      if (Usuario.idPerfil > 1)
+      {
+        $.post('../server/php/proyecto/Empresas_Cargar.php', {Usuario: Usuario.id, Parametro : ''}, function(data, textStatus, xhr) 
+        {
+          $.each(data, function(index, val) 
+          {
+              $(".imgLogoEmpresa").attr("src", '../server/php/' + val.Ruta + '/' + val.Archivo);
+              $(".lblEmpresa_Nombre").text(val.Nombre);
+              
+              $(".lblEmpresa_Direccion").text(val.Direccion);
+              $(".lblEmpresa_Telefono").text(val.Telefono);
+              $(".lblEmpresa_Responsable").text(val.Correo);
+
+              $("#txtInicio_idEmpresa").val(val.id);
+          });
+        }, 'json');
+      }
+    }
+  }, 'json');
+
   
 
   $.fn.inicio_CargarMenu = function()
