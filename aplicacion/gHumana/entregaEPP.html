@@ -7,6 +7,34 @@
  	<div class="page-content container-fluid">
  		<div class="panel panel-primary panel-bordered">
  			<div class="panel-heading">
+              <div class="panel-actions">
+              	<button class="btn text-left btn-warning lnkAbrirModulo" Vinculo="gHumana/EntregaEpp_Agregar.html" Titulo="Entrega de EPP" data-callback="gHumana_EntregaEPP_Cargar"><i class="icon fa-plus"></i> Nueva entrega</button>
+              </div>
+            </div>  
+ 			<div class="panel-body">
+ 				<form id="frmGHumana_EntregaEPP_Buscar">
+ 					<div class="col-sm-4">
+						<div class="form-group">
+	                    	<label for="txtGHumana_EntregaEPP_Desde" class="control-label guardar">Desde</label>
+	                    	<input class="form-control guardar datepicker" id="txtGHumana_EntregaEPP_Desde" required="">
+		                </div>
+ 					</div>
+
+ 					<div class="col-sm-4">
+						<div class="form-group">
+	                    	<label for="txtGHumana_EntregaEPP_Hasta" class="control-label">Hasta</label>
+	                    	<input class="form-control guardar datepicker guardar" id="txtGHumana_EntregaEPP_Hasta" required="">
+		                </div>
+ 					</div>
+
+ 					<div class="col-sm-4">
+ 						<button type="submit" class="btn btn-primary btn-block margin-top-25"><i class="icon wb-search"></i>Buscar</button>
+ 					</div>
+ 				</form>
+ 			</div>
+ 		</div>
+ 		<div class="panel panel-primary panel-bordered">
+ 			<div class="panel-heading">
               <!--
               <div class="panel-actions">
 				<button class="btn text-left btn-success lnkAbrirModulo" Vinculo="gHumana/matrizEpp_Agregar.html" Titulo="EPP" data-callback="gHumana_MatrizEPP_Cargar"><i class="icon fa-plus"></i> Agregar Elemento</button>
@@ -17,17 +45,17 @@
  			<div class="panel-body">
               <div class="col-md-12 form-group">
 			 		<div class="table-responsive">
-						<table id="tblGHumana_MatrizEPP" class="table table-hover table-striped">
+						<table id="tblGHumana_EntregaEPP" class="table table-hover table-striped">
 							<thead>
 								<tr>
 									<th></th>
-									<th>Tipo de Protección</th>
-									<th>Elementro de Protección</th>
-									<th></th>
-									<th>Norma</th>
-									<th>Limitaciones</th>
-									<th>Mantenimiento</th>
-									<th>Tiempo de Reposición</th>
+									<th>Fecha</th>
+									<th>Nombre</th>
+									<th>Cargo</th>
+									<th>Proyecto</th>
+									<th>EPP</th>
+									<th>Talla</th>
+									<th>Cantidad</th>
 								</tr>
 							</thead>
 							<tbody></tbody>

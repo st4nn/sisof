@@ -1,0 +1,115 @@
+<!-- Page -->
+<div class="page" style="min-height: 90vh;">
+	<div class="page-header">
+		<button class="btn btn-primary pull-right btn-pill-left btnGHumana_VerEPPEntregados">Volver</button>
+		<h3 class="page-title">Entrega de EPP</h3>
+	</div>
+ 	<div class="page-content container-fluid">
+ 		<div class="panel panel-primary panel-bordered">
+ 			<div class="panel-heading">
+				<div class="panel-actions">
+		      	</div>
+            </div>
+ 			<div class="panel-body">
+				<form id="frmGHumana_EntregaEPP">
+					<input type="hidden" class="guardar" id="txtGHumana_EntregaEPP_id">
+					
+			 		<div class="row">
+				 		<div class="form-group col-sm-5 pull-right">
+				        	<label for="txtGHumana_EntregaEPP_fechaEntrega" class="control-label">Fecha de Entrega</label>
+				        	<input class="form-control guardar datepicker" id="txtGHumana_EntregaEPP_fechaEntrega" required="">
+				        </div>
+			 		</div>
+
+			 		<div class="row">
+			 			<div class="col-sm-12 text-right font-size-24">
+			 				<div class="col-md-4 text-right">
+			                	<label for="btnGHumana_Cargo_AgregarEPP" class="control-label font-size-12">Personal</label>
+			              	</div>
+			              	<div class="col-md-8">
+			              		<div class="form-group">
+				                  <div class="input-group">
+				                    <select id="txtGHumana_EntregaEPP_Personal" class="form-control">
+			                		</select>
+				                    <span class="input-group-btn">
+				                      <button id="txtGHumana_EntregaEPP_Personal_Agregar" type="button" class="btn btn-primary">
+				                      	<i class="icon wb-arrow-down" aria-hidden="true"></i>
+				                      </button>
+				                    </span>
+				                  </div>
+				                </div>
+			              	</div>
+			 			</div>
+			 			<div class="col-sm-12">
+					 		<div class="row">
+					 			<h3><small>Cedula: </small><span id="lblGHumana_EntregaEPP_Cedula"></span></h3>
+					 		</div>
+					 		<div class="row">
+					 			<h3><small>Nombre: </small><span id="lblGHumana_EntregaEPP_Nombre"></span></h3>
+					 			<small id="lblGHumana_EntregaEPP_Cargo"></small>
+					 		</div>
+			 			</div>
+			 			<input type="hidden" class="guardar" id="txtGHumana_EntregaEPP_idPersonal" required="">
+			 		</div>
+
+			 		<div class="row">
+			 			<div class="form-group">
+				        	<label for="txtGHumana_EntregaEPP_Proyecto" class="control-label">Proyecto</label>
+				        	<input class="form-control guardar" id="txtGHumana_EntregaEPP_Proyecto" required="">
+				        </div>
+			 		</div>
+
+			 		<div class="row">
+			 			<div class="form-group">
+				        	<label for="txtGHumana_EntregaEPP_idEPP" class="control-label">Elemento de Protección</label>
+				        	<select class="form-control guardar" id="txtGHumana_EntregaEPP_idEPP" required="">
+				        	</select>
+				        </div>
+			 		</div>
+
+			 		<div class="row">
+			 			<div class="col-sm-6">
+				 			<div class="form-group">
+					        	<label for="txtGHumana_EntregaEPP_Talla" class="control-label">Talla</label>
+					        	<input class="form-control guardar" id="txtGHumana_EntregaEPP_Talla">
+					        </div>
+			 			</div>
+
+			 			<div class="col-sm-6">
+				 			<div class="form-group">
+					        	<label for="txtGHumana_EntregaEPP_Cantidad" class="control-label">Cantidad</label>
+					        	<input class="form-control guardar" type="number" id="txtGHumana_EntregaEPP_Cantidad" required="">
+					        </div>
+			 			</div>
+			 		</div>
+
+			 		<button type="button" class="btn btn-success btn-block">Agregar</button>
+				</form>
+ 			</div>
+ 		</div>
+ 		<div class="panel panel-primary panel-bordered">
+ 			<div class="panel-heading">
+				<div class="panel-actions">
+		      	</div>
+            </div>
+ 			<div class="panel-body">
+ 				<table id="tblGHumana_EntregaEPP_Entregados" class="table table-hover table-striped">
+ 					<thead>
+ 						<tr>
+	 						<th></th>
+	 						<th>Item</th>
+	 						<th>EPP</th>
+	 						<th>Talla</th>
+	 						<th>Cantidad</th>
+	 						<th>Fecha Entrega</th>
+	 						<th></th>
+ 						</tr>
+ 					</thead>
+ 					<tbody></tbody>
+ 				</table>
+ 			</div>
+ 		</div>
+	</div>
+</div>
+
+<script src="../js/gHumana_entregaEPP_Agregar.js"></script>
