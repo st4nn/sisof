@@ -1,5 +1,4 @@
 <!-- Page -->
-<input type="hidden" id="txtGHumana_Cargo_idCargo">
 <div class="page" style="min-height: 90vh;">
 	<div class="page-header">
 		<button class="btn btn-primary pull-right btn-pill-left btnGHumana_VerOrganigrama">Volver al Organigrama</button>
@@ -7,98 +6,106 @@
 		<h3 id="lblGHumana_Cargo_Titulo" class="page-title"></h3>
 	</div>
  	<div class="page-content container-fluid">
+		<form id="frmGHumana_Cargo">
+			<input type="hidden" class="guardar" id="txtGHumana_Cargo_idCargo">
+			
+	 		<div class="row">
+	 			<div class="col-sm-6">
+	 				<div class="panel panel-primary panel-bordered">
+			 			<div class="panel-heading">
+			              <h3 class="panel-title">Estudios</h3>
+			            </div>
+			 			<div class="panel-body">
+	 						<textarea id="txtGHumana_Cargo_Estudios" rows="5" class="form-control guardar"></textarea>
+	 					</div>
+	 				</div>
+	 			</div>
+	 			<div class="col-sm-6">
+	 				<div class="panel panel-primary panel-bordered">
+			 			<div class="panel-heading">
+			              <h3 class="panel-title">Formación</h3>
+			            </div>
+			 			<div class="panel-body">
+	 						<textarea id="txtGHumana_Cargo_Formacion" rows="5" class="form-control guardar"></textarea>
+	 					</div>
+	 				</div>
+	 			</div>
+	 		</div>
 
- 		<div class="row">
- 			<div class="col-sm-6">
- 				<div class="panel panel-primary panel-bordered">
-		 			<div class="panel-heading">
-		              <h3 class="panel-title">Estudios</h3>
-		            </div>
-		 			<div class="panel-body">
- 						<textarea id="txtGHumana_Cargo_Estudios" rows="5" class="form-control"></textarea>
- 					</div>
- 				</div>
- 			</div>
- 			<div class="col-sm-6">
- 				<div class="panel panel-primary panel-bordered">
-		 			<div class="panel-heading">
-		              <h3 class="panel-title">Formación</h3>
-		            </div>
-		 			<div class="panel-body">
- 						<textarea id="txtGHumana_Cargo_Formacion" rows="5" class="form-control"></textarea>
- 					</div>
- 				</div>
- 			</div>
- 		</div>
+	 		<div class="row">
+	 			<div class="col-sm-6">
+	 				<div class="panel panel-primary panel-bordered">
+			 			<div class="panel-heading">
+			              <h3 class="panel-title">Elementos de Protección Personal</h3>
+			            </div>
+			 			<div class="panel-body">
+	 						<ul class="list-group list-group-full list-group-dividered">
+			                  <!--
+			                  <li class="list-group-item">
+			                    <button type="button" class="btn btn-pure btn-danger icon wb-close"></button> Cras justo odio
+			                  </li>
+			                  <li class="list-group-item">
+			                    Dapibus ac facilisis in
+			                  </li>
+			                  <li class="list-group-item">
+			                    <span class="badge badge-danger">3</span> Morbi leo risus
+			                  </li>
+			                  <li class="list-group-item active">
+			                    <span class="badge badge-info">10</span> Porta ac consectetur ac
+			                  </li>
+			                  <li class="list-group-item">
+			                    Vestibulum at eros
+			                  </li>
+			                  <li class="list-group-item">
+			                    Ibus ac facilis
+			                  </li>
+			                  -->
+			                </ul>
+	 					</div>
+	 				</div>
+	 			</div>
+	 			<div class="col-sm-6">
+	 				<div class="panel panel-primary panel-bordered">
+			 			<div class="panel-heading">
+			              <h3 class="panel-title">Profesiograma</h3>
+			            </div>
+			 			<div class="panel-body">
+	 						<div id="cntGHumana_Cargo_Profesiograma"></div>
+	 					</div>
+	 				</div>
+	 			</div>
+	 		</div>
 
- 		<div class="row">
- 			<div class="col-sm-6">
- 				<div class="panel panel-primary panel-bordered">
-		 			<div class="panel-heading">
-		              <h3 class="panel-title">Elementos de Protección Personal</h3>
-		            </div>
-		 			<div class="panel-body">
- 						<ul class="list-group list-group-full list-group-dividered">
-		                  <li class="list-group-item">
-		                    <button type="button" class="btn btn-pure btn-danger icon wb-close"></button> Cras justo odio
-		                  </li>
-		                  <li class="list-group-item">
-		                    Dapibus ac facilisis in
-		                  </li>
-		                  <li class="list-group-item">
-		                    <span class="badge badge-danger">3</span> Morbi leo risus
-		                  </li>
-		                  <li class="list-group-item active">
-		                    <span class="badge badge-info">10</span> Porta ac consectetur ac
-		                  </li>
-		                  <li class="list-group-item">
-		                    Vestibulum at eros
-		                  </li>
-		                  <li class="list-group-item">
-		                    Ibus ac facilis
-		                  </li>
-		                </ul>
- 					</div>
- 				</div>
- 			</div>
- 			<div class="col-sm-6">
- 				<div class="panel panel-primary panel-bordered">
-		 			<div class="panel-heading">
-		              <h3 class="panel-title">Profesiograma</h3>
-		            </div>
-		 			<div class="panel-body">
- 						<div id="cntGHumana_Cargo_Profesiograma"></div>
- 					</div>
- 				</div>
- 			</div>
- 		</div>
+	 		<div class="panel panel-primary panel-bordered">
+	 			<div class="panel-heading">
+	              <h3 class="panel-title">Experiencia</h3>
+	            </div>
+	 			<div class="panel-body">
+					<textarea id="txtGHumana_Cargo_Experiencia" rows="5" class="form-control guardar"></textarea>
+	 			</div>
+	 		</div>
 
- 		<div class="panel panel-primary panel-bordered">
- 			<div class="panel-heading">
-              <h3 class="panel-title">Experiencia</h3>
-            </div>
- 			<div class="panel-body">
-				<textarea id="txtGHumana_Cargo_Experiencia" rows="5" class="form-control"></textarea>
- 			</div>
- 		</div>
+	 		<div class="panel panel-primary panel-bordered">
+	 			<div class="panel-heading">
+	              <h3 class="panel-title">Responsabilidades</h3>
+	            </div>
+	 			<div class="panel-body">
+	 				<textarea id="txtGHumana_Cargo_Responsabilidades" rows="5" class="form-control guardar"></textarea>
+	 			</div>
+	 		</div>
 
- 		<div class="panel panel-primary panel-bordered">
- 			<div class="panel-heading">
-              <h3 class="panel-title">Responsabilidades</h3>
-            </div>
- 			<div class="panel-body">
- 				<textarea id="txtGHumana_Cargo_Responsabilidades" rows="5" class="form-control"></textarea>
- 			</div>
- 		</div>
+	 		<div class="panel panel-primary panel-bordered">
+	 			<div class="panel-heading">
+	              <h3 class="panel-title">Rendición de Cuentas</h3>
+	            </div>
+	 			<div class="panel-body">
+	 				<textarea id="txtGHumana_Cargo_RendicionDeCuentas" rows="5" class="form-control guardar"></textarea>
+	 			</div>
+	 		</div>
 
- 		<div class="panel panel-primary panel-bordered">
- 			<div class="panel-heading">
-              <h3 class="panel-title">Rendición de Cuentas</h3>
-            </div>
- 			<div class="panel-body">
- 				<textarea id="txtGHumana_Cargo_RendicionDeCuentas" rows="5" class="form-control"></textarea>
- 			</div>
- 		</div>
+	 		<button type="submit" class="btn btn-success btn-block">Guardar</button>
+
+		</form>
 	</div>
 </div>
 
