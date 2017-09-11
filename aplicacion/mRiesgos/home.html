@@ -1,0 +1,61 @@
+<!-- Page -->
+<div class="page" style="min-height: 90vh;">
+	<div class="page-header">
+        <button class="btn btn-primary pull-right btn-pill-left btnGHumana_VerPanel">Volver al Panel</button>
+		<h3 class="page-title">Matriz de Riesgos</h3>
+	</div>
+ 	<div class="page-content container-fluid">
+ 		<div class="panel panel-primary panel-bordered">
+ 			<div class="panel-heading">
+              <div class="panel-actions">
+				<button id="btnMRiesgos_Home_Actualizar" class="btn btn-success"><i class="icon fa-refresh"></i></button>
+              </div>
+            </div>
+ 			<div class="panel-body">
+              <div class="col-md-12 form-group">
+			 		<div class="table-responsive">
+						<table id="tblMRiesgos_Home" class="table table-hover table-bordered table-striped">
+							<thead>
+								<tr>
+									<th rowspan="2">Proceso</th>
+									<th rowspan="2">Actividades</th>
+									<th rowspan="2">Rutinario <small>(Sí o no)</small></th>
+									<th colspan="3">Peligro</th>
+									<th colspan="2">Control Existente</th>
+									<th colspan="7">Evaluación del riesgo</th>
+									<th>Valoración del riesgo</th>
+									<th colspan="3">Criterios para establecer controles</th>
+									<th colspan="2">Medidas de Intervención</th>
+									<th rowspan="2">Programa</th>
+								</tr>
+								<tr>
+									<th>Descripción</th>
+									<th>Clasificación</th>
+									<th>Efectos posibles</th>
+									<th>Tipo</th>
+									<th>Control</th>
+									<th>Nivel de Deficiencia</th>
+									<th>Nivel de Exposición</th>
+									<th>Nivel de Probabilidad <small>(NDxNE)</small></th>
+									<th>Interpretación del nivel de probabilidad</th>
+									<th>Nivel de Consecuencia</th>
+									<th>Nivel de Riesgo <small>(NR)</small> e Intervención</th>
+									<th>Interpretación del NR</th>
+									<th>Aceptabilidad del Riesgo</th>
+									<th>Nro Expuestos</th>
+									<th>Peor Consecuencia</th>
+									<th>Existencia Requisito Legal Específico Asociado <small>(Si o No)</small></th>
+									<th>Medidas de Intervención</th>
+									<th>Tipo de medida</th>
+								</tr>
+							</thead>
+							<tbody></tbody>
+						</table>
+					</div>
+              </div>
+            </div>
+        </div>
+	</div>
+</div>
+
+<script src="../js/mRiesgos_home.js"></script>
