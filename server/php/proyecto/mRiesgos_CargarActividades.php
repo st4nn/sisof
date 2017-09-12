@@ -8,10 +8,12 @@
    $sql = "SELECT
             gProcesos_Procesos_Actividades.id AS idActividad,
             gProcesos_Procesos.Texto AS Proceso,
-            gProcesos_Procesos_Actividades.Nombre AS Actividad
+            gProcesos_Procesos_Actividades.Nombre AS Actividad,
+            mRiesgos_Matriz.*
          FROM
             gProcesos_Procesos_Actividades
             INNER JOIN gProcesos_Procesos ON gProcesos_Procesos.idDiagrama = gProcesos_Procesos_Actividades.idEmpresa AND gProcesos_Procesos_Actividades.idProceso = gProcesos_Procesos.idInterno
+            LEFT JOIN mRiesgos_Matriz ON mRiesgos_Matriz.idEmpresa = gProcesos_Procesos_Actividades.idEmpresa AND gProcesos_Procesos_Actividades.id = mRiesgos_Matriz.idActividad
          WHERE
             gProcesos_Procesos_Actividades.idEmpresa = '$idEmpresa'
          ORDER BY 1, 2;";

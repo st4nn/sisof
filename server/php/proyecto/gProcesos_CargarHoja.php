@@ -41,7 +41,8 @@
             INNER JOIN confRiesgos_Clasificacion ON confRiesgos_Clasificacion.id = confRiesgos.idClasificacion 
             INNER JOIN gProcesos_Procesos ON gProcesos_Procesos.idInterno = gProcesos_Procesos_Riesgos.idProceso AND gProcesos_Procesos.idDiagrama = '$idDiagrama'
          WHERE
-            gProcesos_Procesos.idInterno = '$idKey';";
+            gProcesos_Procesos.idInterno = '$idKey'
+            AND gProcesos_Procesos.idDiagrama = '$idDiagrama';";
             
       $result = $link->query($sql);
       $idx = 0;
@@ -65,7 +66,8 @@
             gProcesos_Procesos_Info
             INNER JOIN gProcesos_Procesos ON gProcesos_Procesos.idInterno = gProcesos_Procesos_Info.idProceso AND gProcesos_Procesos.idDiagrama = '$idDiagrama'
          WHERE
-            gProcesos_Procesos.idInterno = '$idKey';";
+            gProcesos_Procesos.idInterno = '$idKey'
+            AND gProcesos_Procesos.idDiagrama = '$idDiagrama';";
 
             
       $result = $link->query($sql);
@@ -86,8 +88,10 @@
           FROM
             gProcesos_Procesos_Actividades
             INNER JOIN gProcesos_Procesos ON gProcesos_Procesos.idInterno = gProcesos_Procesos_Actividades.idProceso AND gProcesos_Procesos.idDiagrama = '$idDiagrama'
+            INNER JOIN gProcesos_Mapa_Diagrama ON gProcesos_Mapa_Diagrama.id = gProcesos_Procesos.idDiagrama
          WHERE
-            gProcesos_Procesos.idInterno = '$idKey';";
+            gProcesos_Procesos.idInterno = '$idKey'
+            AND gProcesos_Procesos.idDiagrama = '$idDiagrama';";
             
       $result = $link->query($sql);
       $idx = 0;
@@ -115,7 +119,8 @@
             INNER JOIN gHumana_Cargos ON gHumana_Cargos.idInterno = gProcesos_Procesos_Personal.idCargo 
             INNER JOIN gHumana_Organigrama_Diagrama ON gHumana_Organigrama_Diagrama.id = gHumana_Cargos.idDiagrama AND gHumana_Organigrama_Diagrama.idEmpresa = gProcesos_Mapa_Diagrama.idEmpresa
          WHERE
-            gProcesos_Procesos.idInterno = '$idKey';";
+            gProcesos_Procesos.idInterno = '$idKey'
+            AND gProcesos_Procesos.idDiagrama = '$idDiagrama';";
             
       $result = $link->query($sql);
       $idx = 0;

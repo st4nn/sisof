@@ -34,11 +34,142 @@ function mRiesgos_Home()
     });
 
     $(document).delegate('.txtMRiesgos_Matriz_EfectosPosibles', 'change', function(event) {
+        var contenedor = $(this).parent('td').parent('tr');
         var objPC = $(contenedor).find('.txtMRiesgos_Matriz_PeorConsecuecia');
         $(objPC).text($(this).val());
     });
 
-    mRiesgos_Home_RefescarTabla();
+    $(document).delegate('.btnMRiesgos_Matriz_Copiar', 'click', function(event) 
+    {
+        var contenedor = $(this).parent('td').parent('tr');
+        var vHtml = $(contenedor).clone(true, true); 
+
+        $(vHtml).find(".txtMRiesgos_Matriz_Rutinario").val($(contenedor).find(".txtMRiesgos_Matriz_Rutinario").val());
+        $(vHtml).find(".txtMRiesgos_Matriz_Descripcion").val($(contenedor).find(".txtMRiesgos_Matriz_Descripcion").val());
+        $(vHtml).find(".txtMRiesgos_Matriz_Tipo").val($(contenedor).find(".txtMRiesgos_Matriz_Tipo").val());
+        $(vHtml).find(".txtMRiesgos_Matriz_NivelDeDeficiencia").val($(contenedor).find(".txtMRiesgos_Matriz_NivelDeDeficiencia").val());
+        $(vHtml).find(".txtMRiesgos_Matriz_NivelDeExposicion").val($(contenedor).find(".txtMRiesgos_Matriz_NivelDeExposicion").val());
+        $(vHtml).find(".txtMRiesgos_Matriz_NivelDeConsecuencia").val($(contenedor).find(".txtMRiesgos_Matriz_NivelDeConsecuencia").val());
+        $(vHtml).find(".txtMRiesgos_Matriz_RequisitoLegal").val($(contenedor).find(".txtMRiesgos_Matriz_RequisitoLegal").val());
+        $(vHtml).find(".txtMRiesgos_Matriz_TipoMedida").val($(contenedor).find(".txtMRiesgos_Matriz_TipoMedida").val());
+        $(vHtml).find(".txtMRiesgos_Matriz_Programa").val($(contenedor).find(".txtMRiesgos_Matriz_Programa").val());
+
+        $(vHtml).find(".txtMRiesgos_Matriz_Clasificacion").val($(contenedor).find(".txtMRiesgos_Matriz_Clasificacion").val());
+
+        $(vHtml).attr("idObj", 0);
+        
+        $(contenedor).after(vHtml);
+    });
+
+    $(document).delegate('.btnMRiesgos_Matriz_Quitar', 'click', function(event) 
+    {
+        var contenedor = $(this).parent('td').parent('tr');
+        var idRiesgo = $(contenedor).attr("idActividad");
+        var btnObj = this;
+
+        
+        bootbox.confirm({
+        message: "Estas seguro de quitar este Elemento?",
+        buttons: {
+            confirm: {
+                label: 'Si, quitarlo',
+                className: 'btn-danger'
+            },
+            cancel: {
+                label: 'No',
+                className: 'btn-default'
+            }
+        },
+        callback: function (result) {
+          if (result)
+          {
+            $.post('../server/php/proyecto/mRiesgos_QuitarFila.php', {Usuario : Usuario.id, idRiesgo: idRiesgo}, function(data, textStatus, xhr) 
+            {
+                if (isNaN(data))
+                {
+                    Mensaje("Error", data, 'danger');
+                } else
+                {
+                    $(btnObj).parent('td').parent('tr').remove();
+                }
+            });
+          }
+        }
+      });
+    });
+
+    
+
+    $(document).delegate('#tblMRiesgos_Home tbody tr input, #tblMRiesgos_Home tbody tr select, #tblMRiesgos_Home tbody tr textarea', 'change', function(event) 
+    {
+        var contenedor = $(this).parent('td').parent('tr');
+        $(contenedor).find('.btnMRiesgos_Matriz_Guardar').slideDown();
+        $("#cntMRiesgos_ActionButtons").slideDown();
+    });
+
+    $(document).delegate('.btnMRiesgos_Matriz_Guardar', 'click', function(event) 
+    {
+        var contenedor = $(this).parent('td').parent('tr');
+        var btnObj = this;
+
+        var obj = $(contenedor).find(".guardar");
+        var datos = {};
+        datos['id'] = $(contenedor).attr("idObj");
+        datos['Usuario'] = Usuario.id;
+        datos['idEmpresa'] = $("#txtInicio_idEmpresa").val();
+        datos['idActividad'] = $(contenedor).attr("idActividad");
+        
+
+        $.each(obj, function(index, val) 
+        {
+            if ($(val).attr("data-indice") != undefined)
+            {
+              if ($(val).prop("tagName") == "SPAN" || $(val).prop("tagName") == "TD")
+              {
+                datos[$(val).attr("data-indice")] = $(val).text();
+              } else
+              {
+                datos[$(val).attr("data-indice")] = $(val).val();
+              }
+            }
+        });
+
+        datos = JSON.stringify(datos);  
+        datos = JSON.parse(datos);
+
+        $.post('../server/php/proyecto/mRiesgos_CrearFila.php', datos, function(data, textStatus, xhr) 
+        {
+            if (isNaN(data))
+            {
+                Mensaje("Error", data, 'danger');
+            } else
+            {
+                $(btnObj).hide();
+
+                if($(".showSweetAlert:visible").length == 0)
+                {
+                    Mensaje("Hey", "Los datos han sido guardados", 'success');
+                }
+
+                $(contenedor).attr("idObj", parseInt(data));
+
+                if ($(".btnMRiesgos_Matriz_Guardar:visible").length == 0)
+                {
+                    $("#cntMRiesgos_ActionButtons").hide();
+                }
+            }
+        });
+
+
+    });
+
+    $("#btnMRiesgos_Matriz_Guardar").on("click", function(evento)
+        {
+            evento.preventDefault();
+            $(".btnMRiesgos_Matriz_Guardar:visible").trigger('click');
+        });
+
+    //mRiesgos_Home_RefescarTabla();
 }
 
 function txtMRiesgos_Matriz_NDxNE_Change(obj)
@@ -141,6 +272,14 @@ function txtMRiesgos_Matriz_NDxNE_Change(obj)
 
 function mRiesgos_Home_RefescarTabla()
 {
+    if ($(window).width() < 767)
+    {
+        $.site.menubar.hide();
+    } else
+    {
+        $.site.menubar.fold();
+    }
+
     $("#tblMRiesgos_Home tbody tr").remove();
     $.post('../server/php/proyecto/mRiesgos_CargarActividades.php', 
         {
@@ -151,20 +290,33 @@ function mRiesgos_Home_RefescarTabla()
             if (data != 0)
             {
                 var tds = '';
+                var ids = [];
+                var arrValores = [];
                 $.each(data, function(index, val) 
                 {
-                    tds += '<tr idActividad="' + val.idActividad + '">';
-                        tds += '<td>' + val.Proceso + '</td>';
-                        tds += '<td>' + val.Actividad + '</td>';
-                        tds += '<td>';
-                            tds += '<select class="form-control">';
+                    ids.push(val.id);
+                    if (!isNaN(val.id))
+                    {
+                        arrValores[val.id] = val;
+                    }
+
+                    tds += '<tr idObj="' + val.id + '" idActividad="' + val.idActividad + '">';
+                        tds += '<td class="text-nowrap text-middle">';
+                            tds += '<button class="btn btn-icon btn-flat text-primary btnMRiesgos_Matriz_Copiar"><i class="icon wb-copy"></i></button>';
+                            tds += '<button class="btn btn-icon btn-flat text-danger btnMRiesgos_Matriz_Quitar"><i class="icon wb-close"></i></button>';
+                            tds += '<button class="btn btn-icon btn-flat text-success btnMRiesgos_Matriz_Guardar hide"><i class="icon fa-floppy-o"></i></button>';
+                        tds += '</td>';
+                        tds += '<td class="text-nowrap text-middle">' + val.Proceso + '</td>';
+                        tds += '<td class="text-nowrap text-middle">' + val.Actividad + '</td>';
+                        tds += '<td class="text-middle">';
+                            tds += '<select class="form-control width-100 guardar txtMRiesgos_Matriz_Rutinario" data-indice="Rutinario">';
                                 tds += '<option value=""></option>';
                                 tds += '<option value="Si">Si</option>';
                                 tds += '<option value="No">No</option>';
                             tds += '</select>';
                         tds += '</td>';
-                        tds += '<td>';
-                            tds += '<select class="form-control txtMRiesgos_Matriz_Descripcion">';
+                        tds += '<td class="text-middle">';
+                            tds += '<select class="form-control width-150 guardar txtMRiesgos_Matriz_Descripcion" data-indice="Descripcion">';
                                 tds += '<option value=""></option>';
                                 tds += '<option value="Biológico">Biológico</option>';
                                 tds += '<option value="Físico">Físico</option>';
@@ -175,23 +327,23 @@ function mRiesgos_Home_RefescarTabla()
                                 tds += '<option value="Fenómenos Naturales">Fenómenos Naturales</option>';
                             tds += '</select>';
                         tds += '</td>';
-                        tds += '<td>';
-                            tds += '<select class="form-control txtMRiesgos_Matriz_Clasificacion">';
+                        tds += '<td class="text-middle">';
+                            tds += '<select class="form-control width-200 guardar txtMRiesgos_Matriz_Clasificacion" data-indice="Clasificacion">';
                                 tds += '<option value=""></option>';
                             tds += '</select>';
                         tds += '</td>';
-                        tds += '<td><textarea class="form-control txtMRiesgos_Matriz_EfectosPosibles" rows="3"></textarea></td>';
-                        tds += '<td>';
-                            tds += '<select class="form-control">';
+                        tds += '<td><textarea class="form-control width-200 guardar txtMRiesgos_Matriz_EfectosPosibles" data-indice="EfectosPosibles" rows="2"></textarea></td>';
+                        tds += '<td class="text-middle">';
+                            tds += '<select class="form-control width-150 guardar txtMRiesgos_Matriz_Tipo" data-indice="Tipo">';
                                 tds += '<option value=""></option>';
-                                tds += '<option value="Individuo">Individuo</option>';
+                                tds += '<option value="Fuente">Fuente</option>';
                                 tds += '<option value="Medio">Medio</option>';
                                 tds += '<option value="Individuo">Individuo</option>';
                             tds += '</select>';
                         tds += '</td>';
-                        tds += '<td><textarea class="form-control" rows="3"></textarea></td>';
-                        tds += '<td>';
-                            tds += '<select class="form-control txtMRiesgos_Matriz_NivelDeDeficiencia">';
+                        tds += '<td><textarea class="form-control width-200 guardar txtMRiesgos_Matriz_Control" data-indice="Control" rows="2"></textarea></td>';
+                        tds += '<td class="text-middle">';
+                            tds += '<select class="form-control width-200 guardar txtMRiesgos_Matriz_NivelDeDeficiencia" data-indice="NivelDeDeficiencia">';
                                 tds += '<option value=""></option>';
                                 tds += '<option value="10">Se ha(n) detectado peligro(s) que determina(n) como posible la generación de incidentes o consecuencias muy significativas, o la eficacia del conjunto de medidas preventivas existentes respecto al riesgo es nula o no existe, o ambos.</option>';
                                 tds += '<option value="6">Se ha(n) detectado algún(os) peligro(s) que pueden dar lugar a consecuencias significativa(s), o la eficacia del conjunto de medidas preventivas existentes es baja, o ambos.</option>';
@@ -199,8 +351,8 @@ function mRiesgos_Home_RefescarTabla()
                                 tds += '<option value="1">No se ha detectado consecuencia alguna, o la eficacia del conjunto de medidas preventivas existentes es alta, o ambos. El riesgo está controlado.</option>';
                             tds += '</select>';
                         tds += '</td>';
-                        tds += '<td>';
-                            tds += '<select class="form-control txtMRiesgos_Matriz_NivelDeExposicion">';
+                        tds += '<td class="text-middle">';
+                            tds += '<select class="form-control width-200 guardar txtMRiesgos_Matriz_NivelDeExposicion" data-indice="NivelDeExposicion">';
                                 tds += '<option value=""></option>';
                                 tds += '<option value="4">La situación de exposición se presenta sin interrupción o varias veces con tiempo prolongado durante la jornada laboral.</option>';
                                 tds += '<option value="3">La situación de exposición se presenta varias veces durante la jornada laboral por tiempos cortos.</option>';
@@ -208,31 +360,31 @@ function mRiesgos_Home_RefescarTabla()
                                 tds += '<option value="1">La situación de exposición se presenta de manera eventual.</option>';
                             tds += '</select>';
                         tds += '</td>';
-                        tds += '<td><span class="txtMRiesgos_Matriz_NivelDeProbabilidad"></span></td>';
-                        tds += '<td><span class="txtMRiesgos_Matriz_InterpretacionDeProbabilidad"></span></td>';
-                        tds += '<td>';
-                            tds += '<select class="form-control txtMRiesgos_Matriz_NivelDeConsecuencia">';
+                        tds += '<td class="text-middle text-center"><span class="guardar txtMRiesgos_Matriz_NivelDeProbabilidad" data-indice="NivelDeProbabilidad"></span></td>';
+                        tds += '<td class="text-middle text-center"><span class="guardar txtMRiesgos_Matriz_InterpretacionDeProbabilidad" data-indice="InterpretacionDeProbabilidad"></span></td>';
+                        tds += '<td class="text-middle">';
+                            tds += '<select class="form-control width-200 guardar txtMRiesgos_Matriz_NivelDeConsecuencia" data-indice="NivelDeConsecuencia">';
                                 tds += '<option value="100">Muerte (s)</option>';
                                 tds += '<option value="60">Lesiones o enfermedades graves irreparables (Incapacidad permanente parcial o invalidez)</option>';
                                 tds += '<option value="25">Lesiones o enfermedades con incapacidad laboral temporal (ILT)</option>';
                                 tds += '<option value="10">Lesiones o enfermedades que no requieren incapacida</option>';
                             tds += '</select>';
                         tds += '</td>';
-                        tds += '<td><span class="txtMRiesgos_Matriz_NivelDeRiesgo"></span></td>';
-                        tds += '<td><span class="txtMRiesgos_Matriz_iNivelDeRiesgo"></span></td>';
-                        tds += '<td class="success txtMRiesgos_Matriz_aNivelDeRiesgo text-center">Aceptable</td>';
-                        tds += '<td><input class="form-control" type="number"></td>';
-                        tds += '<td><span class="txtMRiesgos_Matriz_PeorConsecuecia"></span></td>';
-                        tds += '<td>';
-                            tds += '<select class="form-control">';
+                        tds += '<td class="text-middle text-center"><span class="guardar txtMRiesgos_Matriz_NivelDeRiesgo" data-indice="NivelDeRiesgo"></span></td>';
+                        tds += '<td class="text-middle text-center"><span class="guardar txtMRiesgos_Matriz_iNivelDeRiesgo" data-indice="iNivelDeRiesgo"></span></td>';
+                        tds += '<td class="success guardar txtMRiesgos_Matriz_aNivelDeRiesgo text-center text-middle" data-indice="aNivelDeRiesgo">Aceptable</td>';
+                        tds += '<td class="text-middle"><input class="form-control width-100 guardar txtMRiesgos_Matriz_NroExpuestos" data-indice="NroExpuestos" type="number"></td>';
+                        tds += '<td class="text-middle text-center"><span class="guardar txtMRiesgos_Matriz_PeorConsecuecia" data-indice="PeorConsecuecia"></span></td>';
+                        tds += '<td class="text-middle">';
+                            tds += '<select class="form-control width-100 guardar txtMRiesgos_Matriz_RequisitoLegal" data-indice="RequisitoLegal">';
                                 tds += '<option value=""></option>';
                                 tds += '<option value="Si">Si</option>';
                                 tds += '<option value="No">No</option>';
                             tds += '</select>';
                         tds += '</td>';
-                        tds += '<td><textarea class="form-control" rows="3"></textarea></td>';
-                        tds += '<td>';
-                            tds += '<select class="form-control">';
+                        tds += '<td><textarea class="form-control width-200 guardar txtMRiesgos_Matriz_MedidasDeIntervencion" data-indice="MedidasDeIntervencion" rows="2"></textarea></td>';
+                        tds += '<td class="text-middle">';
+                            tds += '<select class="form-control width-200 guardar txtMRiesgos_Matriz_TipoMedida" data-indice="TipoMedida">';
                                 tds += '<option value=""></option>';
                                 tds += '<option value="Eliminación">Eliminación</option>';
                                 tds += '<option value="Sustitución">Sustitución</option>';
@@ -241,8 +393,8 @@ function mRiesgos_Home_RefescarTabla()
                                 tds += '<option value="Equipos / elementos de Protección Personal">Equipos / elementos de Protección Personal </option>';
                             tds += '</select>';
                         tds += '</td>';
-                        tds += '<td>';
-                            tds += '<select class="form-control">';
+                        tds += '<td class="text-middle">';
+                            tds += '<select class="form-control width-200 guardar txtMRiesgos_Matriz_Programa" data-indice="Programa">';
                                 tds += '<option value=""></option>';
                                 tds += '<option value="Medicina Preventiva y del Trabajo">Medicina Preventiva y del Trabajo</option>';
                                 tds += '<option value="Seguridad Industrial">Seguridad Industrial</option>';
@@ -253,6 +405,37 @@ function mRiesgos_Home_RefescarTabla()
                 });
 
                 $("#tblMRiesgos_Home tbody").append(tds);
+
+                $.each(ids, function(index, indice) 
+                {
+                    var valores = arrValores[indice];
+
+                    if (!isNaN(indice) && indice != '')
+                    {
+                        var contenedor = $('#tblMRiesgos_Home tbody tr[idObj=' + indice + ']');
+
+                        var obj = $(contenedor).find(".guardar");
+
+                        $.each(obj, function(index, val) 
+                        {
+                            if ($(val).attr("data-indice") != undefined)
+                            {
+                              if ($(val).prop("tagName") == "SPAN" || $(val).prop("tagName") == "TD")
+                              {
+                                $(val).text(valores[$(val).attr('data-indice')]);
+                              } else
+                              {
+                                $(val).val(valores[$(val).attr('data-indice')]);
+                              }
+                            }
+                        });
+
+                        $(contenedor).find('.txtMRiesgos_Matriz_NivelDeConsecuencia').trigger('change');
+                    }
+                });
+
+                $(".btnMRiesgos_Matriz_Guardar").hide();
+                $("#cntMRiesgos_ActionButtons").hide();
             }
         }, 'json');
 }
