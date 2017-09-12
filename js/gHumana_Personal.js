@@ -17,7 +17,7 @@ function gHumana_Personal()
 		cargarModulo('gHumana/Personal_Agregar.html', 'Personal', function()
 		{
 			gHumana_Personal_LlenarCargos();
-			gHumana_Personal_Cargar(pPrefijo);
+			gHumana_Personal_CargarPersona(pPrefijo);
 		});
 	});
 }

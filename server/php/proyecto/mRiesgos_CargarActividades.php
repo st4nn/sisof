@@ -6,7 +6,7 @@
    $idUsuario = addslashes($_POST['Usuario']);
    
    $sql = "SELECT
-            gProcesos_Procesos_Actividades.id AS idActividad,
+            gProcesos_Procesos_Actividades.id AS RidActividad,
             gProcesos_Procesos.Texto AS Proceso,
             gProcesos_Procesos_Actividades.Nombre AS Actividad,
             mRiesgos_Matriz.*

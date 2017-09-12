@@ -11,10 +11,13 @@
       $datos->$key = addslashes($value);
    }
 
-   $sql = "INSERT INTO gHumana_Personal(
+   $id = $datos->Prefijo;
+
+   $sql = "INSERT INTO gHumana_Personal(id, 
       idEmpresa, idUsuario, Numero_id, Apellidos, Nombres, talla_Camisa, talla_Pantalon, 
       talla_Zapatos, fecha_de_Ingreso, idCargo, RH, Telefono, email, Direccion, estado_Civil) VALUES 
    (
+      $id,
       '" . $idEmpresa . "',
       '" . $idUsuario . "',
       '" . $datos->Numero_id . "', 
@@ -46,6 +49,7 @@
       email = VALUES(email),
       Direccion = VALUES(Direccion),
       estado_Civil = VALUES(estado_Civil);";
+
 
    $link->query(utf8_decode($sql));
    if ( $link->error == "")

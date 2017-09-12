@@ -6,11 +6,11 @@
    $Prefijo = addslashes($_POST['Prefijo']);
    
    $sql = "SELECT
-            gHumana_MatrizEPP.*
+            gHumana_Personal.*
           FROM
-            gHumana_MatrizEPP
+            gHumana_Personal
          WHERE
-            gHumana_MatrizEPP.Prefijo = '$Prefijo';";
+            gHumana_Personal.id = '$Prefijo';";
             
    $result = $link->query($sql);
    $idx = 0;

@@ -34,6 +34,35 @@ function gHumana_Personal_Agregar()
     			});
     	});
     });
+
+    $("#btnGHumana_Personal_Agregar_QuitarPersona").on("click", function(evento)
+    {
+        var id = $("#txtGHumana_Personal_Prefijo").val();
+        bootbox.confirm({
+            message: "Estas seguro de quitar esta Persona?",
+            buttons: {
+                confirm: {
+                    label: 'Si, quitarlo',
+                    className: 'btn-danger'
+                },
+                cancel: {
+                    label: 'No',
+                    className: 'btn-default'
+                }
+            },
+            callback: function (result) {
+              if (result)
+              {
+                $.post('../server/php/proyecto/gHumana_Personal_Quitar.php', {id: id}, function(data, textStatus, xhr) 
+                {
+                  gHumana_Personal_Cargar();
+                  cargarModulo('gHumana/personal.html', 'Personal');
+                });
+              }
+            }
+          });        
+    });
+
 }	
 
 function gHumana_Personal_CargarPersona(Prefijo)
@@ -42,7 +71,7 @@ function gHumana_Personal_CargarPersona(Prefijo)
 	if (Prefijo === undefined)
 	{
 		$("#frmGHumana_Personal_Agregar")[0].reset();
-		$("#txtGHumana_Personal_Prefijo").val(obtenerPrefijo());
+		$("#txtGHumana_Personal_Prefijo").val('NULL');
 	} else
 	{
 		$("#imggHumana_Personal_Imagen_Preview").attr("src", "");
@@ -52,8 +81,9 @@ function gHumana_Personal_CargarPersona(Prefijo)
 			Prefijo : Prefijo
 		}, function(data, textStatus, xhr) 
 		{
-			$.each(data, function(index, val) 
-			{
+            $("#txtGHumana_Personal_Prefijo").val(data.id);
+            $.each(data, function(index, val) 
+            {
 				 if ($("#txtGHumana_Personal_" + index).length > 0)
                  {
                     $("#txtGHumana_Personal_" + index).val(val);
@@ -66,7 +96,6 @@ function gHumana_Personal_CargarPersona(Prefijo)
 function gHumana_Personal_LlenarCargos()
 {
     $("#txtGHumana_Personal_idCargo option").remove();
-    console.log(tdsOpersonal_Option);
     $("#txtGHumana_Personal_idCargo").append(tdsOpersonal_Option);
 }
 

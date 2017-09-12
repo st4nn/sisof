@@ -300,7 +300,7 @@ function mRiesgos_Home_RefescarTabla()
                         arrValores[val.id] = val;
                     }
 
-                    tds += '<tr idObj="' + val.id + '" idActividad="' + val.idActividad + '">';
+                    tds += '<tr idObj="' + val.id + '" idActividad="' + val.RidActividad + '">';
                         tds += '<td class="text-nowrap text-middle">';
                             tds += '<button class="btn btn-icon btn-flat text-primary btnMRiesgos_Matriz_Copiar"><i class="icon wb-copy"></i></button>';
                             tds += '<button class="btn btn-icon btn-flat text-danger btnMRiesgos_Matriz_Quitar"><i class="icon wb-close"></i></button>';
@@ -426,6 +426,11 @@ function mRiesgos_Home_RefescarTabla()
                               } else
                               {
                                 $(val).val(valores[$(val).attr('data-indice')]);
+                              }
+
+                              if ($(val).attr('data-indice') == 'Descripcion')
+                              {
+                                $(val).trigger('change');
                               }
                             }
                         });
