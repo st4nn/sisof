@@ -1,0 +1,80 @@
+<style>
+	.objPTrabajo_PlanDeTrabajo_Actividad:hover
+	{
+		cursor: pointer;
+		background: #62a8ea;
+		color: white;
+	}
+</style>
+<!-- Page -->
+<div class="page" style="min-height: 90vh;">
+	<div class="page-header">
+        <button class="btn btn-primary pull-right btn-pill-left btnpTrabajo_VerPanel">Volver al Panel</button>
+		<h3 class="page-title">Plan de Trabajo Anual</h3>
+	</div>
+ 	<div class="page-content container-fluid">
+ 		<div class="panel panel-primary panel-bordered">
+ 			<div class="panel-heading">
+              <div class="panel-actions">
+				
+              </div>
+            </div>
+ 			<div class="panel-body">
+ 				<div class="row">
+	              	<div class="col-md-4 text-right">
+	                	<label for="txtPTrabajo_Home_Anio" class="control-label">Año</label>
+	              	</div>
+	              	<div class="col-md-4">
+	              		<div class="form-group">
+		                  <div class="input-group">
+            				<input class="form-control col-md-6 guardar" id="txtPTrabajo_Home_Anio" required="">
+		                    <span class="input-group-btn">
+		                      <button id="btnGProcesos_Hoja_CargarResponsables" type="button" class="btn btn-primary">
+		                      	<i class="icon fa-refresh" aria-hidden="true"></i>
+		                      </button>
+		                    </span>
+		                  </div>
+		                </div>
+	              	</div>
+	            </div>
+
+              	<div class="col-md-12 form-group">
+			 		<div class="table-responsive">
+						<table id="tblPTrabajo_PlanDeTrabajo_Actividades" class="table table-bordered table-hover">
+							<thead>
+								<tr>
+									<th rowspan="3">Descripción</th>
+									<th rowspan="3">Clasificación</th>
+									<th rowspan="3">Control</th>
+									<th colspan="8" class="text-center text-middle">Ene</th>
+									<th colspan="8" class="text-center text-middle">Feb</th>
+									<th colspan="8" class="text-center text-middle">Mar</th>
+									<th colspan="8" class="text-center text-middle">Abr</th>
+									<th colspan="8" class="text-center text-middle">May</th>
+									<th colspan="8" class="text-center text-middle">Jun</th>
+									<th colspan="8" class="text-center text-middle">Jul</th>
+									<th colspan="8" class="text-center text-middle">Ago</th>
+									<th colspan="8" class="text-center text-middle">Sep</th>
+									<th colspan="8" class="text-center text-middle">Oct</th>
+									<th colspan="8" class="text-center text-middle">Nov</th>
+									<th colspan="8" class="text-center text-middle">Dic</th>
+								</tr>
+								<tr id="tblPTrabajo_PlanDeTrabajo_Actividades_thead2">
+								</tr>
+								<tr id="tblPTrabajo_PlanDeTrabajo_Actividades_thead3">
+								</tr>
+							</thead>
+							<tbody>
+								
+							</tbody>
+						</table>
+					</div>
+              	</div>
+            </div>
+        </div>
+	</div>
+</div>
+
+
+
+<script src="../js/pTrabajo_PlanDeTrabajo.js"></script>

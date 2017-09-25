@@ -3,12 +3,9 @@
   include("datosUsuario.php"); 
    $link = Conectar();
    
-   /*
    $idEmpresa = addslashes($_POST['idEmpresa']);
    $idUsuario = addslashes($_POST['Usuario']);
-   */
-  
-  $idEmpresa = 48;
+   
    
    $sql = "SELECT
             gProcesos_Procesos.id AS RidProceso,
@@ -29,7 +26,7 @@
             mRiesgos_Matriz.Clasificacion,
             mRiesgos_Matriz.aNivelDeRiesgo
          ORDER BY 
-            1, 2;;";
+            1, 2;";
 
    $result = $link->query($sql);
    $idx = 0;

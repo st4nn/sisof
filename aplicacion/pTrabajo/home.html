@@ -1,0 +1,73 @@
+<style>
+  .cntPTrabajo_Opcion
+  {
+    padding: 0.5em;
+  }
+  .cntPTrabajo_Opcion .widget-content
+  {
+    border-radius: 1em;
+  }
+  .cntPTrabajo_Opcion:hover
+  {
+    cursor: pointer;
+  }
+  .cntPTrabajo_Opcion .widget-content:hover
+  {
+    background: #465BD4;
+  }
+  .cntPTrabajo_Opcion .widget-content
+  {
+    background: #677AE4;
+  }
+
+  .cntPTrabajo_Opcion .counter-icon i
+  {
+    font-size:4em;
+  }
+</style>
+<div class="page" style="min-height: 90vh;">
+  <div class="page-content padding-30 container-fluid">
+    <div class="row">
+      <div class="col-lg-3 col-md-6">
+        <div class="widget cntPTrabajo_Opcion">
+          <div class="widget-content padding-20 white lnkAbrirModulo" Vinculo="pTrabajo/planDeTrabajo.html" Titulo="Plan de Trabajo" data-callback="pTrabajo_PlanDeTrabajo_cargarTabla">
+            <div class="counter counter-lg counter-inverse">
+              <div class="counter-number-group">
+                <span class="counter-icon margin-left-10"><i class="icon fa-calendar" aria-hidden="true"></i></span>
+              </div>
+              <div class="counter-label text-uppercase font-size-16">Plan de Trabajo</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-md-6">
+        <div class="widget cntPTrabajo_Opcion">
+          <div class="widget-content padding-20 white lnkAbrirModulo" Vinculo="gHumana/procedimiento.html" Titulo="Presupuesto SG SST" data-callback="gHumana_Procedimiento_cargarArchivos">
+            <div class="counter counter-lg counter-inverse">
+              <div class="counter-number-group">
+                <span class="counter-icon margin-left-10"><i class="icon fa-money" aria-hidden="true"></i></span>
+              </div>
+              <div class="counter-label text-uppercase font-size-16">Presupuesto SG SST</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-md-6">
+        <div class="widget cntPTrabajo_Opcion">
+          <div class="widget-content padding-20 white lnkAbrirModulo" Vinculo="gHumana/procedimiento.html" Titulo="Informe de la Gestión del SG SST" data-callback="gHumana_Procedimiento_cargarArchivos">
+            <div class="counter counter-lg counter-inverse">
+              <div class="counter-number-group">
+                <span class="counter-icon margin-left-10"><i class="icon fa-briefcase" aria-hidden="true"></i></span>
+              </div>
+              <div class="counter-label text-uppercase font-size-16">Informe de la Gestión del SG SST</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="../js/pTrabajo_home.js"></script>
