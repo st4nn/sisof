@@ -1,0 +1,73 @@
+<style>
+  .cntPObjetivos_Opcion
+  {
+    padding: 0.5em;
+  }
+  .cntPObjetivos_Opcion .widget-content
+  {
+    border-radius: 1em;
+  }
+  .cntPObjetivos_Opcion:hover
+  {
+    cursor: pointer;
+  }
+  .cntPObjetivos_Opcion .widget-content:hover
+  {
+    background: #FBC02D;
+  }
+  .cntPObjetivos_Opcion .widget-content
+  {
+    background: #F7DA64;
+  }
+
+  .cntPObjetivos_Opcion .counter-icon i
+  {
+    font-size:4em;
+  }
+</style>
+<div class="page" style="min-height: 90vh;">
+  <div class="page-content padding-30 container-fluid">
+    <div class="row">
+      <div class="col-lg-3 col-md-6">
+        <div class="widget cntPObjetivos_Opcion">
+          <div class="widget-content padding-20 white lnkAbrirModulo" Vinculo="pObjetivos/Politica.html" Titulo="Política del SG SST" data-callback="PObjetivos_Procedimiento_cargarArchivos">
+            <div class="counter counter-lg counter-inverse">
+              <div class="counter-number-group">
+                <span class="counter-icon margin-left-10"><i class="icon fa-folder-open" aria-hidden="true"></i></span>
+              </div>
+              <div class="counter-label text-uppercase font-size-16">Política del SG SST</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-md-6">
+        <div class="widget cntPObjetivos_Opcion">
+          <div class="widget-content padding-20 white lnkAbrirModulo" Vinculo="pTrabajo/presupuesto.html" Titulo="Presupuesto SG SST" data-callback="pTrabajo_Presupuesto_cargarTabla">
+            <div class="counter counter-lg counter-inverse">
+              <div class="counter-number-group">
+                <span class="counter-icon margin-left-10"><i class="icon fa-line-chart" aria-hidden="true"></i></span>
+              </div>
+              <div class="counter-label text-uppercase font-size-16">Objetivos del  SG SST</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-md-6">
+        <div class="widget cntPObjetivos_Opcion">
+          <div class="widget-content padding-20 white lnkAbrirModulo" Vinculo="gHumana/procedimiento.html" Titulo="Informe de la Gestión del SG SST" data-callback="gHumana_Procedimiento_cargarArchivos">
+            <div class="counter counter-lg counter-inverse">
+              <div class="counter-number-group">
+                <span class="counter-icon margin-left-10"><i class="icon fa-pie-chart" aria-hidden="true"></i></span>
+              </div>
+              <div class="counter-label text-uppercase font-size-16">Análisis de Riesgos</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="../js/pObjetivos_home.js"></script>
