@@ -79,7 +79,6 @@ function pTrabajo_PlanDeTrabajo_cargarTabla()
 				function(data, textStatus, xhr) {
 					if (data != 0)
 					{
-						data = [{id : 1, idEmpresa : 48, idRiesgo : 1, idUsuario : 1, fechaCargue : '', Anio : 2017, Mes : 2, Semana : 2, Tipo : 'P', Valor : 90}];
 						$.each(data, function(index, val) 
 						{
 							 $('.objPTrabajo_PlanDeTrabajo_Actividad[idRiesgo=' + val.idRiesgo+ '][Tipo="' + val.Tipo + '"][Mes=' + val.Mes + '][Semana=' + val.Semana + ']').text(val.Valor);
@@ -98,6 +97,7 @@ function pTrabajo_PlanDeTrabajo_lanzarPopUp(obj)
 	datos.Mes = $(obj).attr("Mes");
 	datos.Semana = $(obj).attr("Semana");
 	datos.Tipo = $(obj).attr("Tipo");
+	datos.Anio = $("#txtPTrabajo_Home_Anio").val();
 
 
 	var Meses = ["", "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
@@ -105,7 +105,7 @@ function pTrabajo_PlanDeTrabajo_lanzarPopUp(obj)
 	var Tipos = {"P" : "Presupuestado", "E" : "Ejecutado"};
 
 	bootbox.prompt({
-			title : 'Ingresa el valor ' + Tipos[datos.Tipo] + ' para la ' + Semanas[datos.Semana] + ' semana de ' + Meses[datos.Mes], 
+			title : 'Ingresa el valor ' + Tipos[datos.Tipo] + ' para la ' + Semanas[datos.Semana] + ' semana de ' + Meses[datos.Mes] + ' de ' + datos.Anio, 
 			inputType: 'number',
 			buttons: {
             confirm: {
@@ -120,11 +120,28 @@ function pTrabajo_PlanDeTrabajo_lanzarPopUp(obj)
 		{
 			if (!isNaN(dato) && dato != '' && dato != null)
 			{
-				$(obj).text(dato);
-				$(obj).fadeTo(500, .1).fadeTo(500, 1);
+				datos.idUsuario = Usuario.id;
+				datos.idEmpresa = $("#txtInicio_idEmpresa").val();
+				datos.Valor = dato;
+
+				$.post('../server/php/proyecto/pTrabajo_PlanDeTrabajo_IngresarValor.php', datos, function(data, textStatus, xhr) 
+				{
+					if (!isNaN(data))
+					{
+						$(obj).text(dato);
+						$(obj).fadeTo(500, .1).fadeTo(500, 1);
+					} else
+					{
+						Mensaje("Error", data, 'danger');
+					}
+				});
+
 			} else
 			{
-				bootbox.alert(datos + ' No es un valor válido, por favor ingresa unicamente números');
+				if (dato != '' && dato != null)
+				{
+					bootbox.alert(datos + ' No es un valor válido, por favor ingresa unicamente números');
+				}
 			}
 		}});
 
