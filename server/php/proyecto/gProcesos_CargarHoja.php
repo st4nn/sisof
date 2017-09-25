@@ -88,10 +88,11 @@
           FROM
             gProcesos_Procesos_Actividades
             INNER JOIN gProcesos_Procesos ON gProcesos_Procesos.idInterno = gProcesos_Procesos_Actividades.idProceso AND gProcesos_Procesos.idDiagrama = '$idDiagrama'
-            INNER JOIN gProcesos_Mapa_Diagrama ON gProcesos_Mapa_Diagrama.id = gProcesos_Procesos.idDiagrama
+            INNER JOIN gProcesos_Mapa_Diagrama ON gProcesos_Mapa_Diagrama.id = gProcesos_Procesos.idDiagrama AND gProcesos_Procesos_Actividades.idEmpresa = gProcesos_Mapa_Diagrama.idEmpresa
          WHERE
             gProcesos_Procesos.idInterno = '$idKey'
             AND gProcesos_Procesos.idDiagrama = '$idDiagrama';";
+
             
       $result = $link->query($sql);
       $idx = 0;

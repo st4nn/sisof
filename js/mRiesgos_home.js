@@ -170,6 +170,12 @@ function mRiesgos_Home()
         });
 
     //mRiesgos_Home_RefescarTabla();
+    
+    $(document).delegate('.btnMRiesgos_VerPanel', 'click', function(event) 
+    {
+        event.preventDefault();
+        cargarModulo("mRiesgos/home.html", "Matriz de Riesgos");
+    });
 }
 
 function txtMRiesgos_Matriz_NDxNE_Change(obj)
@@ -448,6 +454,7 @@ function mRiesgos_Home_RefescarTabla()
 function fun_MRiesgos_Home_Peligo_Clasificaciones(Descripcion)
 {
     var mRiesgos_Home_Peligo_Clasificaciones = {
+        '' : [],
         'Biológico' : [
             'Virus',
             'Bacterias',
@@ -463,25 +470,25 @@ function fun_MRiesgos_Home_Peligo_Clasificaciones(Descripcion)
             'Iluminación (luz visible por exceso o deficiencia)',
             'Vibración (cuerpo entero, segmentaria)',
             'Temperaturas extremas (calor y frio)',
-            'Preción atmosférica (normal y ajustada)',
+            'Preción atmosférica (normal y ajustada)',
             'Radiaciones ionizantes (rayos x, gama, beta y alfa)',
-            'Radiaciones no ionizantes (láser, ultravioleta infrarroja)'
+            'Radiaciones no ionizantes (láser, ultravioleta infrarroja)'
         ],
         'Químico' : [
-            'Polvos orgánicos inorgánicos',
+            'Polvos orgánicos inorgánicos',
             'Fibras',
-            'Líquidos (nieblas y rocíos)',
+            'Líquidos (nieblas y rocíos)',
             'Gases y vapores',
-            'Humos metálicos, no metálicos',
+            'Humos metálicos, no metálicos',
             'Material particulado'
         ],
         'Clasificación Psicosocial' : [
-            'Gestión organizacional (estilo de mando, pago, contratación, participación, inducción y capacitación, bienestar social, evaluación del desempeño, manejo de cambios)',
-            'Características de la organización del trabajo (comunicación, tecnología, organización del trabajo, demandas cualitativas y cuantitativas de la labo',
-            'Características del grupo social del trabajo (relaciones, cohesión, calidad de interacciones, trabajo en equipo',
-            'Condiciones de la tarea (carga mental, contenido de la tarea, demandas emocionales, sistemas de control, definición de roles, monotonía, etc)',
-            'Interfase persona tarea (conocimientos, habilidades con relación a la demanda de la tarea, iniciativa, autonomía y reconocimiento, identificación de la persona con la tarea y la organizació',
-            'Jornada de trabajo (pausas, trabajo nocturno, rotación, horas extras, descansos)'
+            'Gestión organizacional (estilo de mando, pago, contratación, participación, inducción y capacitación, bienestar social, evaluación del desempeño, manejo de cambios)',
+            'Características de la organización del trabajo (comunicación, tecnología, organización del trabajo, demandas cualitativas y cuantitativas de la labo',
+            'Características del grupo social del trabajo (relaciones, cohesión, calidad de interacciones, trabajo en equipo',
+            'Condiciones de la tarea (carga mental, contenido de la tarea, demandas emocionales, sistemas de control, definición de roles, monotonía, etc)',
+            'Interfase persona tarea (conocimientos, habilidades con relación a la demanda de la tarea, iniciativa, autonomía y reconocimiento, identificación de la persona con la tarea y la organización',
+            'Jornada de trabajo (pausas, trabajo nocturno, rotación, horas extras, descansos)'
         ],
         'Biomecánicos' : [
             'Postura (prologada mantenida, forzada, antigravitacionales)',
@@ -490,20 +497,20 @@ function fun_MRiesgos_Home_Peligo_Clasificaciones(Descripcion)
             'Manipulación manual de cargas'
         ],
         'Condiciones de Seguridad' : [
-            'Mecánico (elementos de máquinas, herramientas, piezas a trabajar, materiales proyectados sólidos o fluidos',
-            'Eléctrico (alta y baja tensión, estática)',
-            'Locativo (almacenamiento, superficies de trabajo (irregularidades, deslizantes, con diferencia del nivel) condiciones de orden y aseo, caídas de objeto)',
-            'Tecnológico (explosión, fuga, derrame, incendio)',
-            'Accidentes de tránsito',
-            'Públicos (Robos, atracos, asaltos, atentados, desorden público, etc.)',
+            'Mecánico (elementos de máquinas, herramientas, piezas a trabajar, materiales proyectados sólidos o fluidos',
+            'Eléctrico (alta y baja tensión, estática)',
+            'Locativo (almacenamiento, superficies de trabajo (irregularidades, deslizantes, con diferencia del nivel) condiciones de orden y aseo, caídas de objeto)',
+            'Tecnológico (explosión, fuga, derrame, incendio)',
+            'Accidentes de tránsito',
+            'Públicos (Robos, atracos, asaltos, atentados, desorden público, etc.)',
             'Trabajo en Alturas',
             'Espacios Confinados' 
         ],
         'Fenómenos Naturales' : [
             'Sismo',
-            'T erremoto',
+            'Terremoto',
             'Vendaval',
-            'Inundación',
+            'Inundación',
             'Derrumbe',
             'Precipitaciones, (lluvias, granizadas, heladas)'
         ]

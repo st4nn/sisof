@@ -1,0 +1,69 @@
+<!-- Page -->
+<div class="page" style="min-height: 90vh;">
+	<div class="page-header">
+        <button class="btn btn-primary pull-right btn-pill-left btnMRiesgos_VerPanel">Volver al Panel</button>
+		<h3 class="page-title">Resumen de riesgos</h3>
+	</div>
+ 	<div class="page-content container-fluid">
+ 		<div class="panel panel-primary panel-bordered">
+ 			<div class="panel-heading">
+              <div class="panel-actions">
+				<button id="btnMRiesgos_rRiesgos_Actualizar" class="btn btn-success"><i class="icon fa-refresh"></i></button>
+              </div>
+            </div>
+ 			<div class="panel-body">
+              <div class="col-md-12 form-group">
+			 		<div class="table-responsive">
+						<table id="tblMRiesgos_rRiesgos" class="table table-bordered table-hover">
+							<thead>
+								<tr>
+									<th class="text-center text-middle"></th>
+									<th class="text-center text-middle"></th>
+									<th class="text-center text-middle">Sin Clasificar</th>
+									<th class="text-center text-middle bg-light-green-800 white">Aceptable</th>
+									<th class="text-center text-middle bg-yellow-800 white">Mejorable</th>
+									<th class="text-center text-middle bg-brown-800 white">No Aceptable o Aceptable con Control Específico</th>
+									<th class="text-center text-middle bg-red-800 white">NO Aceptable</th>
+									<th class="text-center text-middle">Total Actividades</th>
+								</tr>
+							</thead>
+							<tbody></tbody>
+						</table>
+					</div>
+					<div class="table-responsive">
+						<table id="tblMRiesgos_rRiesgos_Total" class="table table-bordered table-hover">
+							<thead>
+								<tr>
+
+								</tr>
+							</thead>
+							<tbody></tbody>
+						</table>						
+					</div>
+
+					<div class="table-responsive">
+						<table id="tblMRiesgos_rRiesgos_Resumen" class="table table-bordered table-hover">
+							<thead>
+								<tr>
+									<th></th>
+									<th># Actividades</th>
+									<th>Clasificación</th>
+									<th>Riesgo</th>
+								</tr>
+							</thead>
+							<tbody></tbody>
+						</table>						
+					</div>
+
+					<div id="cntMRiesgos_ActionButtons" class="text-right hide" style="position: fixed; bottom: 40px; right: 20px; z-index:1000;">
+		              	<button type="submit" class="btn btn-success btn-floating tooltip-success" data-toggle="tooltip" data-placement="top" data-original-title="Guardar" id="btnMRiesgos_Matriz_Guardar">
+		              		<i class="icon fa-floppy-o"></i>
+		              	</button>
+		            </div>
+              </div>
+            </div>
+        </div>
+	</div>
+</div>
+
+<script src="../js/mRiesgos_rRiesgos.js"></script>

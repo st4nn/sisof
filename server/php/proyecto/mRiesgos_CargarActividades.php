@@ -12,10 +12,11 @@
             mRiesgos_Matriz.*
          FROM
             gProcesos_Procesos_Actividades
-            INNER JOIN gProcesos_Procesos ON gProcesos_Procesos.idDiagrama = gProcesos_Procesos_Actividades.idEmpresa AND gProcesos_Procesos_Actividades.idProceso = gProcesos_Procesos.idInterno
+			   INNER JOIN gProcesos_Mapa_Diagrama ON gProcesos_Mapa_Diagrama.idEmpresa = gProcesos_Procesos_Actividades.idEmpresa
+            INNER JOIN gProcesos_Procesos ON gProcesos_Mapa_Diagrama.idEmpresa = gProcesos_Procesos_Actividades.idEmpresa AND gProcesos_Procesos_Actividades.idProceso = gProcesos_Procesos.idInterno AND gProcesos_Mapa_Diagrama.id = gProcesos_Procesos.idDiagrama
             LEFT JOIN mRiesgos_Matriz ON mRiesgos_Matriz.idEmpresa = gProcesos_Procesos_Actividades.idEmpresa AND gProcesos_Procesos_Actividades.id = mRiesgos_Matriz.idActividad
          WHERE
-            gProcesos_Procesos_Actividades.idEmpresa = '$idEmpresa'
+            gProcesos_Mapa_Diagrama.idEmpresa = '$idEmpresa'
          ORDER BY 1, 2;";
             
    $result = $link->query($sql);
