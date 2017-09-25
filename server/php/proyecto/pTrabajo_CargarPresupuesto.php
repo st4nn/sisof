@@ -8,16 +8,11 @@
    
    
    $sql = "SELECT
-            mRiesgos_Matriz.id AS id,
-            mRiesgos_Matriz.Descripcion AS Descripcion,
-            mRiesgos_Matriz.Clasificacion AS Clasificacion,
-            mRiesgos_Matriz.MedidasDeIntervencion
+            pTrabajo_Anual_Riesgos_Presupuesto.*
          FROM
-            mRiesgos_Matriz
+            pTrabajo_Anual_Riesgos_Presupuesto
          WHERE
-            mRiesgos_Matriz.idEmpresa = '$idEmpresa'
-         ORDER BY 
-            2, 3;";
+            pTrabajo_Anual_Riesgos_Presupuesto.idEmpresa = '$idEmpresa';";
 
    $result = $link->query($sql);
    $idx = 0;

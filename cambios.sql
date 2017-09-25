@@ -169,3 +169,102 @@ ALTER TABLE `mRiesgos_Matriz`
 --
 ALTER TABLE `mRiesgos_Matriz`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+
+
+/*-- ---------------------------------------------------------- ---------------------------------------------------------- --------------------------------------------------------
+20170925
+ */
+
+-- --------------------------------------------------------
+
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `pTrabajo_Anual_Riesgos`
+--
+
+CREATE TABLE `pTrabajo_Anual_Riesgos` (
+  `id` int(11) NOT NULL,
+  `idEmpresa` int(11) NOT NULL,
+  `idRiesgo` int(11) NOT NULL,
+  `idUsuario` int(11) NOT NULL,
+  `fechaCargue` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `Anio` int(11) NOT NULL,
+  `Mes` int(11) NOT NULL,
+  `Semana` int(11) NOT NULL,
+  `Tipo` varchar(2) NOT NULL,
+  `Valor` double NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `pTrabajo_Anual_Riesgos`
+--
+
+--
+-- Índices para tablas volcadas
+--
+
+--
+-- Indices de la tabla `pTrabajo_Anual_Riesgos`
+--
+ALTER TABLE `pTrabajo_Anual_Riesgos`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `idEmpresa` (`idEmpresa`,`idRiesgo`,`Anio`,`Mes`,`Semana`,`Tipo`);
+
+--
+-- AUTO_INCREMENT de las tablas volcadas
+--
+
+--
+-- AUTO_INCREMENT de la tabla `pTrabajo_Anual_Riesgos`
+--
+ALTER TABLE `pTrabajo_Anual_Riesgos`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+
+
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `pTrabajo_Anual_Riesgos_Presupuesto`
+--
+
+  CREATE TABLE `pTrabajo_Anual_Riesgos_Presupuesto` (
+  `id` int(11) NOT NULL,
+  `idEmpresa` int(11) NOT NULL,
+  `idRiesgo` int(11) NOT NULL,
+  `idUsuario` int(11) NOT NULL,
+  `fechaCargue` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `Anio` int(11) NOT NULL,
+  `Mes` int(11) NOT NULL,
+  `Semana` int(11) NOT NULL,
+  `Tipo` varchar(2) NOT NULL,
+  `Valor` double NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `pTrabajo_Anual_Riesgos_Presupuesto`
+--
+
+--
+-- Índices para tablas volcadas
+--
+
+--
+-- Indices de la tabla `pTrabajo_Anual_Riesgos_Presupuesto`
+--
+ALTER TABLE `pTrabajo_Anual_Riesgos_Presupuesto`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `idEmpresa` (`idEmpresa`,`idRiesgo`,`Anio`,`Mes`,`Semana`,`Tipo`);
+
+--
+-- AUTO_INCREMENT de las tablas volcadas
+--
+
+--
+-- AUTO_INCREMENT de la tabla `pTrabajo_Anual_Riesgos_Presupuesto`
+--
+ALTER TABLE `pTrabajo_Anual_Riesgos_Presupuesto`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
